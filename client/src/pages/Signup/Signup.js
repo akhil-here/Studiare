@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import signup_gif from '../../images/signup.webp';
+import signup from '../../images/signup.webp';
 import './Signup.css';
 
 const Signup = () => {
@@ -54,7 +54,7 @@ const Signup = () => {
     <div>
       <div className="row d-flex mx-auto">
         <div className="col-xl-7 col-12 d-flex align-items-center justify-content-center flex-column">
-          <img src={signup_gif} alt="Signup GIF" className="w-100" />
+          <img src={signup} alt="Signup GIF" className="w-100" />
         </div>
         <div className="col-xl-5 col-12 text-white d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">

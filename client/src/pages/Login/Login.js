@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
 import {UserContext} from '../../App';
-import log_gif from '../../images/login.webp';
+import login from '../../images/login.webp';
 import './Login.css';
 
 const Login = () => {
@@ -59,7 +59,7 @@ const Login = () => {
     <div>
       <div className="row d-flex mx-auto justify-content-center">
         <div className="col-xl-7 col-12 d-flex align-items-center justify-content-center flex-column">
-          <img src={log_gif} alt="Login GIF" className="w-100" />
+          <img src={login} alt="Login GIF" className="w-100" />
         </div>
         <div className="col-xl-5 col-12 d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
@@ -143,7 +143,7 @@ const Login = () => {
                 }}
               >
                 {' '}
-                Have an account already?{' '}
+                Don't have an account already?{' '}
               </Link>
             </div>
             <div className="row form-group align-items-center justify-content-center">

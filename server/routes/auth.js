@@ -2,10 +2,22 @@ const express = require ('express');
 const router = express.Router ();
 const mongoose = require ('mongoose');
 const User = mongoose.model ('User');
+const crypto = require ('crypto');
 const bcrpyt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
 const {JWT_SECRET} = require ('../keys');
+const {API_KEY} = require ('../keys');
 const requireLogin = require ('../middleware/requireLogin');
+const nodemailer = require ('nodemailer');
+const sendgridTransport = require ('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport (
+  sendgridTransport ({
+    auth: {
+      api_key: API_KEY,
+    },
+  })
+);
 
 router.get ('/protected', requireLogin, (req, res) => {
   res.send ('Hello user!!!');
@@ -33,6 +45,12 @@ router.post ('/signup', (req, res) => {
         user
           .save ()
           .then (user => {
+            transporter.sendMail ({
+              to: user.email,
+              from: 'studiare.miniproject@gmail.com',
+              subject: 'Registration success',
+              html: '<h1>Welcome aboard </h1>' + user.name,
+            });
             res.json ({message: 'Saved Successfully!!'});
           })
           .catch (err => {
@@ -74,15 +92,35 @@ router.post ('/login', (req, res) => {
     });
 });
 
-// router.get ('/forgotpass', (req, res,next) => {
-//   res.send("Forgot password")
-// });
-
-router.post ('/forgotpass', (req, res) => {
-  const {email} = req.body;
-  console.log (email);
+router.post ('/reset-password', (req, res) => {
+  crypto.randomBytes (32, (err, buffer) => {
+    if (err) {
+      console.log (err);
+    }
+    const token = buffer.toString ('hex');
+    User.findOne ({email: req.body.email}).then (user => {
+      if (!user) {
+        return res
+          .status (422)
+          .json ({error: "User doesn't exist with that email"});
+      }
+      user.resetToken = token;
+      user.expireToken = Date.now () + 3600000;
+      user.save ().then (result => {
+        transporter.sendMail ({
+          to: user.email,
+          from: 'studiare.miniproject@gmail.com',
+          subject: 'password reset',
+          html: `
+                <p>You requested for password reset</p>
+                <h5>Click on this <a href="${EMAIL}/reset/${token}">link</a> to reset your password</h5>
+                `,
+        });
+        res.json ({
+          message: 'Check our inbox for the link to reset password!!',
+        });
+      });
+    });
+  });
 });
-
-router.post ('/resetpass', (req, res) => {});
-
 module.exports = router;

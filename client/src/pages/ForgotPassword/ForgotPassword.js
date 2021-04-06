@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import forgotpass_gif from '../../images/forgot_pass.webp';
+import forgotpass from '../../images/forgot_pass.webp';
 
 const ForgotPassword = () => {
+  const history = useHistory ();
   const [email, setEmail] = useState ('');
 
   const PostData = () => {
@@ -20,6 +22,7 @@ const ForgotPassword = () => {
       NotificationManager.success (
         'Check our inbox for the link to reset password!!'
       );
+      history.push ('/login');
     }
   };
 
@@ -27,7 +30,7 @@ const ForgotPassword = () => {
     <div>
       <div className="row d-flex mx-auto justify-content-center">
         <div className="col-xl-7 col-12 d-flex align-items-center justify-content-center flex-column">
-          <img src={forgotpass_gif} alt="forgot password" className="w-100" />
+          <img src={forgotpass} alt="forgot password" className="w-100" />
         </div>
         <div className="col-xl-5 col-12 d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
@@ -75,7 +78,6 @@ const ForgotPassword = () => {
                   color: 'white',
                 }}
               >
-
                 Send Link{' '}
               </button>
             </div>
