@@ -37,7 +37,7 @@ const Login = () => {
       .then (data => {
         console.log (data);
         if (data.error) {
-          NotificationManager.danger (data.error);
+          NotificationManager.error (data.error);
         } else {
           localStorage.setItem ('jwt', data.token);
           localStorage.setItem ('user', JSON.stringify (data.user));
@@ -147,11 +147,7 @@ const Login = () => {
               </Link>
             </div>
             <div className="row form-group align-items-center justify-content-center">
-              <Link
-                to="/forgotpass"
-                className="d-block"
-                style={{color: '#201140'}}
-              >
+              <Link to="/reset" className="d-block" style={{color: '#201140'}}>
                 Forgot Password
               </Link>
             </div>

@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema({
+const mongoose = require ('mongoose');
+const userSchema = new mongoose.Schema ({
   name: {
     type: String,
     required: true,
@@ -12,10 +12,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role:{
-      type:String,
-      required: true,
-  }
+  role: {
+    type: String,
+    required: true,
+  },
+  resetToken: String,
+  expireToken: Date,
 });
 
-mongoose.model("User", userSchema);
+mongoose.model ('User', userSchema);

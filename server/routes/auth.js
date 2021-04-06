@@ -110,10 +110,10 @@ router.post ('/reset-password', (req, res) => {
         transporter.sendMail ({
           to: user.email,
           from: 'studiare.miniproject@gmail.com',
-          subject: 'password reset',
+          subject: 'Reset password',
           html: `
                 <p>You requested for password reset</p>
-                <h5>Click on this <a href="${EMAIL}/reset/${token}">link</a> to reset your password</h5>
+                <h5>Click on this <a href="http://localhost:3000/reset/${token}">link</a> to reset your password</h5>
                 `,
         });
         res.json ({
@@ -123,4 +123,27 @@ router.post ('/reset-password', (req, res) => {
     });
   });
 });
+
+router.post ('/new-password', (req, res) => {
+  const newPassword = req.body.password;
+  const sentToken = req.body.token;
+  User.findOne ({resetToken: sentToken, expireToken: {$gt: Date.now ()}})
+    .then (user => {
+      if (!user) {
+        return res.status (422).json ({error: 'Try again session expired'});
+      }
+      bcrypt.hash (newPassword, 12).then (hashedpassword => {
+        user.password = hashedpassword;
+        user.resetToken = undefined;
+        user.expireToken = undefined;
+        user.save ().then (saveduser => {
+          res.json ({message: 'Updated password successfully!!'});
+        });
+      });
+    })
+    .catch (err => {
+      console.log (err);
+    });
+});
+
 module.exports = router;

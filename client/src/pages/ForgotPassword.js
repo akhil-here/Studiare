@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import forgotpass from '../../images/forgot_pass.webp';
+import forgotpass from '../images/forgot_pass.webp';
 
 const ForgotPassword = () => {
   const history = useHistory ();
   const [email, setEmail] = useState ('');
+  const {token} = useParams ();
 
   const PostData = () => {
     if (email.length < 1) {
@@ -13,17 +14,34 @@ const ForgotPassword = () => {
       return;
     } else if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test (
-        email
+        email,
+        token
       )
     ) {
       NotificationManager.error ('Invalid email format!!');
       return;
-    } else {
-      NotificationManager.success (
-        'Check our inbox for the link to reset password!!'
-      );
-      history.push ('/login');
     }
+    fetch ('/reset-password', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify ({
+        email,
+      }),
+    })
+      .then (res => res.json ())
+      .then (data => {
+        if (data.error) {
+          NotificationManager.error (data.error);
+        } else {
+          NotificationManager.success (data.message);
+          history.push ('/login');
+        }
+      })
+      .catch (err => {
+        console.log (err);
+      });
   };
 
   return (

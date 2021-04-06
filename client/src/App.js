@@ -13,7 +13,8 @@ import Home from './shared/Home/Home';
 import {reducer, initialState} from './reducers/userReducer';
 import './App.css';
 import Teacher from './components/Teacher';
-import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 export const UserContext = createContext ();
 
@@ -26,7 +27,7 @@ const Routing = () => {
       dispatch ({type: 'USER', payload: user});
       history.push ('/home');
     } else {
-      history.push ('/');
+      if (!history.location.pathname.startsWith ('/reset')) history.push ('/');
     }
   }, []);
   return (
@@ -48,8 +49,11 @@ const Routing = () => {
         <Route path="/teacher">
           <Teacher />
         </Route>
-        <Route path="/forgotpass">
+        <Route exact path="/reset">
           <ForgotPassword />
+        </Route>
+        <Route path="/reset/:token">
+          <ResetPassword />
         </Route>
       </Router>
     </Switch>
