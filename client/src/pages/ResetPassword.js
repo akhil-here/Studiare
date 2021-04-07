@@ -28,8 +28,8 @@ const ResetPassword = () => {
         if (data.error) {
           NotificationManager.error (data.error);
         } else {
+          console.log (password);
           NotificationManager.success (data.message);
-          history.push ('/login');
         }
       })
       .catch (error => {

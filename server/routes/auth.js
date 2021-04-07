@@ -132,7 +132,7 @@ router.post ('/new-password', (req, res) => {
       if (!user) {
         return res.status (422).json ({error: 'Try again session expired'});
       }
-      bcrypt.hash (newPassword, 12).then (hashedpassword => {
+      bcrpyt.hash (newPassword, 12).then (hashedpassword => {
         user.password = hashedpassword;
         user.resetToken = undefined;
         user.expireToken = undefined;
