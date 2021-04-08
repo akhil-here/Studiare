@@ -12,9 +12,11 @@ import {
 import Home from './shared/Home/Home';
 import {reducer, initialState} from './reducers/userReducer';
 import './App.css';
+import Header from './shared/Header';
 import Teacher from './components/Teacher';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import CreateCourse from './pages/CreateCourse';
 
 export const UserContext = createContext ();
 
@@ -32,12 +34,13 @@ const Routing = () => {
   }, []);
   return (
     <Switch>
-      <Router>
+      <Router forceRefresh={true}>
         <Globalstyles />
         <Route exact path="/">
           <Intropage />
         </Route>
         <Route path="/home">
+          <Header />
           <Home />
         </Route>
         <Route path="/login">
@@ -54,6 +57,9 @@ const Routing = () => {
         </Route>
         <Route path="/reset/:token">
           <ResetPassword />
+        </Route>
+        <Route path="/createcourse">
+          <CreateCourse />
         </Route>
       </Router>
     </Switch>

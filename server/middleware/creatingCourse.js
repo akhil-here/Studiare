@@ -20,8 +20,9 @@ module.exports = (req, res, next) => {
         console.log (userdata);
         next ();
       } else {
-        console.log ('Cannot create course!!');
-        return;
+        return res
+          .status (401)
+          .json ({error: 'Not a teacher so cannot create a course!!'});
       }
     });
   });
