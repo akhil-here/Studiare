@@ -46,11 +46,7 @@ const Login = () => {
             payload: data.user,
           });
           NotificationManager.success ('Log In successful!!');
-          if (data.user.role === 'Teacher') {
-            history.push ('/teacher');
-          } else {
-            history.push ('/home');
-          }
+          history.push ('/home');
         }
       });
   };

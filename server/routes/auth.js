@@ -19,10 +19,6 @@ const transporter = nodemailer.createTransport (
   })
 );
 
-router.get ('/protected', requireLogin, (req, res) => {
-  res.send ('Hello user!!!');
-});
-
 router.post ('/signup', (req, res) => {
   const {name, email, password, role} = req.body;
   if (!email || !name || !password || !role) {

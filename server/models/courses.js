@@ -4,11 +4,11 @@ const {ObjectId} = mongoose.Schema.Types;
 const CourseSchema = new mongoose.Schema ({
   category: {
     type: String,
-    // required: true,
+    required: true,
   },
   course_name: {
     type: String,
-    // required: true,
+    required: true,
   },
   teacher_name: {
     type: ObjectId,
@@ -23,7 +23,7 @@ const CourseSchema = new mongoose.Schema ({
   },
   no_of_hours: {
     type: Number,
-    // required: true,
+    required: true,
   },
   price: {
     type: Number,
@@ -34,16 +34,16 @@ const CourseSchema = new mongoose.Schema ({
     // required: true,
   },
   certificate: {
-    type: Boolean,
-    // required: true,
+    type: String,
+    required: true,
   },
   pre_req: {
     type: String,
-    // required: true,
+    required: true,
   },
   learning_objectives: {
     type: String,
-    // required: true,
+    required: true,
   },
   lessons: [
     {
@@ -52,12 +52,10 @@ const CourseSchema = new mongoose.Schema ({
       // required: true,
     },
   ],
-  ratings: [
-    {
-      stars: Number,
-      // required: true,
-    },
-  ],
+  ratings: {
+    type: Number,
+    // required:true
+  },
   comments: [
     {
       text: String,
@@ -76,7 +74,7 @@ const CourseSchema = new mongoose.Schema ({
   },
   course_photo: {
     type: String,
-    default: 'No photo',
+    required: true,
   },
   videos: [
     {

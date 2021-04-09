@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
 import signup from '../../images/signup.webp';
 import './Signup.css';

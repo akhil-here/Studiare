@@ -3,17 +3,40 @@ const router = express.Router ();
 const mongoose = require ('mongoose');
 const creatingCourse = require ('../middleware/creatingCourse');
 const Courses = mongoose.model ('Courses');
-// const requireLogin = require ('../middleware/requireLogin');
 
 router.post ('/createcourse', creatingCourse, (req, res) => {
-  const {course_name, price} = req.body;
-  if (!course_name || !price) {
+  const {
+    category,
+    course_name,
+    no_of_hours,
+    price,
+    certificate,
+    pre_req,
+    learning_objectives,
+    course_photo,
+  } = req.body;
+  if (
+    !category ||
+    !course_name ||
+    !no_of_hours ||
+    !price ||
+    !certificate ||
+    !pre_req ||
+    !learning_objectives ||
+    !course_photo
+  ) {
     return res.status (422).json ({error: 'Please add all the fields!!'});
   }
   req.user.password = undefined;
   const course = new Courses ({
+    category,
     course_name,
+    no_of_hours,
     price,
+    certificate,
+    pre_req,
+    learning_objectives,
+    course_photo,
     teacher_name: req.user,
   });
   course
