@@ -3,6 +3,7 @@ const router = express.Router ();
 const mongoose = require ('mongoose');
 const creatingCourse = require ('../middleware/creatingCourse');
 const Courses = mongoose.model ('Courses');
+const requireLogin = require ('../middleware/requireLogin');
 
 router.post ('/createcourse', creatingCourse, (req, res) => {
   const {
@@ -43,6 +44,18 @@ router.post ('/createcourse', creatingCourse, (req, res) => {
     .save ()
     .then (result => {
       res.json ({course: result});
+    })
+    .catch (err => {
+      console.log (err);
+    });
+});
+
+router.get ('/allcourses', requireLogin, (req, res) => {
+  Courses.find ()
+    .populate ('teacher_name', '_id name')
+    // .populate("comments.postedBy", "_id name")
+    .then (posts => {
+      res.json ({posts});
     })
     .catch (err => {
       console.log (err);
