@@ -19,7 +19,6 @@ import ResetPassword from './pages/ResetPassword';
 import CreateCourse from './pages/CreateCourse';
 
 export const UserContext = createContext ();
-
 const Routing = () => {
   const history = useHistory ();
   const {state, dispatch} = useContext (UserContext);
@@ -33,9 +32,9 @@ const Routing = () => {
     }
   }, []);
   return (
-    <Switch>
-      <Router forceRefresh={true}>
-        <Globalstyles />
+    <div>
+      <Globalstyles />
+      <Switch>
         <Route exact path="/">
           <Intropage />
         </Route>
@@ -61,8 +60,8 @@ const Routing = () => {
         <Route path="/createcourse">
           <CreateCourse />
         </Route>
-      </Router>
-    </Switch>
+      </Switch>
+    </div>
   );
 };
 

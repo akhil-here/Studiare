@@ -5,7 +5,7 @@ const creatingCourse = require ('../middleware/creatingCourse');
 const Courses = mongoose.model ('Courses');
 const requireLogin = require ('../middleware/requireLogin');
 
-router.post ('/createcourse', creatingCourse, (req, res) => {
+router.post ('/createcourse', (req, res) => {
   const {
     category,
     course_name,

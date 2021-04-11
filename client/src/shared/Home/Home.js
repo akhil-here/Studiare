@@ -14,6 +14,9 @@ const Home = () => {
       .then (result => {
         console.log (result);
         setData (result.posts);
+      })
+      .catch (err => {
+        console.log (err);
       });
   }, []);
   return (
@@ -177,131 +180,53 @@ const Home = () => {
         </div>
         {data.map (item => {
           return (
-            <div className="internships col-xl-12  p-md-3 py-3 mx-2">
-              {/* <Link to={`/internship-details/${this.props.id}`}> */}
-              <div
-                className="card internships-container"
-                style={{width: 'auto', border: ''}}
-              >
-                <div
-                  className="card-header internships-container-title"
-                  style={{borderBottom: 'medium solid royalblue'}}
-                >
-                  <b
-                    style={{
-                      fontSize: '1.2em',
-                      color: 'black',
-                    }}
-                    className="card-title text-justify my-auto"
-                  >
-                    {item.course_name}
-                  </b>
-                </div>
-                <div className="card-body">
-                  <h6 className="card-subtitle mb-2 text-muted text-left">
-                    <span className="mr-2 font-weight-bold">
-                      Course Mentor:
-                    </span>
-                    {item.teacher_name.name}
-                  </h6>
-                  <div
-                    className="card-text text-muted text-left"
-                    style={{fontSize: ''}}
-                  >
-                    <div className="mb-1">
-                      <span className="mr-2 font-weight-bold">Reqs:</span>
-                      {/* {this.props.data.skill_requirements.map (skill => (
-                        <span
-                          key={Math.random ().toString ()}
-                          className="mx-auto"
-                        >
-                          {skill}{' '}
-                        </span>
-                      ))} */}
-                      {item.pre_req}
+            <div className="container">
+              <div className="popular-courses-box">
+                {' '}
+                <div className="row">
+                  <div className="col-lg-3 col-md-6">
+                    <div className="course-post">
+                      <div className="course-thumbnail-holder">
+                        <a href="/">
+                          <img src={item.course_photo} alt="" />
+                        </a>
+                      </div>
+                      <div className="course-content-holder">
+                        <div className="course-content-main">
+                          <h2 className="course-title">
+                            <a href="/">{item.course_name}</a>
+                          </h2>
+                          <div className="course-rating-teacher">
+                            <div
+                              className="star-rating has-ratings"
+                              title="Rated 5.00 out of 5"
+                            >
+                              <span style={{width: '100%'}}>
+                                <span className="rating">5.00</span>
+                                <span className="votes-number">1 Votes</span>
+                              </span>
+                            </div>
+                            <a href="#" className="course-loop-teacher">
+                              {item.teacher_name.name}
+                            </a>
+                          </div>
+                        </div>
+                        <div className="course-content-bottom">
+                          <div className="course-students">
+                            <i className="material-icons">group</i>
+                            <span>64</span>
+                          </div>
+                          <div className="course-price">
+                            <span>£{item.price}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="mb-1">
-                      <span className="mr-2 font-weight-bold">
-                        Number of hours:
-                      </span>
-                      <span className="mx-auto">
-                        {item.no_of_hours}
-                      </span>
-                    </div>
-                    <div className="mb-1">
-                      <span className="mr-2 font-weight-bold">Price:</span>
-                      <span className="mx-auto">
-                        {item.price}
-                      </span>
-                    </div>
-                    {/* <div className="mb-1">
-                      <span className="mr-2 font-weight-bold">Domains:</span>
-                      {this.props.data.domain.map (domain => (
-                        <span
-                          key={Math.random ().toString ()}
-                          className="mx-auto"
-                        >
-                          {domain}{' '}
-                        </span>
-                      ))}
-                    </div> */}
-                    {/* <div>
-                      <span className="mr-2 font-weight-bold">Status</span>
-                      <span className="mx-auto">
-                        {this.props.data.status || null}
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               </div>
-              {/* </Link> */}
             </div>
           );
-          // <div className="container">
-          //   <div className="popular-courses-box">
-          //     <div className="row">
-          //       <div className="col-lg-3 col-md-6">
-          //         <div className="course-post">
-          //           <div className="course-thumbnail-holder">
-          //             <a href="/">
-          //               <img src={item.course_photo} alt="" />
-          //             </a>
-          //           </div>
-          //           <div className="course-content-holder">
-          //             <div className="course-content-main">
-          //               <h2 className="course-title">
-          //                 <a href="/">{item.course_name}</a>
-          //               </h2>
-          //               <div className="course-rating-teacher">
-          //                 <div
-          //                   className="star-rating has-ratings"
-          //                   title="Rated 5.00 out of 5"
-          //                 >
-          //                   <span style={{width: '100%'}}>
-          //                     <span className="rating">5.00</span>
-          //                     <span className="votes-number">1 Votes</span>
-          //                   </span>
-          //                 </div>
-          //                 <a href="#" className="course-loop-teacher">
-          //                   {item.teacher_name.name}
-          //                 </a>
-          //               </div>
-          //             </div>
-          //             <div className="course-content-bottom">
-          //               <div className="course-students">
-          //                 <i className="material-icons">group</i>
-          //                 <span>64</span>
-          //               </div>
-          //               <div className="course-price">
-          //                 <span>£{item.price}</span>
-          //               </div>
-          //             </div>
-          //           </div>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   </div>
-          // </div>
         })}
 
       </section>

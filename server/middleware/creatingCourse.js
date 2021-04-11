@@ -17,7 +17,6 @@ module.exports = (req, res, next) => {
     User.findById (_id).then (userdata => {
       if (userdata.role == 'Teacher') {
         req.user = userdata;
-        console.log (userdata);
         next ();
       } else {
         return res
