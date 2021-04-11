@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import '../Home/Home.scss';
+import Header from './Header';
 
 const Home = () => {
   const [data, setData] = useState ([]);
@@ -21,7 +21,7 @@ const Home = () => {
   }, []);
   return (
     <div id="container">
-
+      <Header />
       {/* collection-section 
     ================================================== */}
       <section className="collection-section">

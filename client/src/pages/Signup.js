@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import signup from '../../images/signup.webp';
-import './Signup.css';
+import signup from '../images/signup.webp';
 
 const Signup = () => {
   const history = useHistory ();
@@ -138,7 +137,7 @@ const Signup = () => {
                   fontWeight: 'bold',
                 }}
               >
-                Login as
+                Sign up as
               </label>
               <div className="row">
                 <p className="col-md-6">

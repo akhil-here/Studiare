@@ -1,18 +1,17 @@
 import React, {useEffect, createContext, useReducer, useContext} from 'react';
 import Globalstyles from './globalStyles';
-import Intropage from './shared/Intropage/Intropage';
-import Login from './pages/Login/Login';
-import Signup from './pages/Signup/Signup';
+import Intropage from './pages/Intropage/Intropage';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useHistory,
 } from 'react-router-dom';
-import Home from './shared/Home/Home';
+import Home from './shared/Home';
 import {reducer, initialState} from './reducers/userReducer';
 import './App.css';
-import Header from './shared/Header';
 import Teacher from './components/Teacher';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
@@ -39,7 +38,6 @@ const Routing = () => {
           <Intropage />
         </Route>
         <Route path="/home">
-          <Header />
           <Home />
         </Route>
         <Route path="/login">

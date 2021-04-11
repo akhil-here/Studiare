@@ -1,9 +1,8 @@
 import React, {useState, useContext} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import {UserContext} from '../../App';
-import login from '../../images/login.webp';
-import './Login.css';
+import {UserContext} from '../App';
+import login from '../images/login.webp';
 
 const Login = () => {
   const {state, dispatch} = useContext (UserContext);
