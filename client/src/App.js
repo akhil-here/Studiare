@@ -28,6 +28,8 @@ const Routing = () => {
       history.push ('/home');
     } else {
       if (!history.location.pathname.startsWith ('/reset')) history.push ('/');
+      else if (!history.location.pathname.startsWith ('/createcourse'))
+        history.push ('/createcourse');
     }
   }, []);
   return (
@@ -37,16 +39,16 @@ const Routing = () => {
         <Route exact path="/">
           <Intropage />
         </Route>
-        <Route path="/home">
+        <Route exact path="/home">
           <Home />
         </Route>
-        <Route path="/login">
+        <Route exact path="/login">
           <Login />
         </Route>
-        <Route path="/signup">
+        <Route exact path="/signup">
           <Signup />
         </Route>
-        <Route path="/teacher">
+        <Route exact path="/teacher">
           <Teacher />
         </Route>
         <Route exact path="/reset">
@@ -55,7 +57,7 @@ const Routing = () => {
         <Route path="/reset/:token">
           <ResetPassword />
         </Route>
-        <Route path="/createcourse">
+        <Route exact path="/createcourse">
           <CreateCourse />
         </Route>
       </Switch>

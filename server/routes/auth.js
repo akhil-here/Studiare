@@ -11,6 +11,8 @@ const requireLogin = require ('../middleware/requireLogin');
 const nodemailer = require ('nodemailer');
 const sendgridTransport = require ('nodemailer-sendgrid-transport');
 
+//https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/routes/articlesRoute.js
+
 const transporter = nodemailer.createTransport (
   sendgridTransport ({
     auth: {

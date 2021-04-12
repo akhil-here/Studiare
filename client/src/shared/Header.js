@@ -1,11 +1,10 @@
 import React, {useContext} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {UserContext} from '../App';
 
 const Header = () => {
   const {state, dispatch} = useContext (UserContext);
   const history = useHistory ();
-  const name = localStorage.getItem ('user');
   return (
     <div>
       <header className="clearfix">
@@ -152,8 +151,7 @@ const Header = () => {
               </ul>
               <a href="#" className="register-modal-opener login-button">
                 <i className="material-icons">perm_identity</i>
-                {/* {localStorage.getItem ('user')} */}
-                {name}
+                My account
               </a>
             </div>
           </div>
