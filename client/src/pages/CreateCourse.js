@@ -18,6 +18,18 @@ const CreateCourse = () => {
   useEffect (
     () => {
       if (url) {
+        console.log (
+          JSON.stringify ({
+            category,
+            course_name,
+            no_of_hours,
+            price,
+            certificate,
+            pre_req,
+            learning_objectives,
+            course_photo: url,
+          })
+        );
         fetch ('/createcourse', {
           method: 'post',
           headers: {
@@ -61,6 +73,7 @@ const CreateCourse = () => {
     })
       .then (res => res.json ())
       .then (data => {
+        console.log (data.url);
         setUrl (data.url);
       })
       .catch (err => {

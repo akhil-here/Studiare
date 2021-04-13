@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import reset from '../images/reset.webp';
 
 const ResetPassword = () => {
-  const history = useHistory ();
   const [password, setPassword] = useState ('');
   const {token} = useParams ();
 
@@ -39,9 +37,6 @@ const ResetPassword = () => {
   return (
     <div>
       <div className="row d-flex mx-auto">
-        {/* <div className="col-xl-7 col-12 d-flex align-items-center justify-content-center flex-column">
-          <img src={reset} alt="Reset password" className="w-100" />
-        </div> */}
         <div className="col-xl-5 col-12 text-white d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
             <div className="form-group">

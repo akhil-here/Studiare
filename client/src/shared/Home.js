@@ -1,24 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from './Header';
 
 const Home = () => {
-  const [data, setData] = useState ([]);
-  useEffect (() => {
-    fetch ('/allcourses', {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
-      },
-    })
-      .then (res => res.json ())
-      .then (result => {
-        // console.log (result);
-        setData (result.posts);
-      })
-      .catch (err => {
-        console.log (err);
-      });
-  }, []);
   return (
     <div id="container">
       <Header />
@@ -178,56 +162,56 @@ const Home = () => {
             </div>
           </div>
         </div>
-        {data.map (item => {
-          return (
-            <div className="container">
-              <div className="popular-courses-box">
-                {' '}
-                <div className="row">
-                  <div className="col-lg-3 col-md-6">
-                    <div className="course-post">
-                      <div className="course-thumbnail-holder">
-                        <a href="/">
-                          <img src={item.course_photo} alt="" />
+
+        <div className="container">
+          <div className="popular-courses-box">
+            {' '}
+            <div className="row">
+              <div className="col-lg-3 col-md-6">
+                <div className="course-post">
+                  <div className="course-thumbnail-holder">
+                    <a href="/">
+                      <img
+                        src="./assets/upload/collection/photography.jpg"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                  <div className="course-content-holder">
+                    <div className="course-content-main">
+                      <h2 className="course-title">
+                        <a href="/">Learn Photography</a>
+                      </h2>
+                      <div className="course-rating-teacher">
+                        <div
+                          className="star-rating has-ratings"
+                          title="Rated 5.00 out of 5"
+                        >
+                          <span style={{width: '100%'}}>
+                            <span className="rating">5.00</span>
+                            <span className="votes-number">1 Votes</span>
+                          </span>
+                        </div>
+                        <a href="#" className="course-loop-teacher">
+                          Venky
                         </a>
                       </div>
-                      <div className="course-content-holder">
-                        <div className="course-content-main">
-                          <h2 className="course-title">
-                            <a href="/">{item.course_name}</a>
-                          </h2>
-                          <div className="course-rating-teacher">
-                            <div
-                              className="star-rating has-ratings"
-                              title="Rated 5.00 out of 5"
-                            >
-                              <span style={{width: '100%'}}>
-                                <span className="rating">5.00</span>
-                                <span className="votes-number">1 Votes</span>
-                              </span>
-                            </div>
-                            <a href="#" className="course-loop-teacher">
-                              {item.teacher_name.name}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="course-content-bottom">
-                          <div className="course-students">
-                            <i className="material-icons">group</i>
-                            <span>64</span>
-                          </div>
-                          <div className="course-price">
-                            <span>£{item.price}</span>
-                          </div>
-                        </div>
+                    </div>
+                    <div className="course-content-bottom">
+                      <div className="course-students">
+                        <i className="material-icons">group</i>
+                        <span>64</span>
+                      </div>
+                      <div className="course-price">
+                        <span>£67</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
 
       </section>
       {/* End popular-courses section */}
