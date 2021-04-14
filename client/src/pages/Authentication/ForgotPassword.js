@@ -1,52 +1,46 @@
-import React, {useState, useContext} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import React, {useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import {UserContext} from '../App';
-import login from '../images/login.webp';
+import forgotpass from '../../images/forgot_pass.webp';
 
-const Login = () => {
-  const {state, dispatch} = useContext (UserContext);
+const ForgotPassword = () => {
   const history = useHistory ();
   const [email, setEmail] = useState ('');
-  const [password, setPassword] = useState ('');
+  const {token} = useParams ();
+
   const PostData = () => {
     if (email.length < 1) {
       NotificationManager.error ('Please provide email!!');
       return;
-    }
-    if (
+    } else if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test (
-        email
+        email,
+        token
       )
     ) {
       NotificationManager.error ('Invalid email format!!');
       return;
     }
-    fetch ('/login', {
+    fetch ('/reset-password', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify ({
         email,
-        password,
       }),
     })
       .then (res => res.json ())
       .then (data => {
-        console.log (data);
         if (data.error) {
           NotificationManager.error (data.error);
         } else {
-          localStorage.setItem ('jwt', data.token);
-          localStorage.setItem ('user', JSON.stringify (data.user));
-          dispatch ({
-            type: 'USER',
-            payload: data.user,
-          });
-          NotificationManager.success ('Log In successful!!');
-          history.push ('/home');
+          NotificationManager.success (data.message);
+          history.push ('/login');
         }
+      })
+      .catch (err => {
+        console.log (err);
       });
   };
 
@@ -54,7 +48,7 @@ const Login = () => {
     <div>
       <div className="row d-flex mx-auto justify-content-center">
         <div className="col-xl-7 col-12 d-flex align-items-center justify-content-center flex-column">
-          <img src={login} alt="Login GIF" className="w-100" />
+          <img src={forgotpass} alt="forgot password" className="w-100" />
         </div>
         <div className="col-xl-5 col-12 d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
@@ -67,7 +61,7 @@ const Login = () => {
                   letterSpacing: 1,
                 }}
               >
-                Login
+                Reset your Password
               </h1>
             </div>
             <div className="form-group">
@@ -80,7 +74,7 @@ const Login = () => {
                 }}
               >
 
-                Email ID{' '}
+                Enter your registered email ID{' '}
               </label>
               <input
                 type="email"
@@ -90,28 +84,6 @@ const Login = () => {
                 onChange={e => setEmail (e.target.value)}
               />
 
-            </div>
-            <div className="form-group">
-
-              <label
-                style={{
-                  color: '#201140',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  fontWeight: 'bold',
-                }}
-              >
-
-                Password{' '}
-              </label>
-              {' '}
-              <input
-                type="password"
-                placeholder="Minimum 6 characters..."
-                className="form-control border-0 shadow"
-                value={password}
-                onChange={e => setPassword (e.target.value)}
-              />
             </div>
 
             <div className="row form-group align-items-center justify-content-center">
@@ -124,28 +96,10 @@ const Login = () => {
                   color: 'white',
                 }}
               >
-
-                Log In{' '}
+                Send Link{' '}
               </button>
             </div>
-            <div className="row form-group align-items-center justify-content-center">
 
-              <Link
-                to="/signup"
-                className="d-block"
-                style={{
-                  color: '#201140',
-                }}
-              >
-                {' '}
-                Don't have an account already?{' '}
-              </Link>
-            </div>
-            <div className="row form-group align-items-center justify-content-center">
-              <Link to="/reset" className="d-block" style={{color: '#201140'}}>
-                Forgot Password
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -153,4 +107,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

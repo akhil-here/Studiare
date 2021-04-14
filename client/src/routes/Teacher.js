@@ -1,11 +1,11 @@
 import React, {createContext} from 'react';
 import Home from '../shared/Home';
-import CreateCourse from '../pages/CreateCourse';
-import CreateEvent from '../pages/CreateEvent';
-import CreateBlog from '../pages/CreateBlog';
-import Courses from '../pages/Courses';
-import BlogList from '../pages/BlogList';
-import EventList from '../pages/EventList';
+import CreateCourse from '../pages/Courses/CreateCourse';
+import CreateEvent from '../pages/Events/CreateEvent';
+import CreateBlog from '../pages/Blogs/CreateBlog';
+import Courses from '../pages/Courses/Courses';
+import BlogList from '../pages/Blogs/BlogList';
+import EventList from '../pages/Events/EventList';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 export const UserContext = createContext ();

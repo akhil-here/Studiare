@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import signup from '../images/signup.webp';
+import signup from '../../images/signup.webp';
 
 const Signup = () => {
   const history = useHistory ();

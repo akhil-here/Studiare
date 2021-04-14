@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Header from '../shared/Header';
+import Header from '../../shared/Header';
 import {Link} from 'react-router-dom';
 
 const Courses = () => {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
-import create from '../images/createcourse.webp';
+import create from '../../images/createcourse.webp';
 import {NotificationManager} from 'react-notifications';
 
 const CreateCourse = () => {

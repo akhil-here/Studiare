@@ -1,10 +1,10 @@
 import React from 'react';
 import Globalstyles from '../globalStyles';
 import Intropage from '../pages/Intropage/Intropage';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
-import ForgotPassword from '../pages/ForgotPassword';
-import ResetPassword from '../pages/ResetPassword';
+import Login from '../pages/Authentication/Login';
+import Signup from '../pages/Authentication/Signup';
+import ForgotPassword from '../pages/Authentication/ForgotPassword';
+import ResetPassword from '../pages/Authentication/ResetPassword';
 import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom';
 
 const Authentication = () => {

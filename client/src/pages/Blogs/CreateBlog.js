@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
-import create from '../images/createblog.webp';
+import create from '../../images/createblog.webp';
 
 const CreateBlog = () => {
   const history = useHistory ();

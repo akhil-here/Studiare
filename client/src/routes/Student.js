@@ -1,8 +1,8 @@
 import React, {createContext} from 'react';
 import Home from '../shared/Home';
-import Courses from '../pages/Courses';
-import BlogList from '../pages/BlogList';
-import EventList from '../pages/EventList';
+import Courses from '../pages/Courses/Courses';
+import BlogList from '../pages/Blogs/BlogList';
+import EventList from '../pages/Events/EventList';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 export const UserContext = createContext ();

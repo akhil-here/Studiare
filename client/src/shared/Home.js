@@ -70,6 +70,7 @@ const Home = () => {
               <Link to={'/allcourseslist'} className="button-one">
                 View All Courses
               </Link>
+
             </div>
           </div>
           <div className="collection-box">
