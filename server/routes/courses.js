@@ -12,7 +12,7 @@ const isVerified = (req, res, next) => {
   console.log (token);
   jwt.verify (token, JWT_SECRET, (err, payload) => {
     const {_id} = payload;
-    console.log (payload);
+    // console.log (payload);
     User.findById (_id).then (userdata => {
       if (userdata.role == 'Teacher') {
         console.log ('teacher');

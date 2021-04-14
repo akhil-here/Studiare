@@ -67,7 +67,7 @@ const CreateEvent = () => {
             if (data.error) {
               NotificationManager.error (data.error);
             } else {
-              console.log (data);
+              // console.log (data);
               NotificationManager.success ('Created event successfully!!');
               history.push ('/home');
             }

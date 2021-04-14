@@ -1,6 +1,6 @@
 import React, {createContext, useReducer, useEffect} from 'react';
 import {reducer, initialState} from './reducers/userReducer';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, history, useHistory} from 'react-router-dom';
 import Authentication from './routes/Authentication';
 import Student from './routes/Student';
 import Teacher from './routes/Teacher';
@@ -10,11 +10,13 @@ export const UserContext = createContext ();
 
 function App () {
   const [state, dispatch] = useReducer (reducer, initialState);
+  const history = useHistory ();
   const user = JSON.parse (localStorage.getItem ('user'));
   useEffect (() => {
     const user = JSON.parse (localStorage.getItem ('user'));
     if (user) {
       dispatch ({type: 'USER', payload: user});
+      // history.push ('/home');
     }
   }, []);
   if (user && user.role === 'Teacher') {
