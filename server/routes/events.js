@@ -81,7 +81,7 @@ router.post ('/createevent', isVerified, (req, res) => {
   event
     .save ()
     .then (result => {
-      console.log (result);
+      // console.log (result);
       res.json ({events: result});
     })
     .catch (err => {

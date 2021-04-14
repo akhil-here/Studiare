@@ -63,6 +63,21 @@ const CreateCourse = () => {
   );
 
   const postDetails = () => {
+    if (
+      !category ||
+      !course_name ||
+      !no_of_hours ||
+      !price ||
+      !certificate ||
+      !pre_req ||
+      !learning_objectives ||
+      !course_photo
+    ) {
+      {
+        NotificationManager.error ('Please provide all details!!');
+        return;
+      }
+    }
     const data = new FormData ();
     data.append ('file', course_photo);
     data.append ('upload_preset', 'studiare');

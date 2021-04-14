@@ -78,6 +78,24 @@ const CreateEvent = () => {
   );
 
   const postDetails = () => {
+    if (
+      !eventName ||
+      !timefrom ||
+      !timeto ||
+      !location ||
+      !date ||
+      !totalSlots ||
+      !cost ||
+      !bookedSlots ||
+      !quantity ||
+      !payMode ||
+      !eventDesc ||
+      !learningObjectives ||
+      !eventImage
+    ) {
+      NotificationManager.error ('Please provide all details!!');
+      return;
+    }
     const data = new FormData ();
     data.append ('file', eventImage);
     data.append ('upload_preset', 'studiare');
