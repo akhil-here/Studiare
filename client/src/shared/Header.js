@@ -127,7 +127,7 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className="drop-link">
-                  <a href="/Courses">Courses</a>
+                  <a href="/allcourseslist">Courses</a>
                 </li>
                 <li><Link to="/Events">Events</Link></li>
                 <li><Link to="/Contact">Contact</Link></li>

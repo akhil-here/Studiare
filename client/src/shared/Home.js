@@ -207,7 +207,7 @@ const Home = () => {
               <h1>Popular Courses</h1>
             </div>
             <div className="right-part">
-              <Link to={'/Courses'} className="button-one" href="#">
+              <Link to={'/allcourseslist'} className="button-one">
                 View All Courses
               </Link>
             </div>
@@ -217,9 +217,9 @@ const Home = () => {
         <div className="container">
           <div className="popular-courses-box">
             {' '}
-            {courseData.map (item => {
-              return (
-                <div className="row">
+            <div className="row">
+              {courseData.map (item => {
+                return (
                   <div className="col-lg-3 col-md-6">
                     <div className="course-post">
                       <div className="course-thumbnail-holder">
@@ -259,9 +259,9 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
