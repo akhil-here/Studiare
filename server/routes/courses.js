@@ -5,6 +5,7 @@ const Courses = mongoose.model ('Courses');
 const User = mongoose.model ('User');
 const jwt = require ('jsonwebtoken');
 const {JWT_SECRET} = require ('../keys');
+const requireLogin = require ('../middleware/requireLogin');
 
 const isVerified = (req, res, next) => {
   const {authorization} = req.headers;
@@ -84,5 +85,17 @@ router.post ('/createcourse', isVerified, (req, res) => {
 //       console.log (err);
 //     });
 // });
+
+router.get ('/allcourses', requireLogin, (req, res) => {
+  Courses.find ()
+    .populate ('teacher_name', '_id name')
+    // .populate("comments.postedBy", "_id name")
+    .then (courses => {
+      res.json ({courses});
+    })
+    .catch (err => {
+      console.log (err);
+    });
+});
 
 module.exports = router;

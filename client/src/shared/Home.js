@@ -1,8 +1,59 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Header from './Header';
 
 const Home = () => {
+  const [courseData, setCourseData] = useState ([]);
+  const [eventData, setEventData] = useState ([]);
+  const [blogData, setBlogData] = useState ([]);
+
+  const DaysEnum = {
+    '01': 'January',
+    '02': 'February',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December',
+  };
+
+  useEffect (() => {
+    fetch ('/allcourses', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+      },
+    })
+      .then (res => res.json ())
+      .then (result => {
+        console.log (result);
+        setCourseData (result.courses);
+      });
+    fetch ('/allevents', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+      },
+    })
+      .then (res => res.json ())
+      .then (result => {
+        console.log (result);
+        setEventData (result.events);
+      });
+    fetch ('/allblogs', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+      },
+    })
+      .then (res => res.json ())
+      .then (result => {
+        console.log (result);
+        setBlogData (result.blogs);
+      });
+  }, []);
   return (
     <div id="container">
       <Header />
@@ -166,50 +217,51 @@ const Home = () => {
         <div className="container">
           <div className="popular-courses-box">
             {' '}
-            <div className="row">
-              <div className="col-lg-3 col-md-6">
-                <div className="course-post">
-                  <div className="course-thumbnail-holder">
-                    <a href="/">
-                      <img
-                        src="./assets/upload/collection/photography.jpg"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="course-content-holder">
-                    <div className="course-content-main">
-                      <h2 className="course-title">
-                        <a href="/">Learn Photography</a>
-                      </h2>
-                      <div className="course-rating-teacher">
-                        <div
-                          className="star-rating has-ratings"
-                          title="Rated 5.00 out of 5"
-                        >
-                          <span style={{width: '100%'}}>
-                            <span className="rating">5.00</span>
-                            <span className="votes-number">1 Votes</span>
-                          </span>
-                        </div>
-                        <a href="#" className="course-loop-teacher">
-                          Venky
+            {courseData.map (item => {
+              return (
+                <div className="row">
+                  <div className="col-lg-3 col-md-6">
+                    <div className="course-post">
+                      <div className="course-thumbnail-holder">
+                        <a href="/">
+                          <img src={item.course_photo} alt="" />
                         </a>
                       </div>
-                    </div>
-                    <div className="course-content-bottom">
-                      <div className="course-students">
-                        <i className="material-icons">group</i>
-                        <span>64</span>
-                      </div>
-                      <div className="course-price">
-                        <span>£67</span>
+                      <div className="course-content-holder">
+                        <div className="course-content-main">
+                          <h2 className="course-title">
+                            <a href="/">{item.course_name}</a>
+                          </h2>
+                          <div className="course-rating-teacher">
+                            <div
+                              className="star-rating has-ratings"
+                              title="Rated 5.00 out of 5"
+                            >
+                              <span style={{width: '100%'}}>
+                                <span className="rating">5.00</span>
+                                <span className="votes-number">1 Votes</span>
+                              </span>
+                            </div>
+                            <a href="#" className="course-loop-teacher">
+                              {item.teacher_name.name}
+                            </a>
+                          </div>
+                        </div>
+                        <div className="course-content-bottom">
+                          <div className="course-students">
+                            <i className="material-icons">group</i>
+                            <span>{item.no_of_students}</span>
+                          </div>
+                          <div className="course-price">
+                            <span>£{item.price}</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
 
@@ -228,99 +280,45 @@ const Home = () => {
                 </div>
               </div>
               <div className="events-box">
-                <div className="events-post">
-                  <div className="event-inner-content">
-                    <div className="top-part">
-                      <div className="date-holder">
-                        <div className="date">
-                          <span className="date-day">22</span>
-                          <span className="date-month">Oct</span>
+                {eventData.map (item => {
+                  return (
+                    <div className="events-post">
+                      <div className="event-inner-content">
+                        <div className="top-part">
+                          <div className="date-holder">
+                            <div className="date">
+                              <span className="date-day">
+                                {item.date.substring (5, 7)}
+                              </span>
+                              <span className="date-month">
+                                {DaysEnum[item.date.substring (5, 7)]}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="content">
+                            <div className="event-meta">
+                              <span className="event-meta-piece start-time">
+                                <i className="material-icons">access_time</i>
+                                {' '}
+                                {item.timefrom} - {item.timeto}
+                              </span>
+                              <span className="event-meta-piece location">
+                                <i className="material-icons">location_on</i>
+                                {' '}
+                                {item.location}
+                              </span>
+                            </div>
+                            <h2 className="title">
+                              <a href="#">
+                                {item.eventName}
+                              </a>
+                            </h2>
+                          </div>
                         </div>
-                      </div>
-                      <div className="content">
-                        <div className="event-meta">
-                          <span className="event-meta-piece start-time">
-                            <i className="material-icons">access_time</i>
-                            {' '}
-                            6:00 am - 12:00 pm
-                          </span>
-                          <span className="event-meta-piece location">
-                            <i className="material-icons">location_on</i>
-                            {' '}
-                            New York , US of America
-                          </span>
-                        </div>
-                        <h2 className="title">
-                          <a href="#">
-                            Summer High School Journalism Camp Registration Form
-                          </a>
-                        </h2>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="events-post">
-                  <div className="event-inner-content">
-                    <div className="top-part">
-                      <div className="date-holder">
-                        <div className="date">
-                          <span className="date-day">14</span>
-                          <span className="date-month">Dec</span>
-                        </div>
-                      </div>
-                      <div className="content">
-                        <div className="event-meta">
-                          <span className="event-meta-piece start-time">
-                            <i className="material-icons">access_time</i>
-                            {' '}
-                            2:00 am - 5:00 am
-                          </span>
-                          <span className="event-meta-piece location">
-                            <i className="material-icons">location_on</i>
-                            {' '}
-                            New York , US of America
-                          </span>
-                        </div>
-                        <h2 className="title">
-                          <a href="#">
-                            Board of Regents Campus Live and Community Forum
-                          </a>
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="events-post">
-                  <div className="event-inner-content">
-                    <div className="top-part">
-                      <div className="date-holder">
-                        <div className="date">
-                          <span className="date-day">17</span>
-                          <span className="date-month">Dec</span>
-                        </div>
-                      </div>
-                      <div className="content">
-                        <div className="event-meta">
-                          <span className="event-meta-piece start-time">
-                            <i className="material-icons">access_time</i>
-                            {' '}
-                            2:00 am - 8:00 am
-                          </span>
-                          <span className="event-meta-piece location">
-                            <i className="material-icons">location_on</i>
-                            {' '}
-                            New York , US of America
-                          </span>
-                        </div>
-                        <h2 className="title">
-                          <a href="#">
-                            May Professional Development Diversity and Inclusion Series
-                          </a>
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="col-lg-6">
@@ -375,6 +373,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+
       </section>
       {/* End events section */}
       {/* countdown-section 
@@ -434,26 +433,30 @@ const Home = () => {
 
           <div className="news-box">
             <div className="row">
-              <div className="col-lg-3 col-md-6">
-                <div className="blog-post">
-                  <a href="/SinglePost">
-                    <img src="./assets/upload/blog/blog-image-1.jpg" alt="" />
-                  </a>
-                  <div className="post-content">
-                    <a className="category" href="#">Academics</a>
-                    <h2>
-                      <a href="/SinglePost">
-                        Couple Of Happy College Students Graduated
+              {blogData.map (item => {
+                return (
+                  <div className="col-lg-3 col-md-6">
+                    <div className="blog-post">
+                      <a href="/">
+                        <img src={item.blog_photo} alt="" />
                       </a>
-                    </h2>
-                    <div className="post-meta date">
-                      <i className="material-icons">access_time</i>
-                      {' '}
-                      June 13, 2018
+                      <div className="post-content">
+                        <a className="category" href="#">{item.category}</a>
+                        <h2>
+                          <a href="/SinglePost">
+                            {item.blogName}
+                          </a>
+                        </h2>
+                        <div className="post-meta date">
+                          <i className="material-icons">access_time</i>
+                          {' '}
+                          {item.publishDate.substring (0, 10)}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
 
             </div>
           </div>

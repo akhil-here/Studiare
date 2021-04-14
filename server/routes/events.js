@@ -5,6 +5,7 @@ const Events = mongoose.model ('Events');
 const User = mongoose.model ('User');
 const jwt = require ('jsonwebtoken');
 const {JWT_SECRET} = require ('../keys');
+const requireLogin = require ('../middleware/requireLogin');
 
 const isVerified = (req, res, next) => {
   const {authorization} = req.headers;
@@ -83,6 +84,18 @@ router.post ('/createevent', isVerified, (req, res) => {
     .then (result => {
       // console.log (result);
       res.json ({events: result});
+    })
+    .catch (err => {
+      console.log (err);
+    });
+});
+
+router.get ('/allevents', requireLogin, (req, res) => {
+  Events.find ()
+    .populate ('teacher_name', '_id name')
+    // .populate("comments.postedBy", "_id name")
+    .then (events => {
+      res.json ({events});
     })
     .catch (err => {
       console.log (err);

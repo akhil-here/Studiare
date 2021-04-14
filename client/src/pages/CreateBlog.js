@@ -9,7 +9,7 @@ const CreateBlog = () => {
   const [category, setCategory] = useState ('');
   const [blogContent, setBlogContent] = useState ('');
   const [tags, setTags] = useState ('');
-  const [publishedDate, setPublishedDate] = useState ('');
+  const [publishDate, setPublishedDate] = useState ('');
   const [blog_photo, setBlogPhoto] = useState ('');
   const [url, setUrl] = useState ('');
 
@@ -22,7 +22,7 @@ const CreateBlog = () => {
             category,
             blogContent,
             tags,
-            publishedDate,
+            publishDate,
             blog_photo: url,
           })
         );
@@ -37,7 +37,7 @@ const CreateBlog = () => {
             category,
             blogContent,
             tags,
-            publishedDate,
+            publishDate,
             blog_photo: url,
           }),
         })
@@ -62,7 +62,7 @@ const CreateBlog = () => {
       !category ||
       !blogContent ||
       !tags ||
-      !publishedDate ||
+      !publishDate ||
       !blog_photo
     ) {
       NotificationManager.error ('Please provide all details!!');
@@ -211,7 +211,7 @@ const CreateBlog = () => {
                 type="date"
                 placeholder="Date published goes here .."
                 className="form-control border-0 shadow"
-                value={publishedDate}
+                value={publishDate}
                 onChange={e => setPublishedDate (e.target.value)}
               />
             </div>
