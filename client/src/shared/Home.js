@@ -67,77 +67,45 @@ const Home = () => {
               <h1>Trending Collection</h1>
             </div>
             <div className="right-part">
-              <Link to="/Courses">View All Courses</Link>
+              <Link to={'/allcourseslist'} className="button-one">
+                View All Courses
+              </Link>
             </div>
           </div>
           <div className="collection-box">
             <div className="row">
-              <div className="col-lg-6 col-md-12">
+              {/* <div className="col-lg-6 col-md-12">
                 <div className="collection-post">
                   <div className="inner-collection">
-                    <img
-                      src="./assets/upload/collection/web-development.jpg"
-                      alt=""
-                    />
+                    <img src={courseData.slice (0, 1).course_photo} alt="" />
                     <a href="#" className="hover-post">
-                      <span className="title">Web Development</span>
-                      <span className="numb-courses">3 Courses</span>
+                      <span className="title">
+                        {courseData.slice (0, 1).category}
+                      </span>
+            
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-3 col-md-6">
-                <div className="collection-post">
-                  <div className="inner-collection">
-                    <img
-                      src="./assets/upload/collection/web-design.jpg"
-                      alt=""
-                    />
-                    <a href="#" className="hover-post">
-                      <span className="title">Web Design</span>
-                      <span className="numb-courses">2 Courses</span>
-                    </a>
+              </div> */}
+              {courseData.slice (0, courseData.length).map (item => {
+                return (
+                  <div className="col-lg-3 col-md-6">
+                    <div className="collection-post">
+                      <div className="inner-collection">
+                        <img src={item.course_photo} alt="" />
+                        <a href="#" className="hover-post">
+                          <span className="title">{item.category}</span>
+
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="collection-post">
-                  <div className="inner-collection">
-                    <img
-                      src="./assets/upload/collection/technology.jpg"
-                      alt=""
-                    />
-                    <a href="#" className="hover-post">
-                      <span className="title">Technology</span>
-                      <span className="numb-courses">3 Courses</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6">
-                <div className="collection-post">
-                  <div className="inner-collection">
-                    <img
-                      src="./assets/upload/collection/photography.jpg"
-                      alt=""
-                    />
-                    <a href="#" className="hover-post">
-                      <span className="title">Photography</span>
-                      <span className="numb-courses">3 Courses</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="collection-post">
-                  <div className="inner-collection">
-                    <img src="./assets/upload/collection/design.jpg" alt="" />
-                    <a href="#" className="hover-post">
-                      <span className="title">Design</span>
-                      <span className="numb-courses">3 Courses</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
+
       </section>
       {/* End collection section */}
       {/* feature-section 
@@ -203,7 +171,6 @@ const Home = () => {
         <div className="container">
           <div className="title-section">
             <div className="left-part">
-              <span>Education</span>
               <h1>Popular Courses</h1>
             </div>
             <div className="right-part">
@@ -218,7 +185,7 @@ const Home = () => {
           <div className="popular-courses-box">
             {' '}
             <div className="row">
-              {courseData.map (item => {
+              {courseData.slice (0, 4).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
                     <div className="course-post">
@@ -253,7 +220,7 @@ const Home = () => {
                             <span>{item.no_of_students}</span>
                           </div>
                           <div className="course-price">
-                            <span>£{item.price}</span>
+                            <span>₹{item.price}</span>
                           </div>
                         </div>
                       </div>
@@ -280,7 +247,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="events-box">
-                {eventData.map (item => {
+                {eventData.slice (0, 3).map (item => {
                   return (
                     <div className="events-post">
                       <div className="event-inner-content">
@@ -378,7 +345,7 @@ const Home = () => {
       {/* End events section */}
       {/* countdown-section 
     ================================================== */}
-      <section className="countdown-section">
+      {/* <section className="countdown-section">
         <div className="container">
           <div className="countdown-box">
             <h1>Limited Time: Get My Book For Free!</h1>
@@ -415,7 +382,7 @@ const Home = () => {
             <a className="button-two" href="#">Get my free book</a>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* End countdown section */}
       {/* news-section 
     ================================================== */}
@@ -427,13 +394,15 @@ const Home = () => {
               <h1>Latest News</h1>
             </div>
             <div className="right-part">
-              <a className="button-one" href="#">View All Posts</a>
+              <Link className="button-one" to="/allblogslist">
+                View All Blogs
+              </Link>
             </div>
           </div>
 
           <div className="news-box">
             <div className="row">
-              {blogData.map (item => {
+              {blogData.slice (0, 4).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
                     <div className="blog-post">

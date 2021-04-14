@@ -27,7 +27,7 @@ const Courses = () => {
           <h1>Courses</h1>
           <ul className="page-depth">
             <li><Link to="/home">Home</Link></li>
-            <li><a href="/allcourseslist">Courses</a></li>
+            <li><Link to="/allcourseslist">Courses</Link></li>
           </ul>
         </div>
       </section>
@@ -88,7 +88,7 @@ const Courses = () => {
                               <span>{item.no_of_students}</span>
                             </div>
                             <div className="course-price">
-                              <span>£{item.price}</span>
+                              <span>₹{item.price}</span>
                             </div>
                           </div>
                         </div>
@@ -128,7 +128,7 @@ const Courses = () => {
                                 {item.course_name}
                               </a>
                             </h3>
-                            <span>£{item.price}</span>
+                            <span>₹{item.price}</span>
                           </div>
                         </li>
                       );

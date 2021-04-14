@@ -82,7 +82,6 @@ router.post ('/createevent', isVerified, (req, res) => {
   event
     .save ()
     .then (result => {
-      // console.log (result);
       res.json ({events: result});
     })
     .catch (err => {
@@ -93,7 +92,6 @@ router.post ('/createevent', isVerified, (req, res) => {
 router.get ('/allevents', requireLogin, (req, res) => {
   Events.find ()
     .populate ('teacher_name', '_id name')
-    // .populate("comments.postedBy", "_id name")
     .then (events => {
       res.json ({events});
     })
