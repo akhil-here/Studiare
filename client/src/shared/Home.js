@@ -7,7 +7,7 @@ const Home = () => {
   const [eventData, setEventData] = useState ([]);
   const [blogData, setBlogData] = useState ([]);
 
-  const DaysEnum = {
+  const MonthsEnum = {
     '01': 'January',
     '02': 'February',
     '03': 'March',
@@ -74,19 +74,6 @@ const Home = () => {
           </div>
           <div className="collection-box">
             <div className="row">
-              {/* <div className="col-lg-6 col-md-12">
-                <div className="collection-post">
-                  <div className="inner-collection">
-                    <img src={courseData.slice (0, 1).course_photo} alt="" />
-                    <a href="#" className="hover-post">
-                      <span className="title">
-                        {courseData.slice (0, 1).category}
-                      </span>
-            
-                    </a>
-                  </div>
-                </div>
-              </div> */}
               {courseData.slice (0, courseData.length).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
@@ -95,7 +82,6 @@ const Home = () => {
                         <img src={item.course_photo} alt="" />
                         <a href="#" className="hover-post">
                           <span className="title">{item.category}</span>
-
                         </a>
                       </div>
                     </div>
@@ -245,6 +231,11 @@ const Home = () => {
                   <span>Events</span>
                   <h1>Upcoming Events</h1>
                 </div>
+                <div className="right-part">
+                  <Link to={'/alleventslist'} className="button-one">
+                    View All events
+                  </Link>
+                </div>
               </div>
               <div className="events-box">
                 {eventData.slice (0, 3).map (item => {
@@ -258,7 +249,7 @@ const Home = () => {
                                 {item.date.substring (5, 7)}
                               </span>
                               <span className="date-month">
-                                {DaysEnum[item.date.substring (5, 7)]}
+                                {MonthsEnum[item.date.substring (5, 7)]}
                               </span>
                             </div>
                           </div>
@@ -267,7 +258,7 @@ const Home = () => {
                               <span className="event-meta-piece start-time">
                                 <i className="material-icons">access_time</i>
                                 {' '}
-                                {item.timefrom} - {item.timeto}
+                                {item.timefrom}hrs - {item.timeto}hrs
                               </span>
                               <span className="event-meta-piece location">
                                 <i className="material-icons">location_on</i>
@@ -391,7 +382,7 @@ const Home = () => {
           <div className="title-section">
             <div className="left-part">
               <span>Blog</span>
-              <h1>Latest News</h1>
+              <h1>Latest Blogs</h1>
             </div>
             <div className="right-part">
               <Link className="button-one" to="/allblogslist">
