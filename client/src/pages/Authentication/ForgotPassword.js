@@ -36,7 +36,6 @@ const ForgotPassword = () => {
           NotificationManager.error (data.error);
         } else {
           NotificationManager.success (data.message);
-          history.push ('/login');
         }
       })
       .catch (err => {
