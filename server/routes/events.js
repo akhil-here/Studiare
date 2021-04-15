@@ -35,12 +35,9 @@ router.post ('/createevent', isVerified, (req, res) => {
     timefrom,
     timeto,
     location,
-    date,
+    eventDate,
     totalSlots,
-    cost,
     bookedSlots,
-    quantity,
-    payMode,
     eventDesc,
     learningObjectives,
     eventImage,
@@ -50,12 +47,9 @@ router.post ('/createevent', isVerified, (req, res) => {
     !timefrom ||
     !timeto ||
     !location ||
-    !date ||
+    !eventDate ||
     !totalSlots ||
-    !cost ||
     !bookedSlots ||
-    !quantity ||
-    !payMode ||
     !eventDesc ||
     !learningObjectives ||
     !eventImage
@@ -68,12 +62,9 @@ router.post ('/createevent', isVerified, (req, res) => {
     timefrom,
     timeto,
     location,
-    date,
+    eventDate,
     totalSlots,
-    cost,
     bookedSlots,
-    quantity,
-    payMode,
     eventDesc,
     learningObjectives,
     eventImage,
@@ -98,6 +89,16 @@ router.get ('/allevents', requireLogin, (req, res) => {
     .catch (err => {
       console.log (err);
     });
+});
+
+router.get ('/alleventslist/:id', requireLogin, (req, res) => {
+  Events.find ({_id: req.params.id}).exec (function (err, rows) {
+    if (err) {
+      console.log (err);
+    } else {
+      res.send (rows[0]);
+    }
+  });
 });
 
 module.exports = router;

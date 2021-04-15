@@ -43,11 +43,11 @@ const BlogList = () => {
                         <img src={item.blog_photo} alt="" />
                       </a>
                       <div className="post-content">
-                        <a className="category" href="#">{item.category}</a>
+                        <p className="category">{item.category}</p>
                         <h2>
-                          <a href="single-post.html">
+                          <Link to={'/allblogslist/' + item._id}>
                             {item.blogName}
-                          </a>
+                          </Link>
                         </h2>
                         <div className="post-meta date">
                           <i className="material-icons">access_time</i>
@@ -59,12 +59,6 @@ const BlogList = () => {
                   </div>
                 );
               })}
-              {/* <ul className="page-pagination">
-              <li><a href="#"><i className="fa fa-angle-left" /></a></li>
-              <li><a href="#" className="active">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#"><i className="fa fa-angle-right" /></a></li>
-            </ul> */}
             </div>
           </div>
         </div>

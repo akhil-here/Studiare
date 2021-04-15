@@ -21,8 +21,8 @@ const EventSchema = new mongoose.Schema ({
     type: String,
     required: true,
   },
-  date: {
-    type: String,
+  eventDate: {
+    type: Date,
     required: true,
   },
   totalSlots: {
@@ -31,18 +31,6 @@ const EventSchema = new mongoose.Schema ({
   },
   bookedSlots: {
     type: Number,
-    required: true,
-  },
-  cost: {
-    type: Number,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  payMode: {
-    type: String,
     required: true,
   },
   eventDesc: {

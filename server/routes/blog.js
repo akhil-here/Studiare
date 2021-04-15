@@ -80,4 +80,14 @@ router.get ('/allblogs', requireLogin, (req, res) => {
     });
 });
 
+router.get ('/allblogslist/:id', requireLogin, (req, res) => {
+  Blog.find ({_id: req.params.id}).exec (function (err, rows) {
+    if (err) {
+      console.log (err);
+    } else {
+      res.send (rows[0]);
+    }
+  });
+});
+
 module.exports = router;

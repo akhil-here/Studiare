@@ -9,12 +9,9 @@ const CreateEvent = () => {
   const [timefrom, setTimeFrom] = useState ('');
   const [timeto, setTimeTo] = useState ('');
   const [location, setLocation] = useState ('');
-  const [date, setDate] = useState ('');
+  const [eventDate, setDate] = useState ('');
   const [totalSlots, setTotalSlots] = useState ('');
-  const [cost, setCost] = useState ('');
   const [bookedSlots, setBookedSlots] = useState ('');
-  const [quantity, setQuantity] = useState ('');
-  const [payMode, setPaymode] = useState ('');
   const [eventDesc, setEventDescription] = useState ('');
   const [learningObjectives, setLearningObjectives] = useState ('');
   const [eventImage, setEventImage] = useState ('');
@@ -29,12 +26,9 @@ const CreateEvent = () => {
             timefrom,
             timeto,
             location,
-            date,
+            eventDate,
             totalSlots,
-            cost,
             bookedSlots,
-            quantity,
-            payMode,
             eventDesc,
             learningObjectives,
             eventImage: url,
@@ -51,12 +45,9 @@ const CreateEvent = () => {
             timefrom,
             timeto,
             location,
-            date,
+            eventDate,
             totalSlots,
-            cost,
             bookedSlots,
-            quantity,
-            payMode,
             eventDesc,
             learningObjectives,
             eventImage: url,
@@ -67,7 +58,6 @@ const CreateEvent = () => {
             if (data.error) {
               NotificationManager.error (data.error);
             } else {
-              // console.log (data);
               NotificationManager.success ('Created event successfully!!');
               history.push ('/home');
             }
@@ -83,12 +73,9 @@ const CreateEvent = () => {
       !timefrom ||
       !timeto ||
       !location ||
-      !date ||
+      !eventDate ||
       !totalSlots ||
-      !cost ||
       !bookedSlots ||
-      !quantity ||
-      !payMode ||
       !eventDesc ||
       !learningObjectives ||
       !eventImage
@@ -226,13 +213,13 @@ const CreateEvent = () => {
                   fontWeight: 'bold',
                 }}
               >
-                Date{' '}
+                Event Date{' '}
               </label>
               <input
                 type="date"
                 placeholder="Date of event goes here..."
                 className="form-control border-0 shadow"
-                value={date}
+                value={eventDate}
                 onChange={e => setDate (e.target.value)}
               />
             </div>
@@ -267,27 +254,6 @@ const CreateEvent = () => {
                   fontWeight: 'bold',
                 }}
               >
-                Cost{' '}
-              </label>
-              {' '}
-              <input
-                type="number"
-                placeholder="Cost goes here.."
-                className="form-control border-0 shadow"
-                value={cost}
-                onChange={e => setCost (e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label
-                style={{
-                  color: '#201140',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  fontWeight: 'bold',
-                }}
-              >
                 Booked Slots{' '}
               </label>
               {' '}
@@ -297,48 +263,6 @@ const CreateEvent = () => {
                 className="form-control border-0 shadow"
                 value={bookedSlots}
                 onChange={e => setBookedSlots (e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label
-                style={{
-                  color: '#201140',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  fontWeight: 'bold',
-                }}
-              >
-                Quantity{' '}
-              </label>
-              {' '}
-              <input
-                type="number"
-                placeholder="Quantity goes here.."
-                className="form-control border-0 shadow"
-                value={quantity}
-                onChange={e => setQuantity (e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label
-                style={{
-                  color: '#201140',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  fontWeight: 'bold',
-                }}
-              >
-                Payment Mode{' '}
-              </label>
-              {' '}
-              <input
-                type="text"
-                placeholder="Payment mode goes here.."
-                className="form-control border-0 shadow"
-                value={payMode}
-                onChange={e => setPaymode (e.target.value)}
               />
             </div>
 
