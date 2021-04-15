@@ -6,21 +6,6 @@ const EventDetails = () => {
   const [eventData, setEventData] = useState ('');
   const {id} = useParams ();
 
-  const MonthsEnum = {
-    '01': 'January',
-    '02': 'February',
-    '03': 'March',
-    '04': 'April',
-    '05': 'May',
-    '06': 'June',
-    '07': 'July',
-    '08': 'August',
-    '09': 'September',
-    '10': 'October',
-    '11': 'November',
-    '12': 'December',
-  };
-
   useEffect (() => {
     fetch (`/alleventslist/${id}`, {
       headers: {
@@ -74,16 +59,13 @@ const EventDetails = () => {
                       <div className="text">
                         <span className="label">Start Time</span>
                         <p>{eventData.timefrom} hrs</p>
-                        {/* <p className="mt-2"> */}
-                        {/* {eventData.date.substring (8, 10)} */}
-                        {' '}
-                        {/* {eventData.date} */}
-                        {/* {eventData.date.substring (8, 10)}{' '} */}
-                        {/* {eventData.date.toLocaleDateString ()} */}
-                        {/* {MonthsEnum[eventData.date.getUTCMonth()]} */}
-                        {' '}
-                        {/* {eventData.date.substring (0, 4)} */}
-                        {/* </p> */}
+                        <p>
+                          {(eventData.eventDate + '').slice (5, 7)}
+                          {'/'}
+                          {(eventData.eventDate + '').slice (8, 10)}
+                          {'/'}
+                          {(eventData.eventDate + '').slice (0, 4)}
+                        </p>
                       </div>
                       <div className="icon">
                         <i className="material-icons">access_time</i>
@@ -95,14 +77,13 @@ const EventDetails = () => {
                       <div className="text">
                         <span className="label">End Time</span>
                         <p>{eventData.timeto} hrs</p>
-                        {/* <p className="mt-2"> */}
-                        {/* {eventData.date} */}
-                        {/* {eventData.date.substring (8, 10)}{' '} */}
-                        {/* {eventData.date.toLocaleDateString ()} */}
-                        {/* {MonthsEnum[eventData.date.substring (5, 7)]} */}
-                        {' '}
-                        {/* {eventData.date.substring (0, 4)} */}
-                        {/* </p> */}
+                        <p>
+                          {(eventData.eventDate + '').slice (5, 7)}
+                          {'/'}
+                          {(eventData.eventDate + '').slice (8, 10)}
+                          {'/'}
+                          {(eventData.eventDate + '').slice (0, 4)}
+                        </p>
                       </div>
                       <div className="icon">
                         <i className="material-icons">access_time</i>

@@ -35,7 +35,7 @@ router.post ('/createevent', isVerified, (req, res) => {
     timefrom,
     timeto,
     location,
-    date,
+    eventDate,
     totalSlots,
     bookedSlots,
     eventDesc,
@@ -47,7 +47,7 @@ router.post ('/createevent', isVerified, (req, res) => {
     !timefrom ||
     !timeto ||
     !location ||
-    !date ||
+    !eventDate ||
     !totalSlots ||
     !bookedSlots ||
     !eventDesc ||
@@ -62,7 +62,7 @@ router.post ('/createevent', isVerified, (req, res) => {
     timefrom,
     timeto,
     location,
-    date,
+    eventDate,
     totalSlots,
     bookedSlots,
     eventDesc,

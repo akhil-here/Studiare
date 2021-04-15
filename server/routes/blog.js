@@ -85,8 +85,6 @@ router.get ('/allblogslist/:id', requireLogin, (req, res) => {
     if (err) {
       console.log (err);
     } else {
-      console.log (rows);
-      // console.log ({rows});
       res.send (rows[0]);
     }
   });

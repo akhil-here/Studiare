@@ -7,7 +7,6 @@ const bcrpyt = require ('bcryptjs');
 const jwt = require ('jsonwebtoken');
 const {JWT_SECRET} = require ('../keys');
 const {API_KEY} = require ('../keys');
-const requireLogin = require ('../middleware/requireLogin');
 const nodemailer = require ('nodemailer');
 const sendgridTransport = require ('nodemailer-sendgrid-transport');
 
