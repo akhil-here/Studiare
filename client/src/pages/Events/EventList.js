@@ -57,10 +57,10 @@ const EventList = () => {
                           <div className="date-holder">
                             <div className="date">
                               <span className="date-day">
-                                {item.date.substring (8, 10)}
+                                {item.eventDate.slice (8, 10)}
                               </span>
                               <span className="date-month">
-                                {MonthsEnum[item.date.substring (5, 7)]}
+                                {MonthsEnum[item.eventDate.slice (5, 7)]}
                               </span>
                             </div>
                           </div>
@@ -107,9 +107,9 @@ const EventList = () => {
                         return (
                           <li>
                             <Link to="#">
-                              {MonthsEnum[item.date.substring (5, 7)]}
+                              {MonthsEnum[item.eventDate.substring (5, 7)]}
                               ,
-                              {item.date.substring (0, 4)}
+                              {item.eventDate.substring (0, 4)}
                             </Link>
                           </li>
                         );

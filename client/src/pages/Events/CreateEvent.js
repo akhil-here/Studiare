@@ -9,7 +9,7 @@ const CreateEvent = () => {
   const [timefrom, setTimeFrom] = useState ('');
   const [timeto, setTimeTo] = useState ('');
   const [location, setLocation] = useState ('');
-  const [date, setDate] = useState ('');
+  const [eventDate, setDate] = useState ('');
   const [totalSlots, setTotalSlots] = useState ('');
   const [bookedSlots, setBookedSlots] = useState ('');
   const [eventDesc, setEventDescription] = useState ('');
@@ -26,7 +26,7 @@ const CreateEvent = () => {
             timefrom,
             timeto,
             location,
-            date,
+            eventDate,
             totalSlots,
             bookedSlots,
             eventDesc,
@@ -45,7 +45,7 @@ const CreateEvent = () => {
             timefrom,
             timeto,
             location,
-            date,
+            eventDate,
             totalSlots,
             bookedSlots,
             eventDesc,
@@ -73,7 +73,7 @@ const CreateEvent = () => {
       !timefrom ||
       !timeto ||
       !location ||
-      !date ||
+      !eventDate ||
       !totalSlots ||
       !bookedSlots ||
       !eventDesc ||
@@ -213,13 +213,13 @@ const CreateEvent = () => {
                   fontWeight: 'bold',
                 }}
               >
-                Date{' '}
+                Event Date{' '}
               </label>
               <input
                 type="date"
                 placeholder="Date of event goes here..."
                 className="form-control border-0 shadow"
-                value={date}
+                value={eventDate}
                 onChange={e => setDate (e.target.value)}
               />
             </div>
