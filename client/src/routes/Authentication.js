@@ -10,7 +10,7 @@ import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom';
 const Authentication = () => {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter forceRefresh={true}>
         <Globalstyles />
         <Switch>
           <Route exact path="/" component={Intropage} />
