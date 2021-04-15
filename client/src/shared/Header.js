@@ -126,7 +126,7 @@ const Header = () => {
                 </li>
               </ul>
               <Link to="#" className="register-modal-opener login-button">
-                <i className="material-icons">perm_identity</i>
+                <i className="material-icons mt-2">perm_identity</i>
                 My account
               </Link>
             </div>

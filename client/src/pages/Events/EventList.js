@@ -57,7 +57,7 @@ const EventList = () => {
                           <div className="date-holder">
                             <div className="date">
                               <span className="date-day">
-                                {item.date.substring (5, 7)}
+                                {item.date.substring (8, 10)}
                               </span>
                               <span className="date-month">
                                 {MonthsEnum[item.date.substring (5, 7)]}
@@ -78,9 +78,10 @@ const EventList = () => {
                               </span>
                             </div>
                             <h2 className="title">
-                              <a href="single-event.html">
+                              {console.log (item._id)}
+                              <Link to={'/alleventslist/' + item._id}>
                                 {item.eventName}
-                              </a>
+                              </Link>
                             </h2>
                           </div>
                           {/* <a href="single-event.html" className="events-image">
