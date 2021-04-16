@@ -22,6 +22,7 @@ require ('./models/user');
 require ('./models/courses');
 require ('./models/events');
 require ('./models/blog');
+require ('./models/profile');
 
 app.use (cors ());
 app.use (express.json ());
@@ -30,6 +31,7 @@ app.use (require ('./routes/auth'));
 app.use (require ('./routes/courses'));
 app.use (require ('./routes/events'));
 app.use (require ('./routes/blog'));
+app.use (require ('./routes/profile'));
 
 app.listen (PORT, () => {
   console.log ('server is running at', PORT);
