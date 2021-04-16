@@ -7,7 +7,10 @@ import Courses from '../pages/Courses/Courses';
 import BlogList from '../pages/Blogs/BlogList';
 import EventList from '../pages/Events/EventList';
 import EventDetails from '../pages/Events/EventDetails';
+import CourseDetails from '../pages/Courses/CourseDetails';
 import BlogDetails from '../pages/Blogs/BlogDetails';
+import Cart from '../pages/Checkout/Cart';
+import Checkout from '../pages/Checkout/Checkout';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 export const UserContext = createContext ();
@@ -23,7 +26,10 @@ const Teacher = () => {
         <Route exact path="/allblogslist" component={BlogList} />
         <Route exact path="/alleventslist" component={EventList} />
         <Route exact path="/alleventslist/:id" component={EventDetails} />
+        <Route exact path="/allcourseslist/:id" component={CourseDetails} />
         <Route exact path="/allblogslist/:id" component={BlogDetails} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route render={() => <Redirect to="/home" />} />
       </Switch>
     </BrowserRouter>

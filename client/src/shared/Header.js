@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {UserContext} from '../App';
+import {connect} from 'react-redux';
 
-const Header = () => {
+const Header = props => {
   const {state, dispatch} = useContext (UserContext);
   const history = useHistory ();
   return (
@@ -36,7 +37,9 @@ const Header = () => {
                     <Link to="/Cart">
                       <i className="material-icons">shopping_cart</i>
                     </Link>
-                    <span className="studiare-cart-number">0</span>
+                    <span className="studiare-cart-number">
+                      {props.newState.numberCart}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -243,4 +246,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    newState: state._cartItems,
+  };
+};
+
+export default connect (mapStateToProps, null) (Header);
+
+// export default Header;
