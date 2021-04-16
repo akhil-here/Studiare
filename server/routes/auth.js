@@ -9,6 +9,7 @@ const {JWT_SECRET} = require ('../keys');
 const {API_KEY} = require ('../keys');
 const nodemailer = require ('nodemailer');
 const sendgridTransport = require ('nodemailer-sendgrid-transport');
+const requireLogin = require ('../middleware/requireLogin');
 
 //https://github.com/hemakshis/Basic-MERN-Stack-App/blob/master/routes/articlesRoute.js
 
@@ -137,6 +138,17 @@ router.post ('/new-password', (req, res) => {
           res.json ({message: 'Updated password successfully!!'});
         });
       });
+    })
+    .catch (err => {
+      console.log (err);
+    });
+});
+
+router.get ('/teacherslist', requireLogin, (req, res) => {
+  User.find ({role: 'Teacher'})
+    .populate ('teacher_name', '_id name')
+    .then (users => {
+      res.json ({users});
     })
     .catch (err => {
       console.log (err);

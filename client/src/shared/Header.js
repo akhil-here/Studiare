@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {UserContext} from '../App';
+import {connect} from 'react-redux';
 
-const Header = () => {
+const Header = props => {
   const {state, dispatch} = useContext (UserContext);
   const history = useHistory ();
   return (
@@ -15,19 +16,16 @@ const Header = () => {
                 <p>
                   <i className="material-icons">phone</i>
                   {' '}
-                  <span>+01 2334 853</span>
+                  <span>+9869101921</span>
                 </p>
                 <p>
                   <i className="material-icons">email</i>
                   {' '}
-                  <span>email@mycourse.com</span>
+                  <span>studiare.miniproject@gmail.com</span>
                 </p>
               </div>
               <div className="col-md-6">
                 <div className="right-top-line">
-                  <ul className="top-menu">
-                    <li><Link to="/">About</Link></li>
-                  </ul>
                   <button className="search-icon">
                     <i className="material-icons open-search">search</i>
                     <i className="material-icons close-search">close</i>
@@ -36,7 +34,9 @@ const Header = () => {
                     <Link to="/Cart">
                       <i className="material-icons">shopping_cart</i>
                     </Link>
-                    <span className="studiare-cart-number">0</span>
+                    <span className="studiare-cart-number">
+                      {props.newState.numberCart}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -72,30 +72,9 @@ const Header = () => {
                   <Link className="active" to="/home">Home</Link>
                 </li>
                 <li className="drop-link">
-                  <Link to={'/'}>
-                    Pages <i className="fa fa-angle-down" />
+                  <Link to={'/teacherslist'}>
+                    Teachers
                   </Link>
-                  <ul className="dropdown">
-                    <li><Link to={'/Portfolio'}>Portfolio</Link></li>
-                    <li><Link to={'/Teachers'}>Teachers</Link></li>
-                    <li><Link to={'/SingleTeacher'}>Teacher Single</Link></li>
-                    <li className="drop-link">
-                      <Link to="#">Submenu Level 1</Link>
-                      <ul className="dropdown level2">
-                        <li><Link to="#">Submenu Level 2</Link></li>
-                        <li className="drop-link">
-                          <Link to="#">Submenu Level 2</Link>
-                          <ul className="dropdown level2">
-                            <li><Link to={'/'}>Submenu Level 3</Link></li>
-                            <li><Link to={'/'}>Submenu Level 3</Link></li>
-                          </ul>
-                        </li>
-                        <li><Link to="#">Submenu Level 2</Link></li>
-                      </ul>
-                    </li>
-                    <li><Link to="/Cart">Shopping Cart</Link></li>
-                    <li><Link to="/Checkout">Checkout</Link></li>
-                  </ul>
                 </li>
                 <li className="drop-link">
                   <Link to="/allblogslist">
@@ -243,4 +222,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    newState: state._cartItems,
+  };
+};
+
+export default connect (mapStateToProps, null) (Header);
+
+// export default Header;

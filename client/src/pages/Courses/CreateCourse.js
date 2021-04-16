@@ -247,8 +247,9 @@ const CreateCourse = () => {
 
                 Pre-requisites{' '}
               </label>
-              <input
+              <textarea
                 type="text"
+                rows="5"
                 placeholder="Pre-requisites goes here..."
                 className="form-control border-0 shadow"
                 value={pre_req}
@@ -270,8 +271,9 @@ const CreateCourse = () => {
                 Learning Objectives{' '}
               </label>
               {' '}
-              <input
+              <textarea
                 type="text"
+                rows="5"
                 placeholder="Learning outcomes goes here.."
                 className="form-control border-0 shadow"
                 value={learning_objectives}

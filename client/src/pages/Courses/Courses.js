@@ -56,16 +56,16 @@ const Courses = () => {
                     <div className="col-lg-4 col-md-6 col-sm-6">
                       <div className="course-post">
                         <div className="course-thumbnail-holder">
-                          <a href="single-course.html">
-                            <img src={item.course_photo} alt="" />
-                          </a>
+
+                          <img src={item.course_photo} alt="" />
+
                         </div>
                         <div className="course-content-holder">
                           <div className="course-content-main">
                             <h2 className="course-title">
-                              <a href="single-course.html">
+                              <Link to={'/allcourseslist/' + item._id}>
                                 {item.course_name}
-                              </a>
+                              </Link>
                             </h2>
                             <div className="course-rating-teacher">
                               <div
@@ -77,9 +77,9 @@ const Courses = () => {
                                   <span className="votes-number">1 Votes</span>
                                 </span>
                               </div>
-                              <a href="#" className="course-loop-teacher">
-                                {item.teacher_name.name}
-                              </a>
+
+                              {item.teacher_name.name}
+
                             </div>
                           </div>
                           <div className="course-content-bottom">
