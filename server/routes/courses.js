@@ -98,4 +98,14 @@ router.get ('/allcourses', requireLogin, (req, res) => {
     });
 });
 
+router.get ('/allcourseslist/:id', requireLogin, (req, res) => {
+  Courses.find ({_id: req.params.id}).exec (function (err, rows) {
+    if (err) {
+      console.log (err);
+    } else {
+      res.send (rows[0]);
+    }
+  });
+});
+
 module.exports = router;

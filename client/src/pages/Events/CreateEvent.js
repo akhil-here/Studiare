@@ -278,8 +278,9 @@ const CreateEvent = () => {
                 Event description{' '}
               </label>
               {' '}
-              <input
+              <textarea
                 type="text"
+                rows="5"
                 placeholder="Event description goes here.."
                 className="form-control border-0 shadow"
                 value={eventDesc}
@@ -299,8 +300,9 @@ const CreateEvent = () => {
                 Learning Objectives{' '}
               </label>
               {' '}
-              <input
+              <textarea
                 type="text"
+                rows="5"
                 placeholder="Learning outcomes goes here.."
                 className="form-control border-0 shadow"
                 value={learningObjectives}

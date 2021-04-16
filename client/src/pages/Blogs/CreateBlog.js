@@ -89,10 +89,10 @@ const CreateBlog = () => {
   return (
     <div>
       <div className="row d-flex mx-auto justify-content-center">
-        <div className="col-xl-6 col-12 flex-column">
+        <div className="col-xl-7 col-12 flex-column">
           <img src={create} alt="Create blog" className="position-fixed" />
         </div>
-        <div className="col-xl-6 col-12 d-flex align-items-center justify-content-center flex-column">
+        <div className="col-xl-5 col-12 d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
             <div className="form-group">
               <h1
