@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {NotificationManager} from 'react-notifications';
+import forgotpass from '../../images/signup.gif';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState ('');
   const {token} = useParams ();
+  const history = useHistory ();
 
   const PostData = () => {
     if (password.length < 6) {
@@ -28,6 +30,7 @@ const ResetPassword = () => {
         } else {
           console.log (password);
           NotificationManager.success (data.message);
+          history.push ('/login');
         }
       })
       .catch (error => {
@@ -37,6 +40,9 @@ const ResetPassword = () => {
   return (
     <div>
       <div className="row d-flex mx-auto">
+        <div className="col-xl-7 col-12 d-flex align-items-center justify-content-center flex-column">
+          <img src={forgotpass} alt="forgot password" className="w-100" />
+        </div>
         <div className="col-xl-5 col-12 text-white d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
             <div className="form-group">
