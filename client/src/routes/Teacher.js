@@ -11,6 +11,7 @@ import CourseDetails from '../pages/Courses/CourseDetails';
 import BlogDetails from '../pages/Blogs/BlogDetails';
 import Cart from '../pages/Checkout/Cart';
 import Checkout from '../pages/Checkout/Checkout';
+import TeachersList from '../pages/Profile/TeachersList';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 export const UserContext = createContext ();
@@ -30,6 +31,7 @@ const Teacher = () => {
         <Route exact path="/allblogslist/:id" component={BlogDetails} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/teacherslist" component={TeachersList} />
         <Route render={() => <Redirect to="/home" />} />
       </Switch>
     </BrowserRouter>

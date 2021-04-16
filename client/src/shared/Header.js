@@ -16,19 +16,16 @@ const Header = props => {
                 <p>
                   <i className="material-icons">phone</i>
                   {' '}
-                  <span>+01 2334 853</span>
+                  <span>+9869101921</span>
                 </p>
                 <p>
                   <i className="material-icons">email</i>
                   {' '}
-                  <span>email@mycourse.com</span>
+                  <span>studiare.miniproject@gmail.com</span>
                 </p>
               </div>
               <div className="col-md-6">
                 <div className="right-top-line">
-                  <ul className="top-menu">
-                    <li><Link to="/">About</Link></li>
-                  </ul>
                   <button className="search-icon">
                     <i className="material-icons open-search">search</i>
                     <i className="material-icons close-search">close</i>
@@ -75,30 +72,9 @@ const Header = props => {
                   <Link className="active" to="/home">Home</Link>
                 </li>
                 <li className="drop-link">
-                  <Link to={'/'}>
-                    Pages <i className="fa fa-angle-down" />
+                  <Link to={'/teacherslist'}>
+                    Teachers
                   </Link>
-                  <ul className="dropdown">
-                    <li><Link to={'/Portfolio'}>Portfolio</Link></li>
-                    <li><Link to={'/Teachers'}>Teachers</Link></li>
-                    <li><Link to={'/SingleTeacher'}>Teacher Single</Link></li>
-                    <li className="drop-link">
-                      <Link to="#">Submenu Level 1</Link>
-                      <ul className="dropdown level2">
-                        <li><Link to="#">Submenu Level 2</Link></li>
-                        <li className="drop-link">
-                          <Link to="#">Submenu Level 2</Link>
-                          <ul className="dropdown level2">
-                            <li><Link to={'/'}>Submenu Level 3</Link></li>
-                            <li><Link to={'/'}>Submenu Level 3</Link></li>
-                          </ul>
-                        </li>
-                        <li><Link to="#">Submenu Level 2</Link></li>
-                      </ul>
-                    </li>
-                    <li><Link to="/Cart">Shopping Cart</Link></li>
-                    <li><Link to="/Checkout">Checkout</Link></li>
-                  </ul>
                 </li>
                 <li className="drop-link">
                   <Link to="/allblogslist">
