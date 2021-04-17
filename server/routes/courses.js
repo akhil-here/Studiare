@@ -15,7 +15,7 @@ var storage_gallery = multer.diskStorage ({
     cb (null, './uploads');
   },
   filename: function (req, file, cb) {
-    cb (null, Date.now () + file.originalname);
+    cb (null, file.originalname);
   },
 });
 
@@ -95,6 +95,7 @@ router.post (
       learning_objectives,
       course_photo,
       teacher_name: req.user,
+      videos: []
     });
     course
       .save ()
@@ -184,7 +185,7 @@ router.get ('/allcourseslist/:id', requireLogin, (req, res) => {
 
 router.post (
   '/createcourse2',
-  upload_gallery.array ('myFiles', 12),
+  upload_gallery.array ('myFiles', 20),
   (req, res, next) => {
     const files = req.files;
     if (!files) {
@@ -192,12 +193,26 @@ router.post (
       error.httpStatusCode = 400;
       return next (error);
     }
-    console.log (req.body.courseid);
-    return res.json ({
-      data: [],
-      success: true,
-      msg: 'row added',
+
+    console.log(req.body.courseid);
+    console.log(typeof(req.body.courseid))
+    console.log('hi')
+
+    const videotemp = []
+    for (let i = 0; i < req.files.length; i++) {
+      videotemp.push(req.files[i].filename)      
+    }
+    console.log(videotemp)
+
+    Courses.findOneAndUpdate({_id : req.body.courseid}, { videos: videotemp } , function(err,docs){
+      console.log(docs)
     });
+
+    Courses.find({_id : req.body.courseid}, function(err,docs){
+      console.log(docs)
+    });
+
+    return res.json ("Okay");
   }
 );
 

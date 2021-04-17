@@ -64,12 +64,10 @@ const CourseSchema = new mongoose.Schema ({
     type: String,
     required: true,
   },
-  videos: [
-    {
-      text: String,
-      // required: true,
-    },
-  ],
+  videos: {
+    type:Array,
+    required:true
+  },
 });
 
 mongoose.model ('Courses', CourseSchema);
