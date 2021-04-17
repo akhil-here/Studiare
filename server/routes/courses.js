@@ -183,6 +183,19 @@ router.get ('/allcourseslist/:id', requireLogin, (req, res) => {
   });
 });
 
+router.get ('/allcourses/:category', requireLogin, (req, res) => {
+  Courses.find ({category: req.params.category})
+    .populate ('teacher_name', '_id name')
+    .exec (function (err, rows) {
+      if (err) {
+        console.log (err);
+      } else {
+        console.log (rows);
+        res.send (rows);
+      }
+    });
+});
+
 router.post (
   '/createcourse2',
   upload_gallery.array ('myFiles', 20),
@@ -208,7 +221,7 @@ router.post (
       {_id: req.body.courseid},
       {videos: videotemp},
       function (err, docs) {
-        console.log (docs);
+        // console.log (docs);
       }
     );
 

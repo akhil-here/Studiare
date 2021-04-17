@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Header from './Header';
 
 const Home = () => {
@@ -7,6 +7,7 @@ const Home = () => {
   const [eventData, setEventData] = useState ([]);
   const [blogData, setBlogData] = useState ([]);
   const userrole = JSON.parse (localStorage.getItem ('user')).role;
+  const username = JSON.parse (localStorage.getItem ('user')).name;
 
   const MonthsEnum = {
     '01': 'January',
@@ -82,9 +83,12 @@ const Home = () => {
                     <div className="collection-post">
                       <div className="inner-collection">
                         <img src={item.course_photo} alt="" />
-                        <a href="#" className="hover-post">
+                        <Link
+                          to={'/allcourses/' + item.category}
+                          className="hover-post"
+                        >
                           <span className="title">{item.category}</span>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -351,47 +355,7 @@ const Home = () => {
 
       </section>
       {/* End events section */}
-      {/* countdown-section 
-    ================================================== */}
-      {/* <section className="countdown-section">
-        <div className="container">
-          <div className="countdown-box">
-            <h1>Limited Time: Get My Book For Free!</h1>
-            <p>Learn anytime, anywhere. Best Courses. Top Instituion.</p>
-            <div className="countdown-item" data-date="2019/12/14">
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-days">
-                  <span className="number" id="days" />
-                  <span className="text">days</span>
-                </span>
-              </div>
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-hours">
-                  <span className="number" id="hours" />
-                  <span className="text">hours</span>
-                </span>
-              </div>
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-min">
-                  <span className="number" id="minutes" />
-                  <span className="text">minutes</span>
-                </span>
-              </div>
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-sec">
-                  <span className="number" id="seconds" />
-                  <span className="text">seconds</span>
-                </span>
-              </div>
-            </div>
-            <p>
-              We offer professional SEO services that help websites increase their organic search score drastically in order to compete for the highest rankings.
-            </p>
-            <a className="button-two" href="#">Get my free book</a>
-          </div>
-        </div>
-      </section> */}
-      {/* End countdown section */}
+
       {/* news-section 
     ================================================== */}
       <section className="news-section">
