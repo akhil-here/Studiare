@@ -66,7 +66,7 @@ const Home = () => {
           <div className="title-section">
             <div className="left-part">
               <span>Categories</span>
-              <h1>Trending Collection</h1>
+              <h1>Trending Course Collections</h1>
             </div>
             <div className="right-part">
               <Link to={'/allcourseslist'} className="button-one">
@@ -358,160 +358,197 @@ const Home = () => {
 
       {/* news-section 
     ================================================== */}
-      <section className="news-section">
+      <section className="collection-section">
         <div className="container">
           <div className="title-section">
             <div className="left-part">
-              <span>Blog</span>
-              <h1>Latest Blogs</h1>
+              <span>Categories</span>
+              <h1>Trending Blog Collections</h1>
             </div>
-            <div className="right-part">
-              {(() => {
-                if (userrole == 'Teacher') {
-                  return (
-                    <Link
-                      to={'/createblog'}
-                      className="button-one btn waves-effect mr-2 "
-                    >
-                      Create Blog
-                    </Link>
-                  );
-                } else {
-                  return;
-                }
-              }) ()}
-              <Link className="button-one" to="/allblogslist">
+            {/* <div className="right-part">
+              <Link to={'/allcourseslist'} className="button-one">
                 View All Blogs
               </Link>
-            </div>
-          </div>
 
-          <div className="news-box">
+            </div> */}
+          </div>
+          <div className="collection-box">
             <div className="row">
               {blogData.slice (0, 4).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
-                    <div className="blog-post">
-                      <a href="/">
+                    <div className="collection-post">
+                      <div className="inner-collection">
                         <img src={item.blog_photo} alt="" />
-                      </a>
-                      <div className="post-content">
-                        <a className="category" href="#">{item.category}</a>
-                        <h2>
-                          <a href="/SinglePost">
-                            {item.blogName}
-                          </a>
-                        </h2>
-                        <div className="post-meta date">
-                          <i className="material-icons">access_time</i>
-                          {' '}
-                          {item.publishDate.substring (0, 10)}
-                        </div>
+                        <Link
+                          to={'/allblogs/' + item.category}
+                          className="hover-post"
+                        >
+                          <span className="title">{item.category}</span>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </div>
+        <section className="news-section">
+          <div className="container">
+            <div className="title-section">
+              <div className="left-part">
+                <span>Blog</span>
+                <h1>Latest Blogs</h1>
+              </div>
+              <div className="right-part">
+                {(() => {
+                  if (userrole == 'Teacher') {
+                    return (
+                      <Link
+                        to={'/createblog'}
+                        className="button-one btn waves-effect mr-2 "
+                      >
+                        Create Blog
+                      </Link>
+                    );
+                  } else {
+                    return;
+                  }
+                }) ()}
+                <Link className="button-one" to="/allblogslist">
+                  View All Blogs
+                </Link>
+              </div>
+            </div>
 
+            <div className="news-box">
+              <div className="row">
+                {blogData.slice (0, 4).map (item => {
+                  return (
+                    <div className="col-lg-3 col-md-6">
+                      <div className="blog-post">
+                        <a href="/">
+                          <img src={item.blog_photo} alt="" />
+                        </a>
+                        <div className="post-content">
+                          <a className="category" href="#">{item.category}</a>
+                          <h2>
+                            <a href="/SinglePost">
+                              {item.blogName}
+                            </a>
+                          </h2>
+                          <div className="post-meta date">
+                            <i className="material-icons">access_time</i>
+                            {' '}
+                            {item.publishDate.substring (0, 10)}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      {/* End news section */}
-      {/* testimonial-section 
+        </section>
+        {/* End news section */}
+        {/* testimonial-section 
     ================================================== */}
-      <section className="testimonial-section">
-        <div className="container">
-          <div className="testimonial-box owl-wrapper">
-            <div className="owl-carousel" data-num={1}>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-1.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-2.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
+        <section className="testimonial-section">
+          <div className="container">
+            <div className="testimonial-box owl-wrapper">
+              <div className="owl-carousel" data-num={1}>
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-1.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-3.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-2.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-4.jpg"
-                        alt=""
-                      />
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-3.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
+                  </div>
+                </div>
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-4.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+        </section>
       </section>
       {/* End testimonial section */}
     </div>
   );
-  // </Router>
 };
 
 export default Home;

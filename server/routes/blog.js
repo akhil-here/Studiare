@@ -82,13 +82,26 @@ router.get ('/allblogs', requireLogin, (req, res) => {
 
 router.get ('/allblogslist/:id', requireLogin, (req, res) => {
   Blog.find ({_id: req.params.id})
-    // .populate ('postedBy', '_id name')
+    .populate ('postedBy', '_id name')
     .exec (function (err, rows) {
       if (err) {
         console.log (err);
       } else {
-        console.log (rows[0]);
+        console.log (rows[0].postedBy.name);
         res.send (rows[0]);
+      }
+    });
+});
+
+router.get ('/allblogs/:category', requireLogin, (req, res) => {
+  Blog.find ({category: req.params.category})
+    .populate ('postedBy', '_id name')
+    .exec (function (err, rows) {
+      if (err) {
+        console.log (err);
+      } else {
+        console.log (rows);
+        res.send (rows);
       }
     });
 });

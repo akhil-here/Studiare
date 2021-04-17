@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Header from '../../shared/Header';
 import {Link, useParams} from 'react-router-dom';
-// import User from '../../../../server/models/user';
 
 const BlogDetails = () => {
   const [blogData, setBlogData] = useState ('');
@@ -20,12 +19,6 @@ const BlogDetails = () => {
       });
   }, []);
 
-  // const getname = () => {
-  //   User.findbyId ({_id: blogData.postedBy}).then (res => {
-  //     console.log (res);
-  //   });
-  // };
-
   return (
     <div id="container">
       <Header />
@@ -37,7 +30,6 @@ const BlogDetails = () => {
           <ul className="page-depth">
             <li><Link to="/home">Home</Link></li>
             <li><Link to="/allblogslist">Blogs</Link></li>
-
             <li>
               <Link to={'/allblogslist/' + blogData._id}>
                 {blogData.blogName}
@@ -52,7 +44,7 @@ const BlogDetails = () => {
       <section className="blog-section">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12 col-md-12">
+            <div className="col-lg-8 col-md-12">
               <div className="blog-box">
                 <div className="blog-post single-post">
                   <div className="post-content">
@@ -77,47 +69,22 @@ const BlogDetails = () => {
                   <img
                     src={blogData.blog_photo}
                     alt=""
-                    className="w-50 d-flex text-center justify-content-center align-items-center"
+                    className="w-100 d-flex text-center justify-content-center align-items-center"
                   />
                   <div className="post-content">
                     <p>{blogData.blogContent}</p>
                     <div className="tags-share-box">
                       <ul className="tags-list">
-                        <li><span>Tags:</span></li>
+                        <li><span className="font-weight-bold">Tags:</span></li>
                         <li>{blogData.tags}</li>
-                        {/* <li><a href="#">theme</a></li>
-                        <li><a href="#">HTML Template</a></li> */}
                       </ul>
-                      {/* <ul className="share-list">
-                        <li><span>Share:</span></li>
-                        <li>
-                          <a href="#" className="facebook">
-                            <i className="fa fa-facebook-f" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" className="twitter">
-                            <i className="fa fa-twitter" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" className="google">
-                            <i className="fa fa-google-plus" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" className="linkedin">
-                            <i className="fa fa-linkedin" />
-                          </a>
-                        </li>
-                      </ul> */}
                     </div>
                     <div className="about-author">
                       <div className="image-holder">
                         <img src="./assets/upload/blog/avatar.jpg" alt="" />
                       </div>
                       <div className="author-content">
-                        <h2>About codebean</h2>
+                        <h2>About {blogData.postedBy}</h2>
                         <p>
                           Aenean eu justo id magna luctus pulvinar. Quisque vitae scelerisque eros. Pellentesque pretium felis non libero pharetra feugiat id ac sem. Suspendisse ac metus justo.
                         </p>
@@ -285,7 +252,7 @@ const BlogDetails = () => {
           </div>
         </div>
       </section>
-      {/* End blog section */}
+      {/* End blog section{' '} */}
     </div>
   );
 };
