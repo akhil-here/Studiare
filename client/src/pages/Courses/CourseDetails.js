@@ -61,7 +61,7 @@ const CourseDetails = props => {
                       <div className="info">
                         <span className="label">Teacher</span>
                         <div className="value">
-                          <a href="/SingleTeacher">Michael Arnett</a>
+                          <a href="/SingleTeacher">ABC</a>
                         </div>
                       </div>
                     </div>
@@ -76,12 +76,7 @@ const CourseDetails = props => {
                         </div>
                       </div>
                     </div>
-                    <div className="course-rating before-gallery-unit">
-                      <div className="star-rating has-ratings">
-                        <span className="rating">4.50</span>
-                        <span className="votes-number">2 Votes</span>
-                      </div>
-                    </div>
+
                   </div>
                   <div className="course-single-gallery">
                     <video
@@ -566,32 +561,18 @@ const CourseDetails = props => {
                       <div className="icon">
                         <i className="material-icons">terrain</i>
                       </div>
-                      <div className="value">Certificate of Completion</div>
+                      <div className="value">
+
+                        {(() => {
+                          if (courseData.certificate) {
+                            return 'Certificate of completion';
+                          } else {
+                            return <del>Certificate of completion</del>;
+                          }
+                        }) ()}
+                      </div>
                     </div>
                   </div>
-                  <ul className="share-list">
-                    <li><span>Share:</span></li>
-                    <li>
-                      <a href="#" className="facebook">
-                        <i className="fa fa-facebook-f" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="twitter">
-                        <i className="fa fa-twitter" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="google">
-                        <i className="fa fa-google-plus" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="linkedin">
-                        <i className="fa fa-linkedin" />
-                      </a>
-                    </li>
-                  </ul>
                 </div>
                 <div className="widget profile-widget">
                   <div className="top-part">

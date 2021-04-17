@@ -13,7 +13,13 @@ const CreateCourse = () => {
   const [pre_req, setPre] = useState ('');
   const [learning_objectives, setLearning] = useState ('');
   const [course_photo, setImage] = useState ('');
+  // const [videos, setVideo] = useState ([]);
+  const [language, setLanguage] = useState ('');
+  const [study_level, setStudyLevel] = useState ('');
   const [url, setUrl] = useState ('');
+  let temp = {};
+  // const [vurl, setVideoURL] = useState ('');
+  // const [lessonsUrl, setLessonUrl] = useState ('');
 
   useEffect (
     () => {
@@ -27,6 +33,8 @@ const CreateCourse = () => {
             certificate,
             pre_req,
             learning_objectives,
+            language,
+            study_level,
             course_photo: url,
           })
         );
@@ -43,6 +51,8 @@ const CreateCourse = () => {
             price,
             certificate,
             pre_req,
+            language,
+            study_level,
             learning_objectives,
             course_photo: url,
           }),
@@ -52,9 +62,10 @@ const CreateCourse = () => {
             if (data.error) {
               NotificationManager.error (data.error);
             } else {
+              temp = data;
+
               console.log (data);
-              NotificationManager.success ('Created course successfully!!');
-              history.push ('/home');
+              // NotificationManager.success ('Created course successfully!!');
             }
           });
       }
@@ -71,7 +82,9 @@ const CreateCourse = () => {
       !certificate ||
       !pre_req ||
       !learning_objectives ||
-      !course_photo
+      !course_photo ||
+      !language ||
+      !study_level
     ) {
       {
         NotificationManager.error ('Please provide all details!!');
@@ -79,9 +92,11 @@ const CreateCourse = () => {
       }
     }
     const data = new FormData ();
+
     data.append ('file', course_photo);
     data.append ('upload_preset', 'studiare');
     data.append ('cloud_name', 'studiare');
+
     fetch ('https://api.cloudinary.com/v1_1/studiare/image/upload', {
       method: 'post',
       body: data,
@@ -94,15 +109,32 @@ const CreateCourse = () => {
       .catch (err => {
         console.log (err);
       });
+
+    // const data2 = new FormData ();
+    // for (var x = 0; x < videos.length; x++) {
+    //   data2.append ('file', videos[x]);
+    // }
+    // fetch ('https://api.cloudinary.com/v1_1/studiare/image/upload', {
+    //   method: 'post',
+    //   body: data2,
+    // })
+    //   .then (res => res.json ())
+    //   .then (data => {
+    //     console.log (data.vurl);
+    //     setVideoURL (data.vurl);
+    //   })
+    //   .catch (err => {
+    //     console.log (err);
+    //   });
   };
 
   return (
     <div>
       <div className="row d-flex mx-auto justify-content-center">
-        <div className="col-xl-7 col-12 flex-column ">
+        <div className="col-xl-6 col-12 flex-column ">
           <img src={create} alt="Create course" className="position-fixed" />
         </div>
-        <div className="col-xl-5 col-12 d-flex align-items-center justify-content-center flex-column">
+        <div className="col-xl-6 col-12 d-flex align-items-center justify-content-center flex-column">
           <div className="w-75">
             <div className="form-group">
               <h1
@@ -199,6 +231,51 @@ const CreateCourse = () => {
               />
 
             </div>
+
+            <div className="form-group">
+              <label
+                style={{
+                  color: '#201140',
+                  fontSize: '1rem',
+                  marginTop: '1rem',
+                  fontWeight: 'bold',
+                }}
+              >
+
+                Language{' '}
+              </label>
+              <input
+                type="text"
+                placeholder="Language goes here..."
+                className="form-control border-0 shadow"
+                value={language}
+                onChange={e => setLanguage (e.target.value)}
+              />
+
+            </div>
+
+            <div className="form-group">
+              <label
+                style={{
+                  color: '#201140',
+                  fontSize: '1rem',
+                  marginTop: '1rem',
+                  fontWeight: 'bold',
+                }}
+              >
+
+                Study Level{' '}
+              </label>
+              <input
+                type="text"
+                placeholder="Study Level goes here..."
+                className="form-control border-0 shadow"
+                value={study_level}
+                onChange={e => setStudyLevel (e.target.value)}
+              />
+
+            </div>
+
             <div className="form-group">
               <label
                 style={{
@@ -299,6 +376,27 @@ const CreateCourse = () => {
                 onChange={e => setImage (e.target.files[0])}
               />
             </div>
+            {/* <div className="form-group course-section">
+
+              <label
+                style={{
+                  color: '#201140',
+                  fontSize: '1rem',
+                  marginTop: '1rem',
+                  fontWeight: 'bold',
+                }}
+              >
+                Upload Videos
+              </label>
+              <input
+                type="file"
+                multiple
+                className="form-control border-0 shadow"
+                onChange={e => setVideo (e.target.files[0])}
+              />
+
+            </div> */}
+
             <div className="row form-group align-items-center justify-content-center">
 
               <button
@@ -312,6 +410,20 @@ const CreateCourse = () => {
                 Create course{' '}
               </button>
             </div>
+
+            <form
+              action="/createcourse2"
+              enctype="multipart/form-data"
+              method="POST"
+            >
+              <input name="courseid" id="cid" />
+
+              <label for="myFiles">Upload videos</label>
+              <input type="file" name="myFiles" multiple /><br /><br />
+
+              <input type="submit" value="Submit" />
+
+            </form>
 
           </div>
         </div>

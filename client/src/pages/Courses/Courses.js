@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 
 const Courses = () => {
   const [courseData, setCourseData] = useState ([]);
+  const username = JSON.parse (localStorage.getItem ('user')).name;
+  const c = [];
 
   useEffect (() => {
     fetch ('/allcourses', {
@@ -13,7 +15,15 @@ const Courses = () => {
     })
       .then (res => res.json ())
       .then (result => {
-        console.log (result);
+        // for (const i in result.courses) {
+        //   if (username != {result.courses[i].teacher_name.name}) {
+        //     c.push (JSON.stringify (`$({result.courses[i]}`));
+        //     // console.log (`${result.courses[i]}`);
+
+        //     // setCourseData (`${result.courses[i]}`);
+        //   }
+        // }
+        console.log (result.courses);
         setCourseData (result.courses);
       });
   }, []);
@@ -68,15 +78,6 @@ const Courses = () => {
                               </Link>
                             </h2>
                             <div className="course-rating-teacher">
-                              <div
-                                className="star-rating has-ratings"
-                                title="Rated 5.00 out of 5"
-                              >
-                                <span style={{width: '100%'}}>
-                                  <span className="rating">5.00</span>
-                                  <span className="votes-number">1 Votes</span>
-                                </span>
-                              </div>
 
                               {item.teacher_name.name}
 
