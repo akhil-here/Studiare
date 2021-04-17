@@ -196,14 +196,16 @@ const Home = () => {
                   <div className="col-lg-3 col-md-6">
                     <div className="course-post">
                       <div className="course-thumbnail-holder">
-                        <a href="/">
-                          <img src={item.course_photo} alt="" />
-                        </a>
+
+                        <img src={item.course_photo} alt="" />
+
                       </div>
                       <div className="course-content-holder">
                         <div className="course-content-main">
                           <h2 className="course-title">
-                            <a href="/">{item.course_name}</a>
+                            <Link to={'/allcourseslist/' + item._id}>
+                              {item.course_name}
+                            </Link>
                           </h2>
                           <a href="#" className="course-loop-teacher">
                             {item.teacher_name.name}
@@ -290,7 +292,9 @@ const Home = () => {
                               </span>
                             </div>
                             <h2 className="title">
-                              {item.eventName}
+                              <Link to={'/alleventslist/' + item._id}>
+                                {item.eventName}
+                              </Link>
                             </h2>
                           </div>
                         </div>
@@ -428,15 +432,15 @@ const Home = () => {
                   return (
                     <div className="col-lg-3 col-md-6">
                       <div className="blog-post">
-                        <a href="/">
-                          <img src={item.blog_photo} alt="" />
-                        </a>
+
+                        <img src={item.blog_photo} alt="" />
+
                         <div className="post-content">
-                          <a className="category" href="#">{item.category}</a>
+                          {item.category}
                           <h2>
-                            <a href="/SinglePost">
+                            <Link to={`/allblogslist/` + item._id}>
                               {item.blogName}
-                            </a>
+                            </Link>
                           </h2>
                           <div className="post-meta date">
                             <i className="material-icons">access_time</i>

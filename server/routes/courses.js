@@ -174,13 +174,15 @@ router.get ('/allcourses', requireLogin, (req, res) => {
 });
 
 router.get ('/allcourseslist/:id', requireLogin, (req, res) => {
-  Courses.find ({_id: req.params.id}).exec (function (err, rows) {
-    if (err) {
-      console.log (err);
-    } else {
-      res.send (rows[0]);
-    }
-  });
+  Courses.find ({_id: req.params.id})
+    .populate ('teacher_name', '_id name')
+    .exec (function (err, rows) {
+      if (err) {
+        console.log (err);
+      } else {
+        res.send (rows[0]);
+      }
+    });
 });
 
 router.get ('/allcourses/:category', requireLogin, (req, res) => {

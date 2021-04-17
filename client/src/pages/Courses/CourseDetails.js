@@ -61,7 +61,12 @@ const CourseDetails = props => {
                       <div className="info">
                         <span className="label">Teacher</span>
                         <div className="value">
-                          <a href="/SingleTeacher">ABC</a>
+                          <a href="/SingleTeacher">
+                            {/* {courseData.teacher_name['name']} */}
+                            {courseData && courseData.teacher_name
+                              ? courseData.teacher_name.name
+                              : null}
+                          </a>
                         </div>
                       </div>
                     </div>
