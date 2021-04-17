@@ -6,6 +6,7 @@ const Home = () => {
   const [courseData, setCourseData] = useState ([]);
   const [eventData, setEventData] = useState ([]);
   const [blogData, setBlogData] = useState ([]);
+  const userrole = JSON.parse (localStorage.getItem ('user')).role;
 
   const MonthsEnum = {
     '01': 'January',
@@ -75,7 +76,7 @@ const Home = () => {
           </div>
           <div className="collection-box">
             <div className="row">
-              {courseData.slice (0, courseData.length).map (item => {
+              {courseData.slice (0, 4).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
                     <div className="collection-post">
@@ -161,6 +162,20 @@ const Home = () => {
               <h1>Popular Courses</h1>
             </div>
             <div className="right-part">
+              {(() => {
+                if (userrole == 'Teacher') {
+                  return (
+                    <Link
+                      to={'/createcourse'}
+                      className="button-one btn waves-effect mr-2 "
+                    >
+                      Create Course
+                    </Link>
+                  );
+                } else {
+                  return;
+                }
+              }) ()}
               <Link to={'/allcourseslist'} className="button-one">
                 View All Courses
               </Link>
@@ -222,6 +237,20 @@ const Home = () => {
                   <h1>Upcoming Events</h1>
                 </div>
                 <div className="right-part">
+                  {(() => {
+                    if (userrole == 'Teacher') {
+                      return (
+                        <Link
+                          to={'/createevent'}
+                          className="button-one btn waves-effect mr-2 "
+                        >
+                          Create Event
+                        </Link>
+                      );
+                    } else {
+                      return;
+                    }
+                  }) ()}
                   <Link to={'/alleventslist'} className="button-one">
                     View All events
                   </Link>
@@ -373,6 +402,20 @@ const Home = () => {
               <h1>Latest Blogs</h1>
             </div>
             <div className="right-part">
+              {(() => {
+                if (userrole == 'Teacher') {
+                  return (
+                    <Link
+                      to={'/createblog'}
+                      className="button-one btn waves-effect mr-2 "
+                    >
+                      Create Blog
+                    </Link>
+                  );
+                } else {
+                  return;
+                }
+              }) ()}
               <Link className="button-one" to="/allblogslist">
                 View All Blogs
               </Link>

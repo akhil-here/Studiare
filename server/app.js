@@ -9,6 +9,7 @@ var path = require ('path');
 mongoose.connect (MONGOURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 mongoose.connection.on ('connected', () => {
