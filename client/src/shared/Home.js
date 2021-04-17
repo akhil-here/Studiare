@@ -186,29 +186,18 @@ const Home = () => {
                           <h2 className="course-title">
                             <a href="/">{item.course_name}</a>
                           </h2>
-                          <div className="course-rating-teacher">
-                            <div
-                              className="star-rating has-ratings"
-                              title="Rated 5.00 out of 5"
-                            >
-                              <span style={{width: '100%'}}>
-                                <span className="rating">5.00</span>
-                                <span className="votes-number">1 Votes</span>
-                              </span>
-                            </div>
-                            <a href="#" className="course-loop-teacher">
-                              {item.teacher_name.name}
-                            </a>
-                          </div>
+                          <a href="#" className="course-loop-teacher">
+                            {item.teacher_name.name}
+                          </a>
                         </div>
-                        <div className="course-content-bottom">
-                          <div className="course-students">
-                            <i className="material-icons">group</i>
-                            <span>{item.no_of_students}</span>
-                          </div>
-                          <div className="course-price">
-                            <span>₹{item.price}</span>
-                          </div>
+                      </div>
+                      <div className="course-content-bottom">
+                        <div className="course-students">
+                          <i className="material-icons">group</i>
+                          <span>{item.no_of_students}</span>
+                        </div>
+                        <div className="course-price">
+                          <span>₹{item.price}</span>
                         </div>
                       </div>
                     </div>

@@ -37,6 +37,7 @@ const BlogDetails = () => {
           <ul className="page-depth">
             <li><Link to="/home">Home</Link></li>
             <li><Link to="/allblogslist">Blogs</Link></li>
+
             <li>
               <Link to={'/allblogslist/' + blogData._id}>
                 {blogData.blogName}

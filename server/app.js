@@ -4,6 +4,7 @@ const mongoose = require ('mongoose');
 const PORT = 5000;
 var cors = require ('cors');
 const {MONGOURI} = require ('./keys');
+var path = require ('path');
 
 mongoose.connect (MONGOURI, {
   useNewUrlParser: true,
@@ -30,6 +31,9 @@ app.use (require ('./routes/auth'));
 app.use (require ('./routes/courses'));
 app.use (require ('./routes/events'));
 app.use (require ('./routes/blog'));
+
+app.use (express.static (path.join (__dirname, '/uploads')));
+console.log (__dirname);
 
 app.listen (PORT, () => {
   console.log ('server is running at', PORT);
