@@ -99,9 +99,7 @@ const BlogDetails = () => {
                         <p>
                           Aenean eu justo id magna luctus pulvinar. Quisque vitae scelerisque eros. Pellentesque pretium felis non libero pharetra feugiat id ac sem. Suspendisse ac metus justo.
                         </p>
-                        <a className="button-one" href="#">
-                          More posts by codebean
-                        </a>
+
                       </div>
                     </div>
                   </div>

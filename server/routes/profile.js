@@ -74,19 +74,11 @@ router.put ('/Profile1',requireLogin, (req, res) => {
     website,
     subject,
     phoneNo,
-<<<<<<< HEAD
-    profile_photo,
-  } = req.body;
-  var temp = 0;
-
-  User.findOne ({_id: req.user})
-=======
     profile_photo
   } = req.body;
   var temp=0;
 
     User.findOne ({_id: req.user})
->>>>>>> main
     .then (exists => {
       if (!exists) {
         return res.status (422).json ({error: 'Invalid Credentials!!'});
