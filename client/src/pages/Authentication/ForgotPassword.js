@@ -4,7 +4,6 @@ import {NotificationManager} from 'react-notifications';
 import forgotpass from '../../images/forgot_pass.webp';
 
 const ForgotPassword = () => {
-  const history = useHistory ();
   const [email, setEmail] = useState ('');
   const {token} = useParams ();
 

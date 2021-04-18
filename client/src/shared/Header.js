@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 const Header = props => {
   const {state, dispatch} = useContext (UserContext);
   const history = useHistory ();
+  const username = JSON.parse (localStorage.getItem ('user')).name;
   return (
     <div>
       <header className="clearfix">
@@ -55,10 +56,13 @@ const Header = props => {
             </button>
           </div>
         </form>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav
+          className="navbar navbar-expand-lg"
+          style={{backgroundColor: '#201140'}}
+        >
           <div className="container">
-            <Link className="navbar-brand" to={'/home'}>
-              <img src="./assets/images/logo.svg" alt="" />
+            <Link className="navbar-brand" to={'/home'} style={{width: '1rem'}}>
+              <img src="./assets/images/logo.png" alt="" />
             </Link>
             <Link to="#" className="mobile-nav-toggle">
               <span />
@@ -67,12 +71,17 @@ const Header = props => {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav mr-auto">
+              <ul
+                className="navbar-nav mr-auto"
+                style={{
+                  marginLeft: '10rem',
+                }}
+              >
                 <li className="drop-link">
                   <Link className="active" to="/home">Home</Link>
                 </li>
                 <li className="drop-link">
-                  <Link to={'/teacherslist'}>
+                  <Link to="/teacherslist">
                     Teachers
                   </Link>
                 </li>
@@ -85,28 +94,32 @@ const Header = props => {
                   <Link to="/allcourseslist">Courses</Link>
                 </li>
                 <li><Link to="/alleventslist">Events</Link></li>
-                <li><Link to="/Contact">Contact</Link></li>
-                <li>
-                  <button
-                    className="btn waves-effect shadow "
-                    onClick={() => {
-                      localStorage.clear ();
-                      dispatch ({type: 'CLEAR'});
-                      history.push ('/login');
-                    }}
-                    style={{
-                      backgroundColor: '#ce1212',
-                      color: 'white',
-                      marginTop: '2rem',
-                    }}
-                  >
-                    Log Out{' '}
-                  </button>
-                </li>
               </ul>
-              <Link to="#" className="register-modal-opener login-button">
+              <button
+                className="btn waves-effect shadow mr-2 mt-2 "
+                onClick={() => {
+                  localStorage.clear ();
+                  dispatch ({type: 'CLEAR'});
+                  history.push ('/login');
+                }}
+                style={{
+                  backgroundColor: '#ce1212',
+                  color: 'white',
+                  marginTop: '2rem',
+                }}
+              >
+                Log Out{' '}
+              </button>
+              <Link
+                to="#"
+                className="register-modal-opener shadow login-button"
+                style={{
+                  backgroundColor: '#ffb037',
+                  color: 'black',
+                }}
+              >
                 <i className="material-icons mt-2">perm_identity</i>
-                My account
+                {username}'s profile
               </Link>
             </div>
           </div>
@@ -134,68 +147,20 @@ const Header = props => {
           <nav className="mobile-nav">
             <ul className="mobile-menu-list">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/home">Home</Link>
               </li>
               <li className="drop-link">
-                <Link to="#">Pages</Link>
-                <ul className="drop-level">
-                  <li><Link to="/">About Us</Link></li>
-                  <li><Link to="/Pricing">Pricing Packages</Link></li>
-                  <li><Link to="/Portfolio">Portfolio</Link></li>
-                  <li><Link to={'/Teachers'}>Teachers</Link></li>
-                  <li><Link to={'/SingleTeacher'}>Teacher Single</Link></li>
-                  <li className="drop-link">
-                    <Link to="#">Submenu Level 1</Link>
-                    <ul className="drop-level">
-                      <li><Link to="#">Submenu Level 2</Link></li>
-                      <li className="drop-link">
-                        <Link to="#">Submenu Level 2</Link>
-                        <ul className="drop-level">
-                          <li><Link to="#">Submenu Level 3</Link></li>
-                          <li><Link to="#">Submenu Level 3</Link></li>
-                        </ul>
-                      </li>
-                      <li><Link to="#">Submenu Level 2</Link></li>
-                    </ul>
-                  </li>
-                </ul>
+                <Link to={'/teacherslist'}>
+                  Teachers
+                </Link>
               </li>
               <li className="drop-link">
-                <Link to="/BlogGrid4">Blog</Link>
-                <ul className="drop-level">
-                  {/* <li className="drop-link">
-                          <Link to="blog-list.html">Blog List</Link>
-                          <ul className="drop-level">
-                            <li><Link to="blog-list-leftsidebar.html">Blog List - Sidebar Left</Link></li>
-                            <li><Link to="blog-list-rightsidebar.html">Blog List - Sidebar Right</Link></li>
-                            <li><Link to="blog-list.html">No Sidebar</Link></li>
-                          </ul>
-                        </li>
-                        <li className="drop-link">
-                          <Link to="blog-grid-3.html">Blog Grid</Link>
-                          <ul className="drop-level">
-                            <li><Link to="blog-grid-3.html">3 Column</Link></li>
-                            <li><Link to="blog-grid-4.html">4 Column</Link></li>
-                            <li><Link to="blog-grid-leftsidebar.html">Sidebar Left</Link></li>
-                            <li><Link to="blog-grid-rightsidebar.html">Sidebar Right</Link></li>
-                          </ul>
-                        </li> */}
-                  <li><Link to="/BlogGrid4">Blog Grid 4</Link></li>
-                  <li><Link to="/SinglePost">Post Single</Link></li>
-                  <li>
-                    <Link to="/BlogGridLeftsidebar">BlogGridLeftsidebar</Link>
-                  </li>
-                </ul>
+                <Link to={'/allblogslist'}>Blog</Link>
               </li>
-              <li>
-                <Link to="/Courses">Courses</Link>
+              <li className="drop-link">
+                <Link to="/allcourseslist">Courses</Link>
               </li>
-              <li>
-                <Link to="/Events">Events</Link>
-              </li>
-              <li>
-                <Link to="/Contact">Contact</Link>
-              </li>
+              <li><Link to="/alleventslist">Events</Link></li>
               <li>
                 <button
                   className="btn waves-effect shadow "
@@ -213,6 +178,17 @@ const Header = props => {
                   Log Out{' '}
                 </button>
               </li>
+              <Link
+                to="#"
+                className="register-modal-opener shadow login-button mt-2"
+                style={{
+                  backgroundColor: '#ffb037',
+                  color: 'black',
+                }}
+              >
+                <i className="material-icons mt-2">perm_identity</i>
+                {username}'s profile
+              </Link>
             </ul>
           </nav>
         </div>

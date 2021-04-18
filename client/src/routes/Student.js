@@ -1,7 +1,9 @@
 import React, {createContext} from 'react';
 import Home from '../shared/Home';
 import Courses from '../pages/Courses/Courses';
+import CourseCat from '../pages/Courses/CourseCat';
 import BlogList from '../pages/Blogs/BlogList';
+import BlogCat from '../pages/Blogs/BlogCat';
 import EventList from '../pages/Events/EventList';
 import EventDetails from '../pages/Events/EventDetails';
 import BlogDetails from '../pages/Blogs/BlogDetails';
@@ -23,6 +25,8 @@ const Student = () => {
         <Route exact path="/alleventslist/:id" component={EventDetails} />
         <Route exact path="/allblogslist/:id" component={BlogDetails} />
         <Route exact path="/allcourseslist/:id" component={CourseDetails} />
+        <Route exact path="/allcourses/:category" component={CourseCat} />
+        <Route exact path="/allblogs/:category" component={BlogCat} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/teacherslist" component={TeachersList} />
