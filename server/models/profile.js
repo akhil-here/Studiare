@@ -13,23 +13,19 @@ const profileSchema = new mongoose.Schema ({
   },
   website: {
     type: String,
-    requried: true,
+    required: true,
   },
   subject: {
     type: String,
-    requried: true,
+    required: true,
   },
   phoneNo: {
     type: Number,
-    requried: true,
+    required: true,
   },
-  
   profile_photo: {
     type: String,
-    
   },
-  
-
 });
 
 mongoose.model ('Profile', profileSchema);

@@ -15,6 +15,7 @@ import Cart from '../pages/Checkout/Cart';
 import Checkout from '../pages/Checkout/Checkout';
 import TeachersList from '../pages/Profile/TeachersList';
 import TeachersProfile from '../pages/Profile/TeacherProfile';
+import SingleTeacher from '../pages/Profile/SingleTeacher';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 export const UserContext = createContext ();
@@ -38,6 +39,7 @@ const Teacher = () => {
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/teacherslist" component={TeachersList} />
         <Route exact path="/teachersprofile" component={TeachersProfile} />
+        <Route exact path="/teacher/:id" component={SingleTeacher} />
         <Route render={() => <Redirect to="/home" />} />
       </Switch>
     </BrowserRouter>

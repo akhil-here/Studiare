@@ -172,54 +172,7 @@ class User_Profile extends React.Component {
                     </div>
 
                   </div>
-                  <div className="line-details">
 
-                    <div className="form-group">
-                      <div className="icon-holder" />
-                      <div className="detail-content">
-                        <i
-                          className="fa fa-mobile"
-                          style={{
-                            color: '#201140',
-                            fontSize: '1rem',
-                            marginTop: '1.5rem',
-                            fontWeight: 'bold',
-                          }}
-                        />
-                        <label
-                          style={{
-                            color: '#201140',
-                            fontSize: '1rem',
-                            marginTop: '1rem',
-                            fontWeight: 'bold',
-                            marginLeft: '1rem',
-                          }}
-                        >
-                          Password:
-                        </label>
-                        <input
-                          type="password"
-                          name="password"
-                          className="form-control shadow border-0"
-                          onChange={this.handleChange}
-                        />
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="form-group d-flex align-items-center justify-content-center">
-                    <button
-                      className="btn waves-effect shadow mt-2 "
-                      type="submit"
-                      value="Submit"
-                      style={{
-                        backgroundColor: '#021140',
-                        color: 'white',
-                      }}
-                    >
-                      Update
-                    </button>
-                  </div>
                 </form>
               </div>
             </div>

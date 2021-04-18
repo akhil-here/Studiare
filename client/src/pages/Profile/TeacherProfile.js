@@ -11,7 +11,7 @@ class Teacher_Profile extends React.Component {
       subject: '',
       detail: '',
       email: '',
-      phone: '',
+      phoneNo: '',
       website: '',
       profile_photo: '',
       url: '',
@@ -36,11 +36,10 @@ class Teacher_Profile extends React.Component {
           email: result.teacher_name.email,
           subject: result.subject,
           detail: result.about,
-          phone: result.phone,
+          phoneNo: result.phoneNo,
           website: result.website,
           profile_photo: result.profile_photo,
         });
-        console.log ('this.state :', this.state);
       });
   }
   image (profile) {
@@ -51,7 +50,6 @@ class Teacher_Profile extends React.Component {
     }
   }
   profileimage () {
-    console.log ('profileimage func');
     const data = new FormData ();
     data.append ('file', this.state.profile_photo);
     data.append ('upload_preset', 'studiare');
@@ -63,12 +61,8 @@ class Teacher_Profile extends React.Component {
       .then (res => res.json ())
       .then (data => {
         console.log (data.url);
-
         this.setState ({url: data.url});
         this.setState ({profile_photo: this.state.url});
-        console.log (this.url);
-        console.log (this.profile_photo);
-        console.log ('Profile func end');
       })
       .catch (err => {
         console.log (err);
@@ -78,7 +72,6 @@ class Teacher_Profile extends React.Component {
     if (event.target.name === 'img') {
       console.log (event.target.files[0]);
       this.setState ({profile_photo: event.target.files[0]});
-      console.log (this.state.profile_photo);
     } else {
       this.setState ({[event.target.name]: event.target.value});
     }
@@ -105,7 +98,7 @@ class Teacher_Profile extends React.Component {
         about: this.state.detail,
         website: this.state.website,
         subject: this.state.subject,
-        phone: this.state.phone,
+        phoneNo: this.state.phoneNo,
         profile_photo: this.state.profile_photo,
         url: this.state.url,
       })
@@ -124,7 +117,7 @@ class Teacher_Profile extends React.Component {
           about: this.state.detail,
           website: this.state.website,
           subject: this.state.subject,
-          phone: this.state.phone,
+          phoneNo: this.state.phoneNo,
           profile_photo: this.state.profile_photo,
         }),
       })
@@ -277,6 +270,38 @@ class Teacher_Profile extends React.Component {
                               />
                             </div>
                           </div>
+                          <div className="form-group">
+
+                            <div className="detail-content">
+                              <i
+                                className="fa fa-book"
+                                style={{
+                                  color: '#201140',
+                                  fontSize: '1rem',
+                                  marginTop: '1.5rem',
+                                  fontWeight: 'bold',
+                                }}
+                              />
+                              <label
+                                style={{
+                                  color: '#201140',
+                                  fontSize: '1rem',
+                                  marginTop: '1rem',
+                                  fontWeight: 'bold',
+                                  marginLeft: '1rem',
+                                }}
+                              >
+                                Subject:
+                              </label>
+                              <input
+                                type="text"
+                                name="subject"
+                                className="form-control shadow border-0"
+                                value={this.state.subject}
+                                onChange={this.handleChange}
+                              />
+                            </div>
+                          </div>
                         </div>
 
                         <div className="line-details">
@@ -349,41 +374,39 @@ class Teacher_Profile extends React.Component {
                           </div>
                         </div>
 
-                        <div className="line-details">
+                        <div className="form-group">
 
-                          <div className="form-group">
-
-                            <div className="detail-content">
-                              <i
-                                className="fa fa-book"
-                                style={{
-                                  color: '#201140',
-                                  fontSize: '1rem',
-                                  marginTop: '1.5rem',
-                                  fontWeight: 'bold',
-                                }}
-                              />
-                              <label
-                                style={{
-                                  color: '#201140',
-                                  fontSize: '1rem',
-                                  marginTop: '1rem',
-                                  fontWeight: 'bold',
-                                  marginLeft: '1rem',
-                                }}
-                              >
-                                Subject:
-                              </label>
-                              <input
-                                type="text"
-                                name="subject"
-                                className="form-control shadow border-0"
-                                value={this.state.subject}
-                                onChange={this.handleChange}
-                              />
-                            </div>
+                          <div className="detail-content">
+                            <i
+                              className="fa fa-phone"
+                              style={{
+                                color: '#201140',
+                                fontSize: '1rem',
+                                marginTop: '1.5rem',
+                                fontWeight: 'bold',
+                              }}
+                            />
+                            <label
+                              style={{
+                                color: '#201140',
+                                fontSize: '1rem',
+                                marginTop: '1rem',
+                                fontWeight: 'bold',
+                                marginLeft: '1rem',
+                              }}
+                            >
+                              Phone No:
+                            </label>
+                            <input
+                              type="text"
+                              name="phoneNo"
+                              className="form-control shadow border-0"
+                              value={this.state.phoneNo}
+                              onChange={this.handleChange}
+                            />
                           </div>
                         </div>
+
                         <div className="form-group d-flex align-items-center justify-content-center">
                           <button
                             className="btn waves-effect shadow mt-2 "
