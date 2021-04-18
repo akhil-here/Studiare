@@ -5,6 +5,7 @@ import BlogList from '../pages/Blogs/BlogList';
 import EventList from '../pages/Events/EventList';
 import EventDetails from '../pages/Events/EventDetails';
 import BlogDetails from '../pages/Blogs/BlogDetails';
+import User_Profile from '../pages/Profile/User_Profile';
 import Cart from '../pages/Checkout/Cart';
 import CourseDetails from '../pages/Courses/CourseDetails';
 import Checkout from '../pages/Checkout/Checkout';
@@ -22,6 +23,7 @@ const Student = () => {
         <Route exact path="/alleventslist" component={EventList} />
         <Route exact path="/alleventslist/:id" component={EventDetails} />
         <Route exact path="/allblogslist/:id" component={BlogDetails} />
+        <Route exact path="/User_Profile" component={User_Profile} />
         <Route exact path="/allcourseslist/:id" component={CourseDetails} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />

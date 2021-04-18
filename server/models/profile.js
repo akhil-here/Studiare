@@ -1,16 +1,11 @@
 const mongoose = require ('mongoose');
-const course = require('./../models/courses');
 
 const {ObjectId} = mongoose.Schema.Types;
 
 const profileSchema = new mongoose.Schema ({
-  name: {
-    type: String,
-    requried: true,
-  },
-  email: {
-    type: String,
-    requried: true,
+  teacher_name: {
+    type: ObjectId,
+    ref: 'User',
   },
   about: {
     type: String,
@@ -31,21 +26,10 @@ const profileSchema = new mongoose.Schema ({
   
   profile_photo: {
     type: String,
-    required: true,
+    
   },
-  course1: {
-    type: course,
-    required: true,
-  },
-  course2: {
-    type: course,
-    required: true,
-  },
-  course3: {
-    type: course,
-    required: true,
-  }
+  
 
 });
 
-mongoose.model ('profile', profileSchema);
+mongoose.model ('Profile', profileSchema);
