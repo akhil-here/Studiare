@@ -18,9 +18,6 @@ const CourseSchema = new mongoose.Schema ({
     type: Number,
     // required: true,
   },
-  votes: {
-    type: Number,
-  },
   no_of_hours: {
     type: Number,
     required: true,
@@ -28,10 +25,6 @@ const CourseSchema = new mongoose.Schema ({
   price: {
     type: Number,
     required: true,
-  },
-  lessons: {
-    type: String,
-    // required: true,
   },
   certificate: {
     type: String,
@@ -45,17 +38,15 @@ const CourseSchema = new mongoose.Schema ({
     type: String,
     required: true,
   },
-  lessons: [
-    {
-      text: String,
-      description: String,
-      // required: true,
-    },
-  ],
-  ratings: {
-    type: Number,
-    // required:true
+  language: {
+    type: String,
+    required: true,
   },
+  study_level: {
+    type: String,
+    required: true,
+  },
+
   comments: [
     {
       text: String,
@@ -69,19 +60,14 @@ const CourseSchema = new mongoose.Schema ({
     type: String,
     // required: true,
   },
-  discounted_price: {
-    type: Number,
-  },
   course_photo: {
     type: String,
     required: true,
   },
-  videos: [
-    {
-      type: String,
-      // required: true,
-    },
-  ],
+  videos: {
+    type:Array,
+    required:true
+  },
 });
 
 mongoose.model ('Courses', CourseSchema);

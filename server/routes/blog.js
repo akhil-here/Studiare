@@ -70,7 +70,7 @@ router.post ('/createblog', isVerified, (req, res) => {
 
 router.get ('/allblogs', requireLogin, (req, res) => {
   Blog.find ()
-    .populate ('teacher_name', '_id name')
+    .populate ('postedBy', '_id name')
     // .populate("comments.postedBy", "_id name")
     .then (blogs => {
       res.json ({blogs});
@@ -81,13 +81,15 @@ router.get ('/allblogs', requireLogin, (req, res) => {
 });
 
 router.get ('/allblogslist/:id', requireLogin, (req, res) => {
-  Blog.find ({_id: req.params.id}).exec (function (err, rows) {
-    if (err) {
-      console.log (err);
-    } else {
-      res.send (rows[0]);
-    }
-  });
+  Blog.find ({_id: req.params.id})
+    // .populate ('postedBy', '_id name')
+    .exec (function (err, rows) {
+      if (err) {
+        console.log (err);
+      } else {
+        res.send (rows[0]);
+      }
+    });
 });
 
 module.exports = router;
