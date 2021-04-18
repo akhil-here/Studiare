@@ -26,7 +26,7 @@ const profileSchema = new mongoose.Schema ({
   
   profile_photo: {
     type: String,
-    required: true,
+    
   },
   
 

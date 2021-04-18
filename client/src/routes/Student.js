@@ -5,6 +5,7 @@ import BlogList from '../pages/Blogs/BlogList';
 import EventList from '../pages/Events/EventList';
 import EventDetails from '../pages/Events/EventDetails';
 import BlogDetails from '../pages/Blogs/BlogDetails';
+import User_Profile from '../pages/Profile/User_Profile';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 export const UserContext = createContext ();
@@ -18,6 +19,7 @@ const Student = () => {
         <Route exact path="/alleventslist" component={EventList} />
         <Route exact path="/alleventslist/:id" component={EventDetails} />
         <Route exact path="/allblogslist/:id" component={BlogDetails} />
+        <Route exact path="/User_Profile" component={User_Profile} />
         <Route render={() => <Redirect to="/home" />} />
       </Switch>
     </BrowserRouter>
