@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Header from './Header';
 
 const Home = () => {
   const [courseData, setCourseData] = useState ([]);
   const [eventData, setEventData] = useState ([]);
   const [blogData, setBlogData] = useState ([]);
+  const userrole = JSON.parse (localStorage.getItem ('user')).role;
+  const username = JSON.parse (localStorage.getItem ('user')).name;
 
   const MonthsEnum = {
     '01': 'January',
@@ -64,7 +66,7 @@ const Home = () => {
           <div className="title-section">
             <div className="left-part">
               <span>Categories</span>
-              <h1>Trending Collection</h1>
+              <h1>Trending Course Collections</h1>
             </div>
             <div className="right-part">
               <Link to={'/allcourseslist'} className="button-one">
@@ -75,15 +77,18 @@ const Home = () => {
           </div>
           <div className="collection-box">
             <div className="row">
-              {courseData.slice (0, courseData.length).map (item => {
+              {courseData.slice (0, 4).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
                     <div className="collection-post">
                       <div className="inner-collection">
                         <img src={item.course_photo} alt="" />
-                        <a href="#" className="hover-post">
+                        <Link
+                          to={'/allcourses/' + item.category}
+                          className="hover-post"
+                        >
                           <span className="title">{item.category}</span>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -161,6 +166,20 @@ const Home = () => {
               <h1>Popular Courses</h1>
             </div>
             <div className="right-part">
+              {(() => {
+                if (userrole == 'Teacher') {
+                  return (
+                    <Link
+                      to={'/createcourse'}
+                      className="button-one btn waves-effect mr-2 "
+                    >
+                      Create Course
+                    </Link>
+                  );
+                } else {
+                  return;
+                }
+              }) ()}
               <Link to={'/allcourseslist'} className="button-one">
                 View All Courses
               </Link>
@@ -177,14 +196,16 @@ const Home = () => {
                   <div className="col-lg-3 col-md-6">
                     <div className="course-post">
                       <div className="course-thumbnail-holder">
-                        <a href="/">
-                          <img src={item.course_photo} alt="" />
-                        </a>
+
+                        <img src={item.course_photo} alt="" />
+
                       </div>
                       <div className="course-content-holder">
                         <div className="course-content-main">
                           <h2 className="course-title">
-                            <a href="/">{item.course_name}</a>
+                            <Link to={'/allcourseslist/' + item._id}>
+                              {item.course_name}
+                            </Link>
                           </h2>
                           <a href="#" className="course-loop-teacher">
                             {item.teacher_name.name}
@@ -222,6 +243,20 @@ const Home = () => {
                   <h1>Upcoming Events</h1>
                 </div>
                 <div className="right-part">
+                  {(() => {
+                    if (userrole == 'Teacher') {
+                      return (
+                        <Link
+                          to={'/createevent'}
+                          className="button-one btn waves-effect mr-2 "
+                        >
+                          Create Event
+                        </Link>
+                      );
+                    } else {
+                      return;
+                    }
+                  }) ()}
                   <Link to={'/alleventslist'} className="button-one">
                     View All events
                   </Link>
@@ -257,7 +292,9 @@ const Home = () => {
                               </span>
                             </div>
                             <h2 className="title">
-                              {item.eventName}
+                              <Link to={'/alleventslist/' + item._id}>
+                                {item.eventName}
+                              </Link>
                             </h2>
                           </div>
                         </div>
@@ -322,189 +359,200 @@ const Home = () => {
 
       </section>
       {/* End events section */}
-      {/* countdown-section 
-    ================================================== */}
-      {/* <section className="countdown-section">
-        <div className="container">
-          <div className="countdown-box">
-            <h1>Limited Time: Get My Book For Free!</h1>
-            <p>Learn anytime, anywhere. Best Courses. Top Instituion.</p>
-            <div className="countdown-item" data-date="2019/12/14">
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-days">
-                  <span className="number" id="days" />
-                  <span className="text">days</span>
-                </span>
-              </div>
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-hours">
-                  <span className="number" id="hours" />
-                  <span className="text">hours</span>
-                </span>
-              </div>
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-min">
-                  <span className="number" id="minutes" />
-                  <span className="text">minutes</span>
-                </span>
-              </div>
-              <div className="countdown-col">
-                <span className="countdown-unit countdown-sec">
-                  <span className="number" id="seconds" />
-                  <span className="text">seconds</span>
-                </span>
-              </div>
-            </div>
-            <p>
-              We offer professional SEO services that help websites increase their organic search score drastically in order to compete for the highest rankings.
-            </p>
-            <a className="button-two" href="#">Get my free book</a>
-          </div>
-        </div>
-      </section> */}
-      {/* End countdown section */}
+
       {/* news-section 
     ================================================== */}
-      <section className="news-section">
+      <section className="collection-section">
         <div className="container">
           <div className="title-section">
             <div className="left-part">
-              <span>Blog</span>
-              <h1>Latest Blogs</h1>
+              <span>Categories</span>
+              <h1>Trending Blog Collections</h1>
             </div>
-            <div className="right-part">
-              <Link className="button-one" to="/allblogslist">
+            {/* <div className="right-part">
+              <Link to={'/allcourseslist'} className="button-one">
                 View All Blogs
               </Link>
-            </div>
-          </div>
 
-          <div className="news-box">
+            </div> */}
+          </div>
+          <div className="collection-box">
             <div className="row">
               {blogData.slice (0, 4).map (item => {
                 return (
                   <div className="col-lg-3 col-md-6">
-                    <div className="blog-post">
-                      <a href="/">
+                    <div className="collection-post">
+                      <div className="inner-collection">
                         <img src={item.blog_photo} alt="" />
-                      </a>
-                      <div className="post-content">
-                        <a className="category" href="#">{item.category}</a>
-                        <h2>
-                          <a href="/SinglePost">
-                            {item.blogName}
-                          </a>
-                        </h2>
-                        <div className="post-meta date">
-                          <i className="material-icons">access_time</i>
-                          {' '}
-                          {item.publishDate.substring (0, 10)}
-                        </div>
+                        <Link
+                          to={'/allblogs/' + item.category}
+                          className="hover-post"
+                        >
+                          <span className="title">{item.category}</span>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </div>
+        <section className="news-section">
+          <div className="container">
+            <div className="title-section">
+              <div className="left-part">
+                <span>Blog</span>
+                <h1>Latest Blogs</h1>
+              </div>
+              <div className="right-part">
+                {(() => {
+                  if (userrole == 'Teacher') {
+                    return (
+                      <Link
+                        to={'/createblog'}
+                        className="button-one btn waves-effect mr-2 "
+                      >
+                        Create Blog
+                      </Link>
+                    );
+                  } else {
+                    return;
+                  }
+                }) ()}
+                <Link className="button-one" to="/allblogslist">
+                  View All Blogs
+                </Link>
+              </div>
+            </div>
 
+            <div className="news-box">
+              <div className="row">
+                {blogData.slice (0, 4).map (item => {
+                  return (
+                    <div className="col-lg-3 col-md-6">
+                      <div className="blog-post">
+
+                        <img src={item.blog_photo} alt="" />
+
+                        <div className="post-content">
+                          {item.category}
+                          <h2>
+                            <Link to={`/allblogslist/` + item._id}>
+                              {item.blogName}
+                            </Link>
+                          </h2>
+                          <div className="post-meta date">
+                            <i className="material-icons">access_time</i>
+                            {' '}
+                            {item.publishDate.substring (0, 10)}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      {/* End news section */}
-      {/* testimonial-section 
+        </section>
+        {/* End news section */}
+        {/* testimonial-section 
     ================================================== */}
-      <section className="testimonial-section">
-        <div className="container">
-          <div className="testimonial-box owl-wrapper">
-            <div className="owl-carousel" data-num={1}>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-1.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-2.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
+        <section className="testimonial-section">
+          <div className="container">
+            <div className="testimonial-box owl-wrapper">
+              <div className="owl-carousel" data-num={1}>
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-1.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-3.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-2.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="item">
-                <div className="testimonial-post">
-                  <p>
-                    {' '}
-                    “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                  </p>
-                  <div className="profile-test">
-                    <div className="avatar-holder">
-                      <img
-                        src="./assets/upload/testimonials/testimonial-avatar-4.jpg"
-                        alt=""
-                      />
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-3.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
-                    <div className="profile-data">
-                      <h2>Nicole Alatorre</h2>
-                      <p>Designer</p>
+                  </div>
+                </div>
+                <div className="item">
+                  <div className="testimonial-post">
+                    <p>
+                      {' '}
+                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
+                    </p>
+                    <div className="profile-test">
+                      <div className="avatar-holder">
+                        <img
+                          src="./assets/upload/testimonials/testimonial-avatar-4.jpg"
+                          alt=""
+                        />
+                      </div>
+                      <div className="profile-data">
+                        <h2>Nicole Alatorre</h2>
+                        <p>Designer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+        </section>
       </section>
       {/* End testimonial section */}
     </div>
   );
-  // </Router>
 };
 
 export default Home;

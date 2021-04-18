@@ -7,6 +7,7 @@ import {Link, useParams} from 'react-router-dom';
 const CourseDetails = props => {
   const [courseData, setCourseData] = useState ('');
   const [videoIndex, setIndex] = useState (0);
+  const username = JSON.parse (localStorage.getItem ('user')).name;
   const {id} = useParams ();
   // const {videoname} = useParams();
 
@@ -118,19 +119,11 @@ const CourseDetails = props => {
                 </div>
                 {/* single course content */}
                 <div className="single-course-content">
-                  <h2>What Will I Learn?</h2>
-                  <p>
-                    Improve your productivity, get things done, and find more time for what’s most important with Time Management Tips. This weekly series provides actionable time management techniques to help people better manage their time and ultimately become more productive. Time management expert Dave Crenshaw provides a new tip every Monday, touching on a wide variety of topics. Tune in to learn about everything from managing emails and calendars to setting priorities, collaborating with coworkers, reducing interruptions, crafting a “productivity mindset,” and creating a more comfortable and effective work environment.
-                  </p>
                   <h2>Learning Objectives</h2>
                   <div className="row">
                     <div className="col-md-12">
                       <ul className="list">
                         {courseData.learning_objectives}
-                        {/* <li>Lorem ipsum dolor sit amet, consectetur</li>
-                        <li>Nullam condimentum metus quis magna egestas</li>
-                        <li>Mauris lobortis metus in pharetra posuere</li>
-                        <li>Suspendisse sed est luctus nibh tempor</li> */}
                       </ul>
                     </div>
 
@@ -138,7 +131,6 @@ const CourseDetails = props => {
                   <h2>Prior Knowledge</h2>
                   <p>
                     {courseData.pre_req}
-                    {/* Improve your productivity, get things done, and find more time for what’s most important with Time Management Tips. This weekly series provides actionable time management techniques to help people better manage their time and ultimately become more productive. Time management expert Dave Crenshaw provides a new tip every Monday, touching on a wide variety of topics. */}
                   </p>
                   
                   {/* course section */}
@@ -202,26 +194,42 @@ const CourseDetails = props => {
                       ₹{courseData.price}
                     </span>
                   </p>
-                  <Link
-                    className="button-one"
-                    to="/cart"
-                    onClick={() => {
-                      props.addItemHandler ({
-                        product: courseData.course_name,
-                        id: courseData._id,
-                        price: courseData.price,
-                        photo: courseData.course_photo,
-                      });
-                    }}
-                  >
-                    Take this course
-                  </Link>
+                  {(() => {
+                    if (
+                      username !==
+                      (courseData && courseData.teacher_name
+                        ? courseData.teacher_name.name
+                        : null)
+                    ) {
+                      return (
+                        <Link
+                          className="button-one"
+                          to="/cart"
+                          onClick={() => {
+                            props.addItemHandler ({
+                              product: courseData.course_name,
+                              id: courseData._id,
+                              price: courseData.price,
+                              photo: courseData.course_photo,
+                            });
+                          }}
+                        >
+                          Take this course
+                        </Link>
+                      );
+                    } else {
+                      return;
+                    }
+                  }) ()}
+
                   <div className="product-meta-info-list">
                     <div className="meta-info-unit">
                       <div className="icon">
                         <i className="material-icons">language</i>
                       </div>
-                      <div className="value">Language: </div>
+                      <div className="value">
+                        Language: {courseData.language}
+                      </div>
                     </div>
                     <div className="meta-info-unit">
                       <div className="icon">
@@ -231,17 +239,21 @@ const CourseDetails = props => {
                         {courseData.no_of_hours} hours on-demand video
                       </div>
                     </div>
-                    <div className="meta-info-unit">
+                    {/* <div className="meta-info-unit">
                       <div className="icon">
                         <i className="material-icons">playlist_add_check</i>
                       </div>
-                      <div className="value">11 Lessons</div>
-                    </div>
+                      {/* <div className="value">
+                         Lessons
+                      </div> 
+                  </div>*/}
                     <div className="meta-info-unit">
                       <div className="icon">
                         <i className="material-icons">spellcheck</i>
                       </div>
-                      <div className="value">Study Level: Intermediate</div>
+                      <div className="value">
+                        Study Level: {courseData.study_level}
+                      </div>
                     </div>
                     <div className="meta-info-unit">
                       <div className="icon">
@@ -264,7 +276,11 @@ const CourseDetails = props => {
                   <div className="top-part">
                     <img
                       src="./assets/upload/teachers/teacher4-thumb.jpg"
-                      alt="Leslie Williams"
+                      alt={
+                        courseData && courseData.teacher_name
+                          ? courseData.teacher_name.name
+                          : null
+                      }
                     />
                     <div className="name">
                       <span className="job-title">Math</span>

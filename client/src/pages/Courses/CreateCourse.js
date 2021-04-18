@@ -13,7 +13,6 @@ const CreateCourse = () => {
   const [pre_req, setPre] = useState ('');
   const [learning_objectives, setLearning] = useState ('');
   const [course_photo, setImage] = useState ('');
-  // const [videos, setVideo] = useState ([]);
   const [language, setLanguage] = useState ('');
   const [study_level, setStudyLevel] = useState ('');
   const [url, setUrl] = useState ('');
@@ -111,23 +110,6 @@ const CreateCourse = () => {
       .catch (err => {
         console.log (err);
       });
-
-    // const data2 = new FormData ();
-    // for (var x = 0; x < videos.length; x++) {
-    //   data2.append ('file', videos[x]);
-    // }
-    // fetch ('https://api.cloudinary.com/v1_1/studiare/image/upload', {
-    //   method: 'post',
-    //   body: data2,
-    // })
-    //   .then (res => res.json ())
-    //   .then (data => {
-    //     console.log (data.vurl);
-    //     setVideoURL (data.vurl);
-    //   })
-    //   .catch (err => {
-    //     console.log (err);
-    //   });
   };
 
   return (
@@ -378,26 +360,6 @@ const CreateCourse = () => {
                 onChange={e => setImage (e.target.files[0])}
               />
             </div>
-            {/* <div className="form-group course-section">
-
-              <label
-                style={{
-                  color: '#201140',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  fontWeight: 'bold',
-                }}
-              >
-                Upload Videos
-              </label>
-              <input
-                type="file"
-                multiple
-                className="form-control border-0 shadow"
-                onChange={e => setVideo (e.target.files[0])}
-              />
-
-            </div> */}
 
             <div className="row form-group align-items-center justify-content-center">
 
@@ -432,8 +394,38 @@ const CreateCourse = () => {
               <label for="myFiles">Upload videos</label>
               <input type="file" name="myFiles" multiple /><br /><br />
 
-              <input type="submit" value="Submit" />
+              <label
+                for="myFiles"
+                style={{
+                  color: '#201140',
+                  fontSize: '1rem',
+                  marginTop: '1rem',
+                  fontWeight: 'bold',
+                }}
+              >
+                Upload videos
+              </label>
 
+              <input
+                type="file"
+                className="form-control border-0 shadow"
+                name="myFiles"
+                multiple
+              />
+              <div className="row form-group mt-2 align-items-center justify-content-center ">
+
+                <button
+                  className="btn waves-effect shadow mt-2 "
+                  type="submit"
+                  style={{
+                    backgroundColor: '#021140',
+                    color: 'white',
+                  }}
+                  onClick={() => history.push ('/home')}
+                >
+                  Submit
+                </button>
+              </div>
             </form>
 
           </div>

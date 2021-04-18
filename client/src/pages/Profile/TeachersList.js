@@ -41,7 +41,7 @@ const TeachersList = () => {
                 return (
                   <div className="col-lg-3 col-md-6">
                     <div className="teacher-post">
-                      <Link to="/">
+                      <Link to={`/teacher/` + item._id}>
                         <img
                           src="./assets/upload/teachers/teacher6.jpg"
                           alt=""

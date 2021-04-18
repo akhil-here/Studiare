@@ -106,7 +106,13 @@ const Courses = () => {
 
                   <ul className="category-list">
                     {courseData.map (item => {
-                      return <li>{item.category}</li>;
+                      return (
+                        <li>
+                          <Link to={`allcourses/` + item.category}>
+                            {item.category}
+                          </Link>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>

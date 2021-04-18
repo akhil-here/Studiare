@@ -46,7 +46,6 @@ const CourseSchema = new mongoose.Schema ({
     type: String,
     required: true,
   },
-
   comments: [
     {
       text: String,
