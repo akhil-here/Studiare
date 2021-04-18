@@ -109,57 +109,6 @@ router.post (
   }
 );
 
-// router.post ('/createcourse', isVerified, (req, res) => {
-//   const {
-//     category,
-//     course_name,
-//     no_of_hours,
-//     price,
-//     certificate,
-//     pre_req,
-//     learning_objectives,
-//     course_photo,
-//     language,
-//     study_level,
-//   } = req.body;
-//   if (
-//     !category ||
-//     !course_name ||
-//     !no_of_hours ||
-//     !price ||
-//     !certificate ||
-//     !pre_req ||
-//     !learning_objectives ||
-//     !course_photo ||
-//     !language ||
-//     !study_level
-//   ) {
-//     return res.status (422).json ({error: 'Please add all the fields!!'});
-//   }
-//   req.user.password = undefined;
-//   const course = new Courses ({
-//     category,
-//     course_name,
-//     no_of_hours,
-//     price,
-//     certificate,
-//     pre_req,
-//     study_level,
-//     language,
-//     learning_objectives,
-//     course_photo,
-//     teacher_name: req.user,
-//   });
-//   course
-//     .save ()
-//     .then (result => {
-//       // console.log (result);
-//       res.json ({course: result});
-//     })
-//     .catch (err => {
-//       console.log (err);
-//     });
-// });
 
 router.get ('/allcourses', requireLogin, (req, res) => {
   Courses.find ()
@@ -174,7 +123,7 @@ router.get ('/allcourses', requireLogin, (req, res) => {
 });
 
 router.get ('/allcourseslist/:id', requireLogin, (req, res) => {
-  Courses.find ({_id: req.params.id}).exec (function (err, rows) {
+  Courses.find ({_id: req.params.id}).populate ('teacher_name', '_id name').exec (function (err, rows) {
     if (err) {
       console.log (err);
     } else {
@@ -215,5 +164,41 @@ router.post (
     return res.json ("Okay");
   }
 );
+
+router.get("/video/:videoname", function (req, res) {
+  // Ensure there is a range given for the video
+  const range = req.headers.range;
+  if (!range) {
+    res.status(400).send("Requires Range header");
+  }
+  // get video stats (about 61MB)
+  const videoPath = path.join (__dirname, '../' ,'/uploads'  , req.params.videoname);
+  const videoSize = fs.statSync(path.join (__dirname, '../' ,'/uploads'  ,req.params.videoname)).size;
+
+  // Parse Range
+  // Example: "bytes=32324-"
+  const CHUNK_SIZE = 10 ** 6; // 1MB
+  const start = Number(range.replace(/\D/g, ""));
+  const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
+
+  // Create headers
+  const contentLength = end - start + 1;
+  const headers = {
+    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+    "Accept-Ranges": "bytes",
+    "Content-Length": contentLength,
+    "Content-Type": "video/mp4",
+  };
+
+  // HTTP Status 206 for Partial Content
+  res.writeHead(206, headers);
+
+  // create video read stream for this particular chunk
+  const videoStream = fs.createReadStream(videoPath, { start, end });
+
+  // Stream the video chunk to the client
+  videoStream.pipe(res);
+  // console.log(res)
+});
 
 module.exports = router;

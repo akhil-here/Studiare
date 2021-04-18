@@ -6,6 +6,7 @@ const initProducts = {
   price: [],
   _products: [],
   photo: [],
+  events_enrolled: []
 };
 
 export const initialState = null;
@@ -21,8 +22,8 @@ export const reducer = (state, action) => {
 };
 
 function cartItems (state = initProducts, action) {
-  console.log (state);
-  console.log (action.payload);
+  // console.log (state);
+  // console.log (action.payload);
 
   switch (action.type) {
     case 'ADD_PRODUCT':
@@ -31,7 +32,7 @@ function cartItems (state = initProducts, action) {
         _products: state.cart.push (action.payload.product),
         _products: state.price.push (action.payload.price),
         _products: state.photo.push (action.payload.photo),
-        numberCart: state.cart.length,
+        numberCart: state.cart.length ,
       };
     case 'REMOVE_PRODUCT':
       return {
@@ -39,7 +40,19 @@ function cartItems (state = initProducts, action) {
         _products: state.cart.splice (action.payload.index, 1),
         _products: state.price.splice (action.payload.index, 1),
         _products: state.photo.splice (action.payload.index, 1),
-        numberCart: state.cart.length,
+        numberCart: state.cart.length ,
+      };
+    case 'ENROLLED':
+      return {
+        ...state,
+        _products: state.events_enrolled.push (action.payload.id),
+        numberCart: state.cart.length ,
+      };
+    case 'UNENROLLED':
+      return {
+        ...state,
+        _products: state.events_enrolled.splice( state.events_enrolled.indexOf(action.payload.id,1) ),
+        numberCart: state.cart.length ,
       };
     default:
       return state;
