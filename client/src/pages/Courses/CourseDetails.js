@@ -9,6 +9,7 @@ const CourseDetails = props => {
   const [videoIndex, setIndex] = useState (0);
   const username = JSON.parse (localStorage.getItem ('user')).name;
   const {id} = useParams ();
+  // const {videoname} = useParams();
 
   useEffect (() => {
     fetch (`/allcourseslist/${id}`, {
@@ -22,6 +23,34 @@ const CourseDetails = props => {
         setCourseData (data);
       });
   }, []);
+
+  const Videoplayer = () =>{
+    if(0)//user has not bought this course
+    {
+      return (
+        <img src={courseData.course_photo} alt="" className="img-responsive" />
+      )
+    }
+    else if(courseData.videos) {
+      return (
+        <video
+          id="videoPlayer"
+          width="780"
+          controls
+          controlsList="nodownload"
+          muted="muted"
+          autoplay={true}
+        >
+        <source
+          src= {"http://localhost:5000/video/" + (courseData && courseData.videos ? courseData.videos[videoIndex] : null)}
+          type="video/mp4"
+        />
+        </video>    
+      );
+    } else {
+      return <video></video>;
+    }
+  }
 
   return (
     <div id="container">
@@ -63,11 +92,7 @@ const CourseDetails = props => {
                       <div className="info">
                         <span className="label">Teacher</span>
                         <div className="value">
-                          <a href="/SingleTeacher">
-                            {courseData && courseData.teacher_name
-                              ? courseData.teacher_name.name
-                              : null}
-                          </a>
+                          <a href="/SingleTeacher">{courseData && courseData.teacher_name ? courseData.teacher_name.name : null}</a>
                         </div>
                       </div>
                     </div>
@@ -85,34 +110,11 @@ const CourseDetails = props => {
 
                   </div>
                   <div className="course-single-gallery">
+                   <Videoplayer/> 
+                  
+                      
 
-                    {(() => {
-                      if (courseData.videos) {
-                        return (
-                          <video
-                            id="videoPlayer"
-                            width="780"
-                            controls
-                            controlsList="nodownload"
-                            muted="muted"
-                            autoplay={true}
-                          >
-                            <source
-                              src={
-                                'http://localhost:5000/video/' +
-                                  (courseData && courseData.videos
-                                    ? courseData.videos[videoIndex]
-                                    : null)
-                              }
-                              type="video/mp4"
-                            />
-                          </video>
-                        );
-                      } else {
-                        return;
-                      }
-                    }) ()}
-
+                    {/* <img src="./assets/upload/courses/4.jpg" alt="" /> */}
                   </div>
                 </div>
                 {/* single course content */}
@@ -130,63 +132,54 @@ const CourseDetails = props => {
                   <p>
                     {courseData.pre_req}
                   </p>
-
+                  
                   {/* course section */}
                   <div className="course-section">
-
-                    {(() => {
+                    
+                  {(() => {
                       if (courseData.videos) {
                         return (
                           <div>
 
-                            {courseData.videos.map ((element, index) => {
-                              return (
-                                <div
-                                  className="panel-group"
-                                  onClick={() => {
-                                    setIndex (index);
-                                  }}
-                                >
-                                  {console.log (index)}
-                                  <div className="course-panel-heading">
-                                    <div className="panel-heading-left">
-                                      <div className="course-lesson-icon">
-                                        <i className="fa fa-play-circle-o" />
-                                      </div>
-                                      <div className="title">
-                                        <h4>
-                                          {element}
-                                          {' '}
-                                          <span className="badge-item free">
-                                            Play
-                                          </span>
-                                        </h4>
-                                        <p className="subtitle">08:57</p>
-                                      </div>
-                                    </div>
-                                    <div className="panel-heading-right">
-                                      <div className="private-lesson">
-                                        <i className="fa fa-book" />
-                                        <span>
-                                          Lesson {courseData.videos[videoIndex]}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            })}
+                  {courseData.videos.map((element,index) => {
+                    return(
+                    <div className="panel-group" onClick={() => {setIndex(index)}}>
+                      {console.log(index)}
+                    <div className="course-panel-heading">
+                      <div className="panel-heading-left">
+                        <div className="course-lesson-icon">
+                          <i className="fa fa-play-circle-o" />
+                        </div>
+                        <div className="title">
+                          <h4>
+                            {element}
+                            {' '}
+                            <span className="badge-item free">Paid</span>
+                          </h4>
+                          <p className="subtitle">08:57</p>
+                        </div>
+                      </div>
+                      <div className="panel-heading-right">
+                        <div className="private-lesson">
+                          <i className="fa fa-lock" /><span>Private</span>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    );
+                  })}  
 
                           </div>
                         );
                       } else {
-                        return;
+                        return ;
                       }
                     }) ()}
 
+                      
                   </div>
                   {/* end course section */}
-
+                  
                 </div>
                 {/* end single course content */}
               </div>

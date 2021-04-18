@@ -15,8 +15,10 @@ const CreateCourse = () => {
   const [course_photo, setImage] = useState ('');
   const [language, setLanguage] = useState ('');
   const [study_level, setStudyLevel] = useState ('');
-  const [id, setID] = useState ('');
   const [url, setUrl] = useState ('');
+  const [id , setId] = useState('');
+  // const [vurl, setVideoURL] = useState ('');
+  // const [lessonsUrl, setLessonUrl] = useState ('');
 
   useEffect (
     () => {
@@ -59,11 +61,12 @@ const CreateCourse = () => {
             if (data.error) {
               NotificationManager.error (data.error);
             } else {
-              setID (data.course._id);
-              console.log (id);
-              NotificationManager.success (
-                'Course details updated and now add the videos!!'
-              );
+              
+              setId(data.course._id);
+              console.log(id)
+
+              console.log (data);
+              // NotificationManager.success ('Created course successfully!!');
             }
           });
       }
@@ -377,13 +380,19 @@ const CreateCourse = () => {
               enctype="multipart/form-data"
               method="POST"
             >
+              
+              
               {(() => {
                 if (id) {
-                  return <input name="courseid" value={id} hidden={true} />;
+                  return <input name="courseid" value={id} hidden={true}/>;
                 } else {
-                  return <input name="courseid" hidden={true} />;
+                  return <input name="courseid" hidden={true}/>;
                 }
               }) ()}
+
+
+              <label for="myFiles">Upload videos</label>
+              <input type="file" name="myFiles" multiple /><br /><br />
 
               <label
                 for="myFiles"

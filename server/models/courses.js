@@ -64,8 +64,8 @@ const CourseSchema = new mongoose.Schema ({
     required: true,
   },
   videos: {
-    type: Array,
-    required: true,
+    type:Array,
+    required:true
   },
 });
 

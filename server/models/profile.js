@@ -23,9 +23,13 @@ const profileSchema = new mongoose.Schema ({
     type: Number,
     requried: true,
   },
+  
   profile_photo: {
     type: String,
+    
   },
+  
+
 });
 
 mongoose.model ('Profile', profileSchema);

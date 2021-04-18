@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Header from '../../shared/Header';
 import {Link, useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
+import addEvents from '../../redux/actions/addEvents';
+import removeEvents from '../../redux/actions/removeEvents';
 
-const EventDetails = () => {
+const EventDetails = (props) => {
   const [eventData, setEventData] = useState ('');
   const {id} = useParams ();
 
@@ -130,13 +133,29 @@ const EventDetails = () => {
                       </tr>
                       <tr>
                         <th>Booked Slots:</th>
-                        <td>{eventData.bookedSlots}</td>
+                        <td>{eventData.bookedSlots + props.newState.events_enrolled.includes(eventData._id) }</td>
                       </tr>
                     </tbody>
                   </table>
-                  <Link className="button-one" to="#">
-                    Enroll
-                  </Link>
+                  
+                    {(
+                      ()=>{
+                        if(props.newState.events_enrolled.includes(eventData._id)){
+                          return(
+                            <Link className="button-one" onClick={()=>{props.removeEventHandler({id:eventData._id})}}>
+                              Unenroll
+                            </Link>
+                          )
+                        }
+                        else{
+                          return( 
+                            <Link className="button-one" onClick={()=>{props.addEventHandler({id:eventData._id})}}>
+                              Enroll
+                            </Link>
+                           )
+                        }
+                      }
+                    )()}
                 </div>
               </div>
             </div>
@@ -148,4 +167,17 @@ const EventDetails = () => {
   );
 };
 
-export default EventDetails;
+const mapStateToProps = state => {
+  return {
+    newState: state._cartItems,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addEventHandler: item => dispatch (addEvents (item)),
+    removeEventHandler: item => dispatch (removeEvents (item)),
+  };
+};
+
+export default connect (mapStateToProps, mapDispatchToProps) (EventDetails);
