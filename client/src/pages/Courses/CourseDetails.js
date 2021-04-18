@@ -24,7 +24,13 @@ const CourseDetails = props => {
   }, []);
 
   const Videoplayer = () =>{
-    if (courseData.videos) {
+    if(0)//user has not bought this course
+    {
+      return (
+        <img src={courseData.course_photo} alt="" className="img-responsive" />
+      )
+    }
+    else if(courseData.videos) {
       return (
         <video
           id="videoPlayer"
