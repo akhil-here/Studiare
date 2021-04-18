@@ -7,6 +7,7 @@ const Header = props => {
   const {state, dispatch} = useContext (UserContext);
   const history = useHistory ();
   const username = JSON.parse (localStorage.getItem ('user')).name;
+  const userrole = JSON.parse (localStorage.getItem ('user')).role;
   return (
     <div>
       <header className="clearfix">
@@ -110,17 +111,38 @@ const Header = props => {
               >
                 Log Out{' '}
               </button>
-              <Link
-                to="#"
-                className="register-modal-opener shadow login-button"
-                style={{
-                  backgroundColor: '#ffb037',
-                  color: 'black',
-                }}
-              >
-                <i className="material-icons mt-2">perm_identity</i>
-                {username}'s profile
-              </Link>
+              {(() => {
+                if (userrole === 'Teacher') {
+                  return (
+                    <Link
+                      to="/teachersprofile"
+                      className="register-modal-opener shadow login-button"
+                      style={{
+                        backgroundColor: '#ffb037',
+                        color: 'black',
+                      }}
+                    >
+                      <i className="material-icons mt-2">perm_identity</i>
+                      {username}'s profile
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <Link
+                      to="/userprofile"
+                      className="register-modal-opener shadow login-button"
+                      style={{
+                        backgroundColor: '#ffb037',
+                        color: 'black',
+                      }}
+                    >
+                      <i className="material-icons mt-2">perm_identity</i>
+                      {username}'s profile
+                    </Link>
+                  );
+                }
+              }) ()}
+
             </div>
           </div>
         </nav>

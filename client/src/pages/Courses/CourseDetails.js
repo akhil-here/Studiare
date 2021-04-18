@@ -7,6 +7,7 @@ import {Link, useParams} from 'react-router-dom';
 const CourseDetails = props => {
   const [courseData, setCourseData] = useState ('');
   const [videoIndex, setIndex] = useState (0);
+  const username = JSON.parse (localStorage.getItem ('user')).name;
   const {id} = useParams ();
 
   useEffect (() => {
@@ -200,20 +201,34 @@ const CourseDetails = props => {
                       ₹{courseData.price}
                     </span>
                   </p>
-                  <Link
-                    className="button-one"
-                    to="/cart"
-                    onClick={() => {
-                      props.addItemHandler ({
-                        product: courseData.course_name,
-                        id: courseData._id,
-                        price: courseData.price,
-                        photo: courseData.course_photo,
-                      });
-                    }}
-                  >
-                    Take this course
-                  </Link>
+                  {(() => {
+                    if (
+                      username !==
+                      (courseData && courseData.teacher_name
+                        ? courseData.teacher_name.name
+                        : null)
+                    ) {
+                      return (
+                        <Link
+                          className="button-one"
+                          to="/cart"
+                          onClick={() => {
+                            props.addItemHandler ({
+                              product: courseData.course_name,
+                              id: courseData._id,
+                              price: courseData.price,
+                              photo: courseData.course_photo,
+                            });
+                          }}
+                        >
+                          Take this course
+                        </Link>
+                      );
+                    } else {
+                      return;
+                    }
+                  }) ()}
+
                   <div className="product-meta-info-list">
                     <div className="meta-info-unit">
                       <div className="icon">
