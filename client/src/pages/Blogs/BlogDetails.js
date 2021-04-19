@@ -4,6 +4,7 @@ import {Link, useParams} from 'react-router-dom';
 
 const BlogDetails = () => {
   const [blogData, setBlogData] = useState ('');
+  const [singleteacherData, setSingleTeacherData] = useState ([]);
   const {id} = useParams ();
 
   useEffect (() => {
@@ -18,6 +19,24 @@ const BlogDetails = () => {
         setBlogData (data);
       });
   }, []);
+
+  useEffect (
+    () => {
+      if (blogData) {
+        fetch (`/teacher/` + blogData.postedBy._id, {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+          },
+        })
+          .then (res => res.json ())
+          .then (data => {
+            console.log (data);
+            setSingleTeacherData (data);
+          });
+      }
+    },
+    [blogData]
+  );
 
   return (
     <div id="container">
@@ -86,7 +105,14 @@ const BlogDetails = () => {
                     </div>
                     <div className="about-author">
                       <div className="image-holder">
-                        <img src="./assets/upload/blog/avatar.jpg" alt="" />
+                        <img
+                          src={singleteacherData.profile_photo}
+                          alt={
+                            blogData && blogData.postedBy
+                              ? blogData.postedBy.name
+                              : null
+                          }
+                        />
                       </div>
                       <div className="author-content">
                         <h2>
@@ -97,7 +123,7 @@ const BlogDetails = () => {
                             : null}
                         </h2>
                         <p>
-                          Aenean eu justo id magna luctus pulvinar. Quisque vitae scelerisque eros. Pellentesque pretium felis non libero pharetra feugiat id ac sem. Suspendisse ac metus justo.
+                          {singleteacherData.about}
                         </p>
 
                       </div>

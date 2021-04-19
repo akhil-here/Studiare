@@ -73,11 +73,6 @@ const Header = props => {
                   <Link className="active" to="/home">Home</Link>
                 </li>
                 <li className="drop-link">
-                  <Link to="/teacherslist">
-                    Teachers
-                  </Link>
-                </li>
-                <li className="drop-link">
                   <Link to="/allblogslist">
                     Blogs
                   </Link>
@@ -151,11 +146,7 @@ const Header = props => {
               <li>
                 <Link to="/home">Home</Link>
               </li>
-              <li className="drop-link">
-                <Link to={'/teacherslist'}>
-                  Teachers
-                </Link>
-              </li>
+
               <li className="drop-link">
                 <Link to={'/allblogslist'}>Blog</Link>
               </li>
