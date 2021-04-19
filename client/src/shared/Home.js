@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 
 const Home = () => {
   const [courseData, setCourseData] = useState ([]);
@@ -112,12 +113,9 @@ const Home = () => {
                     <i className="fa fa-umbrella" />
                   </div>
                   <div className="feature-content">
-                    <h2>
+                    <h2 style={{marginTop: '1rem'}}>
                       Online Learn Courses Management
                     </h2>
-                    <p>
-                      Analyzing negative materials about your brand and addressing them with sentiment analysis and press.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -127,12 +125,9 @@ const Home = () => {
                     <i className="fa fa-id-card-o" />
                   </div>
                   <div className="feature-content">
-                    <h2>
+                    <h2 style={{marginTop: '1rem'}}>
                       Learn from the masters of the field online
                     </h2>
-                    <p>
-                      Analyzing negative materials about your brand and addressing them with sentiment analysis and press.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -142,12 +137,9 @@ const Home = () => {
                     <i className="fa fa-handshake-o" />
                   </div>
                   <div className="feature-content">
-                    <h2>
+                    <h2 style={{marginTop: '1rem'}}>
                       An Introduction-Skills For Learners
                     </h2>
-                    <p>
-                      Analyzing negative materials about your brand and addressing them with sentiment analysis and press.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -236,7 +228,7 @@ const Home = () => {
       <section className="events-section">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-12">
               <div className="title-section">
                 <div className="left-part">
                   <span>Events</span>
@@ -302,56 +294,6 @@ const Home = () => {
                     </div>
                   );
                 })}
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="title-section">
-                <div className="left-part">
-                  <span>Watch Video</span>
-                  <h1>Learn Anywhere</h1>
-                </div>
-              </div>
-              <div className="video-box">
-                <div className="video-post">
-                  <img src="./assets/upload/video/video-poster-1.jpg" alt="" />
-                  <div className="hover-post">
-                    <h2>Marketing, Media and Advertising</h2>
-                    <p>About Studioare</p>
-                  </div>
-                  <a className="video-link iframe" href="/">
-                    <span><i className="fa fa-play" /></span>
-                  </a>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="video-post small-post">
-                      <img
-                        src="./assets/upload/video/video-poster-2.jpg"
-                        alt=""
-                      />
-                      <div className="hover-post">
-                        <h2>Limitless learning</h2>
-                      </div>
-                      <a className="video-link iframe" href="/">
-                        <span><i className="fa fa-play" /></span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="video-post small-post">
-                      <img
-                        src="./assets/upload/video/video-poster-3.jpg"
-                        alt=""
-                      />
-                      <div className="hover-post">
-                        <h2>Learn by Doing</h2>
-                      </div>
-                      <a className="video-link iframe" href="/">
-                        <span><i className="fa fa-play" /></span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -460,96 +402,8 @@ const Home = () => {
         {/* End news section */}
         {/* testimonial-section 
     ================================================== */}
-        <section className="testimonial-section">
-          <div className="container">
-            <div className="testimonial-box owl-wrapper">
-              <div className="owl-carousel" data-num={1}>
-                <div className="item">
-                  <div className="testimonial-post">
-                    <p>
-                      {' '}
-                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                    </p>
-                    <div className="profile-test">
-                      <div className="avatar-holder">
-                        <img
-                          src="./assets/upload/testimonials/testimonial-avatar-1.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="profile-data">
-                        <h2>Nicole Alatorre</h2>
-                        <p>Designer</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimonial-post">
-                    <p>
-                      {' '}
-                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                    </p>
-                    <div className="profile-test">
-                      <div className="avatar-holder">
-                        <img
-                          src="./assets/upload/testimonials/testimonial-avatar-2.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="profile-data">
-                        <h2>Nicole Alatorre</h2>
-                        <p>Designer</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimonial-post">
-                    <p>
-                      {' '}
-                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                    </p>
-                    <div className="profile-test">
-                      <div className="avatar-holder">
-                        <img
-                          src="./assets/upload/testimonials/testimonial-avatar-3.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="profile-data">
-                        <h2>Nicole Alatorre</h2>
-                        <p>Designer</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="testimonial-post">
-                    <p>
-                      {' '}
-                      “Design-driven, customized and reliable solution for your token development and management system to automate sales processes.”
-                    </p>
-                    <div className="profile-test">
-                      <div className="avatar-holder">
-                        <img
-                          src="./assets/upload/testimonials/testimonial-avatar-4.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="profile-data">
-                        <h2>Nicole Alatorre</h2>
-                        <p>Designer</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </section>
       </section>
+      <Footer />
       {/* End testimonial section */}
     </div>
   );

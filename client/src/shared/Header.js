@@ -28,13 +28,15 @@ const Header = props => {
               </div>
               <div className="col-md-6">
                 <div className="right-top-line">
-                  <button className="search-icon">
-                    <i className="material-icons open-search">search</i>
-                    <i className="material-icons close-search">close</i>
-                  </button>
-                  <button className="shop-icon">
+
+                  <button
+                    className="shop-icon"
+                    style={{backgroundColor: '#201140', marginTop: '0.1rem'}}
+                  >
                     <Link to="/Cart">
-                      <i className="material-icons">shopping_cart</i>
+                      <i className="material-icons">
+                        shopping_cart
+                      </i>
                     </Link>
                     <span className="studiare-cart-number">
                       {props.newState.numberCart}
@@ -45,18 +47,7 @@ const Header = props => {
             </div>
           </div>
         </div>
-        <form className="search_bar">
-          <div className="container">
-            <input
-              type="search"
-              className="search-input"
-              placeholder="What are you looking for..."
-            />
-            <button type="submit" className="submit">
-              <i className="material-icons">search</i>
-            </button>
-          </div>
-        </form>
+
         <nav
           className="navbar navbar-expand-lg"
           style={{backgroundColor: '#201140'}}
@@ -147,18 +138,7 @@ const Header = props => {
           </div>
         </nav>
         <div className="mobile-menu">
-          <div className="search-form-box">
-            <form className="search-form">
-              <input
-                type="search"
-                className="search-field"
-                placeholder="Enter keyword..."
-              />
-              <button type="submit" className="search-submit">
-                <i className="material-icons open-search">search</i>
-              </button>
-            </form>
-          </div>
+
           <div className="shopping-cart-box">
             <Link className="shop-icon" to="/Cart">
               <i className="material-icons">shopping_cart</i>
