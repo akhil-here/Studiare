@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 const TeachersList = () => {
   const [teacherData, setTeacherData] = useState ([]);
+  const [singleteacherData, setSingleTeacherData] = useState ([]);
   useEffect (() => {
     fetch ('/teacherslist', {
       headers: {
@@ -12,8 +13,18 @@ const TeachersList = () => {
     })
       .then (res => res.json ())
       .then (result => {
-        console.log (result);
+        console.log (result.users);
         setTeacherData (result.users);
+      });
+    fetch (`/teacher/` + teacherData._id, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+      },
+    })
+      .then (res => res.json ())
+      .then (data => {
+        console.log (data);
+        setSingleTeacherData (data);
       });
   }, []);
   return (
@@ -38,6 +49,30 @@ const TeachersList = () => {
           <div className="teachers-box">
             <div className="row">
               {teacherData.map (item => {
+                {
+                  (() => {
+                    if (item._id == singleteacherData.teacher_name) {
+                      return (
+                        <div className="col-lg-3 col-md-6">
+                          <div className="teacher-post">
+                            <Link to={`/teacher/` + item._id}>
+                              <img
+                                src={singleteacherData.profile_photo}
+                                alt=""
+                              />
+                              <div className="hover-post">
+                                <h2>{item.name}</h2>
+                                <span>{item.email}</span>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      return;
+                    }
+                  }) ();
+                }
                 return (
                   <div className="col-lg-3 col-md-6">
                     <div className="teacher-post">
