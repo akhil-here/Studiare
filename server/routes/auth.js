@@ -155,4 +155,15 @@ router.get ('/teacherslist', requireLogin, (req, res) => {
     });
 });
 
+router.get ('/user/:id', requireLogin, (req, res) => {
+  User.find ({_id: req.params.id})
+    .populate ('teacher_name', '_id name coursesBought')
+    .then (users => {
+      res.json (users[0]);
+    })
+    .catch (err => {
+      console.log (err);
+    });
+});
+
 module.exports = router;

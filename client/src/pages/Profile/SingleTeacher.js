@@ -4,6 +4,7 @@ import {Link, useParams} from 'react-router-dom';
 
 const SingleTeacher = () => {
   const [teacherData, setTeacherData] = useState ('');
+  const [courseData, setCourseData] = useState ([]);
   const {id} = useParams ();
   useEffect (() => {
     fetch (`/teacher/${id}`, {
@@ -15,6 +16,16 @@ const SingleTeacher = () => {
       .then (data => {
         console.log (data);
         setTeacherData (data);
+      });
+    fetch ('/allcourses', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+      },
+    })
+      .then (res => res.json ())
+      .then (result => {
+        console.log (result.courses);
+        setCourseData (result.courses);
       });
   }, []);
   return (
@@ -65,6 +76,17 @@ const SingleTeacher = () => {
                     <div className="image-holder">
                       <img src={teacherData.profile_photo} alt="" />
                     </div>
+
+                    <ul className="social-links">
+                      <li>
+                        <h2 style={{fontSize: '2rem'}}>
+                          {teacherData && teacherData.teacher_name
+                            ? teacherData.teacher_name.name
+                            : null}
+                        </h2>
+                      </li>
+
+                    </ul>
                   </div>
                 </div>
                 <div className="col-lg-6">
@@ -124,81 +146,83 @@ const SingleTeacher = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                    <div className="line-details">
 
-                </div>
-              </div>
-              {/* <div className="teacher-content">
-                <h1>Mission &amp; Biography</h1>
-                <p>
-                  Michael Main holds an QE in Theatre Practice and a PhD in Trafalgar Studios Theatre from London University. He is a Certified Teacher of stage combat with the BASSC, a fight examiner for Stage Combat and holds a black belt in Aikido. Michael has worked for many theatre companies including: the Orange Tree, Stephen Joseph Theatre, Royal &amp; Derngate, Crucible Theatre, Graeae.
-                </p>
-                <p>
-                  He has directed several shows for East 15 – including a Martin Lynch premier and has also directed numerous productions for the Royal Armouries at the Tower of London. He was the fight arranger for the feature film The Roundabout and Assistant Fight Arranger on the feature, Faintheart. In what feels like a past life, he performed in Conquest, a series for the History Channel.
-                </p>
-                <div className="row">
-                  <div className="col-lg-7">
-                    <div className="skills-box">
-                      <h1>Skills</h1>
-                      <div className="skill-line">
-                        <span className="fill-text">Development 90%</span>
-                        <span className="fill-box" style={{width: '90%'}} />
-                      </div>
-                      <div className="skill-line">
-                        <span className="fill-text">Design 80%</span>
-                        <span className="fill-box" style={{width: '80%'}} />
-                      </div>
-                      <div className="skill-line">
-                        <span className="fill-text">Marketing 70%</span>
-                        <span className="fill-box" style={{width: '70%'}} />
-                      </div>
-                      <div className="skill-line">
-                        <span className="fill-text">
-                          WordPress &amp; PHP 54%
-                        </span>
-                        <span className="fill-box" style={{width: '54%'}} />
-                      </div>
-                      <div className="skill-line">
-                        <span className="fill-text">After Effects 94%</span>
-                        <span className="fill-box" style={{width: '94%'}} />
+                      <div className="detail-item">
+                        <div className="icon-holder">
+                          <i className="fa fa-book" />
+                        </div>
+                        <div className="detail-content">
+                          <h2>Subject</h2>
+                          <span>{teacherData.subject}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-5">
-                    <form className="contact-form">
-                      <h1>Send a message</h1>
-                      <input
-                        name="name"
-                        id="name"
-                        type="text"
-                        placeholder="Name*"
-                      />
-                      <input
-                        name="mail"
-                        id="mail"
-                        type="text"
-                        placeholder="E-mail*"
-                      />
-                      <textarea
-                        name="comment"
-                        id="comment"
-                        placeholder="Message"
-                        defaultValue={''}
-                      />
-                      <button type="submit" id="submit_contact">
-                        Submit Message
-                      </button>
-                    </form>
-                  </div>
+
                 </div>
               </div>
-            </div> */}
+              <div className="teacher-content">
+                <h1>
+                  Courses by
+                  {' '}
+                  {teacherData && teacherData.teacher_name
+                    ? teacherData.teacher_name.name
+                    : null}
+                </h1>
+
+                <div className="row">
+                  {courseData.map (item => {
+                    if (
+                      item.teacher_name.name ==
+                      (teacherData && teacherData.teacher_name
+                        ? teacherData.teacher_name.name
+                        : null)
+                    ) {
+                      return (
+                        <div className="col-lg-4 col-md-6 col-sm-6">
+                          <div className="course-post">
+                            <div className="course-thumbnail-holder">
+
+                              <img src={item.course_photo} alt="" />
+
+                            </div>
+                            <div className="course-content-holder">
+                              <div className="course-content-main">
+                                <h2 className="course-title">
+                                  <Link to={'/allcourseslist/' + item._id}>
+                                    {item.course_name}
+                                  </Link>
+                                </h2>
+                                <div className="course-rating-teacher">
+
+                                  {item.teacher_name.name}
+
+                                </div>
+                              </div>
+                              <div className="course-content-bottom">
+                                <div className="course-students">
+                                  <i className="material-icons">group</i>
+                                  <span>{item.no_of_students}</span>
+                                </div>
+                                <div className="course-price">
+                                  <span>₹{item.price}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              </div>
             </div>
           </div>
+
         </section>
 
       </div>
-      {/* End Container */}
     </div>
   );
 };

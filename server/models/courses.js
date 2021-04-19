@@ -14,10 +14,6 @@ const CourseSchema = new mongoose.Schema ({
     type: ObjectId,
     ref: 'User',
   },
-  no_of_students: {
-    type: Number,
-    // required: true,
-  },
   no_of_hours: {
     type: Number,
     required: true,
@@ -46,15 +42,6 @@ const CourseSchema = new mongoose.Schema ({
     type: String,
     required: true,
   },
-  comments: [
-    {
-      text: String,
-      postedBy: {
-        type: ObjectId,
-        ref: 'User',
-      },
-    },
-  ],
   tags: {
     type: String,
     // required: true,
@@ -64,8 +51,8 @@ const CourseSchema = new mongoose.Schema ({
     required: true,
   },
   videos: {
-    type:Array,
-    required:true
+    type: Array,
+    required: true,
   },
 });
 

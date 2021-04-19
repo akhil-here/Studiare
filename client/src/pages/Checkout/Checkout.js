@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from '../../shared/Header';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import removeItems from '../../redux/actions/removeItems';
 
 const Checkout = props => {
+  const [coursebuy, setCourse] = useState ();
+  const id = JSON.parse (localStorage.getItem ('user'))._id;
+  const courseBought = () => {
+    props.newState.courses_enrolled.map ((item, index) => {
+      props.removeItemHandler ({index: index});
+      fetch ('/coursebuy/' + item + '/' + id, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+        },
+      })
+        .then (res => res.json ())
+        .then (result => {
+          console.log (result);
+          setCourse (result);
+        });
+    });
+  };
   return (
     <div>
       <Header />
@@ -148,9 +167,15 @@ const Checkout = props => {
                         </tr>
                       </tbody>
                     </table>
-                    <a href="#" className="checkout-button">
+                    <Link
+                      to={
+                        `/allcourseslist/` + props.newState.courses_enrolled[0]
+                      }
+                      className="checkout-button"
+                      onClick={() => courseBought ()}
+                    >
                       Proceed to Paypal
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -172,7 +197,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // removeItemHandler:(item)=>dispatch(removeItems(item))
+    removeItemHandler: item => dispatch (removeItems (item)),
   };
 };
 

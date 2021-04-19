@@ -226,4 +226,30 @@ router.get ('/video/:videoname', function (req, res) {
   // console.log(res)
 });
 
+router.get ('/coursebuy/:courseid/:uid', requireLogin, (req, res) => {
+  let c = [];
+  User.find ({_id: req.params.uid}).exec (function (err, rows) {
+    if (err) {
+      console.log (err);
+    } else {
+      c = rows[0].coursesBought;
+      c.push (req.params.courseid);
+    }
+  });
+  Courses.findOne ({_id: req.params.courseid}).exec (function (err, rows) {
+    if (err) {
+      console.log (err);
+    } else {
+      User.findOneAndUpdate (
+        {_id: req.params.uid},
+        {coursesBought: c},
+        function (err, docs) {
+          console.log (docs);
+          res.send (docs);
+        }
+      );
+    }
+  });
+});
+
 module.exports = router;

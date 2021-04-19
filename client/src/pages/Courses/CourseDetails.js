@@ -6,8 +6,11 @@ import {Link, useParams} from 'react-router-dom';
 
 const CourseDetails = props => {
   const [courseData, setCourseData] = useState ('');
+  const [userData, setUserData] = useState ('');
+  const [singleteacherData, setSingleTeacherData] = useState ([]);
   const [videoIndex, setIndex] = useState (0);
   const username = JSON.parse (localStorage.getItem ('user')).name;
+  const uid = JSON.parse (localStorage.getItem ('user'))._id;
   const {id} = useParams ();
   // const {videoname} = useParams();
 
@@ -22,16 +25,45 @@ const CourseDetails = props => {
         console.log (data);
         setCourseData (data);
       });
+    fetch (`/user/${uid}`, {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+      },
+    })
+      .then (res => res.json ())
+      .then (data => {
+        console.log (data);
+        setUserData (data);
+      });
   }, []);
+  console.log (courseData);
 
-  const Videoplayer = () =>{
-    if(0)//user has not bought this course
-    {
-      return (
-        <img src={courseData.course_photo} alt="" className="img-responsive" />
-      )
-    }
-    else if(courseData.videos) {
+  useEffect (
+    () => {
+      if (courseData) {
+        fetch (`/teacher/` + courseData.teacher_name._id, {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+          },
+        })
+          .then (res => res.json ())
+          .then (data => {
+            console.log (data);
+            setSingleTeacherData (data);
+          });
+      }
+    },
+    [courseData]
+  );
+
+  const Videoplayer = () => {
+    // if (!userData.coursesBought.includes (courseData._id)) {
+    if (
+      userData && userData.coursesBought && courseData.videos
+        ? userData.coursesBought.includes (courseData._id)
+        : false
+    ) {
+      //user has not bought this course
       return (
         <video
           id="videoPlayer"
@@ -41,16 +73,23 @@ const CourseDetails = props => {
           muted="muted"
           autoplay={true}
         >
-        <source
-          src= {"http://localhost:5000/video/" + (courseData && courseData.videos ? courseData.videos[videoIndex] : null)}
-          type="video/mp4"
-        />
-        </video>    
+          <source
+            src={
+              'http://localhost:5000/video/' +
+                (courseData && courseData.videos
+                  ? courseData.videos[videoIndex]
+                  : null)
+            }
+            type="video/mp4"
+          />
+        </video>
       );
     } else {
-      return <video></video>;
+      return (
+        <img src={courseData.course_photo} alt="" className="img-responsive" />
+      );
     }
-  }
+  };
 
   return (
     <div id="container">
@@ -92,7 +131,18 @@ const CourseDetails = props => {
                       <div className="info">
                         <span className="label">Teacher</span>
                         <div className="value">
-                          <a href="/SingleTeacher">{courseData && courseData.teacher_name ? courseData.teacher_name.name : null}</a>
+                          <Link
+                            to={
+                              `/teacher/` +
+                                (courseData && courseData.teacher_name
+                                  ? courseData.teacher_name._id
+                                  : null)
+                            }
+                          >
+                            {courseData && courseData.teacher_name
+                              ? courseData.teacher_name.name
+                              : null}
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -103,18 +153,16 @@ const CourseDetails = props => {
                       <div className="info">
                         <span className="label">Category</span>
                         <div className="value">
-                          <span>{courseData.category}</span>
+                          <Link to={`/allcourses/` + courseData.category}>
+                            <span>{courseData.category}</span>
+                          </Link>
                         </div>
                       </div>
                     </div>
 
                   </div>
                   <div className="course-single-gallery">
-                   <Videoplayer/> 
-                  
-                      
-
-                    {/* <img src="./assets/upload/courses/4.jpg" alt="" /> */}
+                    <Videoplayer />
                   </div>
                 </div>
                 {/* single course content */}
@@ -132,54 +180,61 @@ const CourseDetails = props => {
                   <p>
                     {courseData.pre_req}
                   </p>
-                  
+
                   {/* course section */}
                   <div className="course-section">
-                    
-                  {(() => {
+
+                    {(() => {
                       if (courseData.videos) {
                         return (
                           <div>
 
-                  {courseData.videos.map((element,index) => {
-                    return(
-                    <div className="panel-group" onClick={() => {setIndex(index)}}>
-                      {console.log(index)}
-                    <div className="course-panel-heading">
-                      <div className="panel-heading-left">
-                        <div className="course-lesson-icon">
-                          <i className="fa fa-play-circle-o" />
-                        </div>
-                        <div className="title">
-                          <h4>
-                            {element}
-                            {' '}
-                            <span className="badge-item free">Paid</span>
-                          </h4>
-                          <p className="subtitle">08:57</p>
-                        </div>
-                      </div>
-                      <div className="panel-heading-right">
-                        <div className="private-lesson">
-                          <i className="fa fa-lock" /><span>Private</span>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                    );
-                  })}  
+                            {courseData.videos.map ((element, index) => {
+                              return (
+                                <div
+                                  className="panel-group"
+                                  onClick={() => {
+                                    setIndex (index);
+                                  }}
+                                >
+                                  {console.log (index)}
+                                  <div className="course-panel-heading">
+                                    <div className="panel-heading-left">
+                                      <div className="course-lesson-icon">
+                                        <i className="fa fa-play-circle-o" />
+                                      </div>
+                                      <div className="title">
+                                        <h4>
+                                          {element}
+                                          {' '}
+                                          <span className="badge-item free">
+                                            Play
+                                          </span>
+                                        </h4>
+
+                                      </div>
+                                    </div>
+                                    <div className="panel-heading-right">
+                                      <div className="private-lesson">
+                                        <i className="fa fa-lock" />
+                                        <span>Lesson {index}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
 
                           </div>
                         );
                       } else {
-                        return ;
+                        return;
                       }
                     }) ()}
 
-                      
                   </div>
                   {/* end course section */}
-                  
+
                 </div>
                 {/* end single course content */}
               </div>
@@ -196,11 +251,29 @@ const CourseDetails = props => {
                   </p>
                   {(() => {
                     if (
-                      username !==
-                      (courseData && courseData.teacher_name
-                        ? courseData.teacher_name.name
-                        : null)
+                      username == (courseData && courseData.teacher_name) ||
+                      (userData && userData.coursesBought
+                        ? userData.coursesBought.includes (courseData._id)
+                        : false)
                     ) {
+                      console.log (
+                        username == (courseData && courseData.teacher_name)
+                      );
+                      console.log (
+                        userData && userData.coursesBought
+                          ? userData.coursesBought.includes (courseData._id)
+                          : false
+                      );
+                      return;
+                    } else {
+                      console.log (
+                        username == (courseData && courseData.teacher_name)
+                      );
+                      console.log (
+                        userData && userData.coursesBought
+                          ? userData.coursesBought.includes (courseData._id)
+                          : false
+                      );
                       return (
                         <Link
                           className="button-one"
@@ -217,8 +290,6 @@ const CourseDetails = props => {
                           Take this course
                         </Link>
                       );
-                    } else {
-                      return;
                     }
                   }) ()}
 
@@ -239,14 +310,6 @@ const CourseDetails = props => {
                         {courseData.no_of_hours} hours on-demand video
                       </div>
                     </div>
-                    {/* <div className="meta-info-unit">
-                      <div className="icon">
-                        <i className="material-icons">playlist_add_check</i>
-                      </div>
-                      {/* <div className="value">
-                         Lessons
-                      </div> 
-                  </div>*/}
                     <div className="meta-info-unit">
                       <div className="icon">
                         <i className="material-icons">spellcheck</i>
@@ -273,9 +336,11 @@ const CourseDetails = props => {
                   </div>
                 </div>
                 <div className="widget profile-widget">
+                  <span>Taught by:</span>
                   <div className="top-part">
+
                     <img
-                      src="./assets/upload/teachers/teacher4-thumb.jpg"
+                      src={singleteacherData.profile_photo}
                       alt={
                         courseData && courseData.teacher_name
                           ? courseData.teacher_name.name
@@ -283,16 +348,38 @@ const CourseDetails = props => {
                       }
                     />
                     <div className="name">
-                      <span className="job-title">Math</span>
+                      <span>
+                        {courseData && courseData.teacher_name
+                          ? courseData.teacher_name.name
+                          : null}
+                      </span>
                     </div>
                   </div>
+
                   <div className="content">
-                    <p>
+                    {/* <p>
                       Donec tortor massa, dapibus sit amet massa ut, tincidunt dapibus neque. Morbi ac mauris lorem.
-                    </p>
-                    <a href="/SingleTeacher" className="text-link">
-                      View full profile
-                    </a>
+                    </p> */}
+                    <button
+                      className="btn waves-effect shadow mt-2 "
+                      type="submit"
+                      style={{
+                        backgroundColor: '#021140',
+                        color: 'white',
+                      }}
+                    >
+                      <Link
+                        to={
+                          `/teacher/` +
+                            (courseData && courseData.teacher_name
+                              ? courseData.teacher_name._id
+                              : null)
+                        }
+                        className="text-link text-white"
+                      >
+                        View full profile
+                      </Link>
+                    </button>
                   </div>
                 </div>
               </div>

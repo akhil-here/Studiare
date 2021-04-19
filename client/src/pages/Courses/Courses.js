@@ -15,14 +15,6 @@ const Courses = () => {
     })
       .then (res => res.json ())
       .then (result => {
-        // for (const i in result.courses) {
-        //   if (username != {result.courses[i].teacher_name.name}) {
-        //     c.push (JSON.stringify (`$({result.courses[i]}`));
-        //     // console.log (`${result.courses[i]}`);
-
-        //     // setCourseData (`${result.courses[i]}`);
-        //   }
-        // }
         console.log (result.courses);
         setCourseData (result.courses);
       });

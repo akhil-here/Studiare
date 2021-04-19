@@ -1,4 +1,5 @@
 const mongoose = require ('mongoose');
+const {ObjectId} = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema ({
   name: {
     type: String,
@@ -18,6 +19,10 @@ const userSchema = new mongoose.Schema ({
   },
   resetToken: String,
   expireToken: Date,
+  coursesBought: {
+    type: Array,
+    required: true,
+  },
 });
 
 mongoose.model ('User', userSchema);
