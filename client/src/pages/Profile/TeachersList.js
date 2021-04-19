@@ -13,20 +13,31 @@ const TeachersList = () => {
     })
       .then (res => res.json ())
       .then (result => {
-        console.log (result.users);
         setTeacherData (result.users);
       });
-    fetch (`/teacher/` + teacherData._id, {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
-      },
-    })
-      .then (res => res.json ())
-      .then (data => {
-        console.log (data);
-        setSingleTeacherData (data);
-      });
   }, []);
+  console.log (teacherData);
+
+  useEffect (
+    () => {
+      if (teacherData) {
+        teacherData.map (item => {
+          fetch (`/teacher/` + item._id, {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
+            },
+          })
+            .then (res => res.json ())
+            .then (data => {
+              setSingleTeacherData (data);
+            });
+        });
+      }
+    },
+    [teacherData]
+  );
+  console.log (singleteacherData);
+
   return (
     <div id="container">
       <Header />
@@ -48,48 +59,34 @@ const TeachersList = () => {
         <div className="container">
           <div className="teachers-box">
             <div className="row">
-              {teacherData.map (item => {
-                {
-                  (() => {
-                    if (item._id == singleteacherData.teacher_name) {
-                      return (
-                        <div className="col-lg-3 col-md-6">
-                          <div className="teacher-post">
-                            <Link to={`/teacher/` + item._id}>
-                              <img
-                                src={singleteacherData.profile_photo}
-                                alt=""
-                              />
-                              <div className="hover-post">
-                                <h2>{item.name}</h2>
-                                <span>{item.email}</span>
-                              </div>
-                            </Link>
+              {(() => {
+                console.log (teacherData.length);
+                console.log (singleteacherData.length);
+                for (let i = 0; i < teacherData.length; i++) {
+                  return (
+                    <div className="col-lg-3 col-md-6">
+                      <div className="teacher-post">
+                        <Link to={`/teacher/` + teacherData[i]._id}>
+                          <img
+                            src={
+                              singleteacherData[i] &&
+                                singleteacherData[i].profile_photo
+                                ? singleteacherData[i].profile_photo
+                                : null
+                            }
+                            alt=""
+                          />
+                          <div className="hover-post">
+                            <h2>{teacherData[i].name}</h2>
+                            <span>{teacherData[i].email}</span>
                           </div>
-                        </div>
-                      );
-                    } else {
-                      return;
-                    }
-                  }) ();
-                }
-                return (
-                  <div className="col-lg-3 col-md-6">
-                    <div className="teacher-post">
-                      <Link to={`/teacher/` + item._id}>
-                        <img
-                          src="./assets/upload/teachers/teacher6.jpg"
-                          alt=""
-                        />
-                        <div className="hover-post">
-                          <h2>{item.name}</h2>
-                          <span>{item.email}</span>
-                        </div>
-                      </Link>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                }
+              }) ()};
+
             </div>
           </div>
         </div>

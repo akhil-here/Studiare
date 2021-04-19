@@ -256,24 +256,8 @@ const CourseDetails = props => {
                         ? userData.coursesBought.includes (courseData._id)
                         : false)
                     ) {
-                      console.log (
-                        username == (courseData && courseData.teacher_name)
-                      );
-                      console.log (
-                        userData && userData.coursesBought
-                          ? userData.coursesBought.includes (courseData._id)
-                          : false
-                      );
                       return;
                     } else {
-                      console.log (
-                        username == (courseData && courseData.teacher_name)
-                      );
-                      console.log (
-                        userData && userData.coursesBought
-                          ? userData.coursesBought.includes (courseData._id)
-                          : false
-                      );
                       return (
                         <Link
                           className="button-one"
