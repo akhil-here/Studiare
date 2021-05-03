@@ -1,5 +1,17 @@
 const mongoose = require ('mongoose');
 const {ObjectId} = mongoose.Schema.Types;
+
+const progress = new mongoose.Schema ({
+  courseId: {
+    type: String,
+    required: true,
+  },
+  lessonsWatched: {
+    type: Array,
+    required: true,
+  },
+});
+
 const userSchema = new mongoose.Schema ({
   name: {
     type: String,
@@ -19,6 +31,7 @@ const userSchema = new mongoose.Schema ({
   },
   resetToken: String,
   expireToken: Date,
+  courseWatched: [progress],
   coursesBought: {
     type: Array,
     required: true,
