@@ -16,7 +16,7 @@ const CreateCourse = () => {
   const [language, setLanguage] = useState ('');
   const [study_level, setStudyLevel] = useState ('');
   const [url, setUrl] = useState ('');
-  const [id , setId] = useState('');
+  const [id, setId] = useState ('');
   // const [vurl, setVideoURL] = useState ('');
   // const [lessonsUrl, setLessonUrl] = useState ('');
 
@@ -61,9 +61,8 @@ const CreateCourse = () => {
             if (data.error) {
               NotificationManager.error (data.error);
             } else {
-              
-              setId(data.course._id);
-              console.log(id)
+              setId (data.course._id);
+              console.log (id);
 
               console.log (data);
               // NotificationManager.success ('Created course successfully!!');
@@ -380,19 +379,14 @@ const CreateCourse = () => {
               enctype="multipart/form-data"
               method="POST"
             >
-              
-              
+
               {(() => {
                 if (id) {
-                  return <input name="courseid" value={id} hidden={true}/>;
+                  return <input name="courseid" value={id} hidden={true} />;
                 } else {
-                  return <input name="courseid" hidden={true}/>;
+                  return <input name="courseid" hidden={true} />;
                 }
               }) ()}
-
-
-              <label for="myFiles">Upload videos</label>
-              <input type="file" name="myFiles" multiple /><br /><br />
 
               <label
                 for="myFiles"
