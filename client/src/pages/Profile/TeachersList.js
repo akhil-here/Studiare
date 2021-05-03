@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 const TeachersList = () => {
   const [teacherData, setTeacherData] = useState ([]);
-  const [singleteacherData, setSingleTeacherData] = useState ([]);
   useEffect (() => {
     fetch ('/teacherslist', {
       headers: {
@@ -13,31 +12,10 @@ const TeachersList = () => {
     })
       .then (res => res.json ())
       .then (result => {
+        console.log (result);
         setTeacherData (result.users);
       });
   }, []);
-  console.log (teacherData);
-
-  useEffect (
-    () => {
-      if (teacherData) {
-        teacherData.map (item => {
-          fetch (`/teacher/` + item._id, {
-            headers: {
-              Authorization: 'Bearer ' + localStorage.getItem ('jwt'),
-            },
-          })
-            .then (res => res.json ())
-            .then (data => {
-              setSingleTeacherData (data);
-            });
-        });
-      }
-    },
-    [teacherData]
-  );
-  console.log (singleteacherData);
-
   return (
     <div id="container">
       <Header />
@@ -59,34 +37,24 @@ const TeachersList = () => {
         <div className="container">
           <div className="teachers-box">
             <div className="row">
-              {(() => {
-                console.log (teacherData.length);
-                console.log (singleteacherData.length);
-                for (let i = 0; i < teacherData.length; i++) {
-                  return (
-                    <div className="col-lg-3 col-md-6">
-                      <div className="teacher-post">
-                        <Link to={`/teacher/` + teacherData[i]._id}>
-                          <img
-                            src={
-                              singleteacherData[i] &&
-                                singleteacherData[i].profile_photo
-                                ? singleteacherData[i].profile_photo
-                                : null
-                            }
-                            alt=""
-                          />
-                          <div className="hover-post">
-                            <h2>{teacherData[i].name}</h2>
-                            <span>{teacherData[i].email}</span>
-                          </div>
-                        </Link>
-                      </div>
+              {teacherData.map (item => {
+                return (
+                  <div className="col-lg-3 col-md-6">
+                    <div className="teacher-post">
+                      <Link to={`/teacher/` + item._id}>
+                        <img
+                          src="./assets/upload/teachers/teacher6.jpg"
+                          alt=""
+                        />
+                        <div className="hover-post">
+                          <h2>{item.name}</h2>
+                          <span>{item.email}</span>
+                        </div>
+                      </Link>
                     </div>
-                  );
-                }
-              }) ()};
-
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
