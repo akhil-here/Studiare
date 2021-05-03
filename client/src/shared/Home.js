@@ -199,9 +199,9 @@ const Home = () => {
                               {item.course_name}
                             </Link>
                           </h2>
-                          <a href="#" className="course-loop-teacher">
+                          <div className="course-loop-teacher">
                             {item.teacher_name.name}
-                          </a>
+                          </div>
                         </div>
                       </div>
                       <div className="course-content-bottom">

@@ -219,6 +219,20 @@ const CourseDetails = props => {
                                         <i className="fa fa-lock" />
                                         <span>Lesson {index}</span>
                                       </div>
+                                      <div className="form-check">
+                                        <input
+                                          className="form-check-input"
+                                          type="checkbox"
+                                          value=""
+                                          id="flexCheckChecked"
+                                        />
+                                        {console.log ('hi')}
+                                        {courseData && courseData.courseWatched
+                                          ? console.log (
+                                              courseData.courseWatched[0]
+                                            )
+                                          : console.log (null)}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
