@@ -34,6 +34,3 @@ This is a web application for an E-Learning website like Udemy/Coursera where on
 	<li>Payments.</li>
   <li>Video player. </li>
 </ul>
-
-## Demo:
-The demo of this project can be found here: <a href = "https://drive.google.com/file/d/1fJmQtaljWQGK2CSY1St1G9ZAcYSs4kye/view?usp=sharing" >Click here </a>
